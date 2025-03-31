@@ -4,6 +4,8 @@ import { initGogSystem } from "@unq-ui/gog-model-js";
 
 import UserController from "./controllers/userController.js";
 import TokenController from "./controllers/tokenController.js";
+import PurchaseController from "./controllers/purchaseController.js";
+import SearchController from "./controllers/searchController.js";
 
 const gogSystem = initGogSystem();
 
@@ -15,8 +17,10 @@ app.use(express.json());
 
 const tokenController = new TokenController(gogSystem);
 const userController = new UserController(gogSystem, tokenController);
+const purchaseController = new PurchaseController(gogSystem, tokenController);
+const searchController = new SearchController(gogSystem, tokenController);
 
-// User
+// Auth
 app.post("/login", tokenController.checkRole("public"), userController.login);
 app.post(
   "/register",
@@ -24,9 +28,27 @@ app.post(
   userController.register
 );
 
-// Other routes
-// ...
-// ...
+// User
+app.get(
+  "/users/current",
+  tokenController.checkRole("user"),
+  userController.getCurrentUser
+);
+app.get(
+  "/users/current/cart",
+  tokenController.checkRole("user"),
+  userController.getCurrentCart
+);
+
+// Purchase
+app.post(
+  "/purchase",
+  tokenController.checkRole("user"),
+  purchaseController.purchase
+);
+
+// Search
+app.get("/search", tokenController.checkRole("user"), searchController.search);
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);

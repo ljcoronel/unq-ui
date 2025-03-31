@@ -45,7 +45,23 @@ class UserController {
     }
   };
 
-  // ...extend with your code
+  getCurrentUser = async (req, res) => {
+    const { id, email, name, image } = req.user;
+    res.json({ user: { id, email, name, image } });
+  };
+
+  getCurrentCart = async (req, res) => {
+    const { id } = req.user;
+    try {
+      const { games } = await this.service.getCart(id);
+      res.json({
+        games,
+        userId: id,
+      });
+    } catch (error) {
+      res.status(400).json({ error: "Error getting cart" });
+    }
+  };
 }
 
 export default UserController;
