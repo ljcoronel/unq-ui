@@ -62,6 +62,68 @@ class UserController {
       res.status(400).json({ error: "Error getting cart" });
     }
   };
+
+  getUserById = async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const user = await this.service.getUser(userId);
+      const { id, email, name, image } = user;
+      res.json({ user: { id, email, name, image } });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
+
+  getFriendsOfUser = async (req, res) => {
+    const { userId } = req.params;
+    try {
+      const users = await this.service.users;
+      const user = users.find((user) => user.id === userId);
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      const friends = user.friends.map(({ id, name, email, image }) => ({
+        id,
+        name,
+        email,
+        image,
+      }));
+
+      res.json({
+        qty: friends.length,
+        friends,
+      });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
+
+  addOrRemoveUserFriend = async (req, res) => {
+    const { id } = req.user;
+    const loggedUserId = id;
+    const { userId } = req.params;
+
+    try {
+      const newUser = await this.service.addOrRemoveFriend(
+        loggedUserId,
+        userId
+      );
+
+      const { id, email, name, image, friends } = newUser;
+      const formattedFriends = friends.map(({ id, name, email, image }) => ({
+        id,
+        name,
+        email,
+        image,
+      }));
+      res.json({
+        user: { id, email, name, image },
+        friends: formattedFriends,
+      });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
 }
 
 export default UserController;

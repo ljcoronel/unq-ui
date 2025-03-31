@@ -50,6 +50,17 @@ app.post(
 // Search
 app.get("/search", tokenController.checkRole("user"), searchController.search);
 
+app.get(
+  "/users/:userId",
+  tokenController.checkRole("public"),
+  userController.getUserById
+);
+
+app
+  .route("/users/:userId/friends")
+  .get(tokenController.checkRole("public"), userController.getFriendsOfUser)
+  .put(tokenController.checkRole("user"), userController.addOrRemoveUserFriend);
+
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
