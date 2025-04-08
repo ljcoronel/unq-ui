@@ -6,7 +6,8 @@ import UserController from "./controllers/userController.js";
 import TokenController from "./controllers/tokenController.js";
 import PurchaseController from "./controllers/purchaseController.js";
 import SearchController from "./controllers/searchController.js";
-import GameController from "./controllers/gameController.js"
+import GameController from "./controllers/gameController.js";
+import TagController from "./controllers/tagController.js";
 
 const gogSystem = initGogSystem();
 
@@ -20,7 +21,8 @@ const tokenController = new TokenController(gogSystem);
 const userController = new UserController(gogSystem, tokenController);
 const purchaseController = new PurchaseController(gogSystem, tokenController);
 const searchController = new SearchController(gogSystem, tokenController);
-const gameController =  new GameController(gogSystem, tokenController);
+const tagController = new TagController(gogSystem, tokenController);
+const gameController = new GameController(gogSystem, tokenController);
 
 // Auth
 app.post("/login", tokenController.checkRole("public"), userController.login);
@@ -59,6 +61,28 @@ app.get("/games",
   gameController.games);
 
 app.get("/recomended", tokenController.checkRole("public"), gameController.recomendedGames);
+app.get(
+  "/users/:userId",
+  tokenController.checkRole("public"),
+  userController.getUserById
+);
+
+app
+  .route("/users/:userId/friends")
+  .get(tokenController.checkRole("public"), userController.getFriendsOfUser)
+  .put(tokenController.checkRole("user"), userController.addOrRemoveUserFriend);
+
+app.delete("/games/:gameId", tokenController.checkRole("user"), gameController.removeGame);
+
+app.put("/games/:gameId/reviews", tokenController.checkRole("user"), gameController.addReview);
+
+
+//tags
+app.get("/tags", tokenController.checkRole("public"), tagController.tags);
+
+app.get("/tags/:tagId", tokenController.checkRole("public"), tagController.getGamesByTagId);
+
+
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
