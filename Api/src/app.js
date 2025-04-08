@@ -58,6 +58,7 @@ app.get("/games",
   tokenController.checkRole("public"), 
   gameController.games);
 
+app.get("/recomended", tokenController.checkRole("public"), gameController.recomendedGames);
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);

@@ -24,6 +24,17 @@ class GameController{
         }
     }
 
+    recomendedGames = async (req, res) => {
+        try{
+            res.json(this.service.getRecommendedGames());
+        }catch(error){
+            res.status(400).json({
+                error: error.message
+            });
+        }
+        
+    }
+
 }
 
 
