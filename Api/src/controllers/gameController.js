@@ -52,8 +52,18 @@ class GameController {
     try {
       const gameId = req.params.gameId;
       const game = await this.service.getGame(gameId);
+
       res.json({
         ...game,
+        reviews: game.reviews.map(({ game, user, ...review }) => {
+          const { id, name, image } = user;
+
+          return {
+            ...review,
+            user: { id, name, image },
+            game: this.transformGame(game),
+          };
+        }),
         mainImage: game.mainImage.url,
         relatedGames: game.relatedGames.map((game) => this.transformGame(game)),
       });
@@ -77,6 +87,8 @@ class GameController {
       website,
       ...simpleGame
     } = game;
+
+
 
     return { ...simpleGame, mainImage: simpleGame.mainImage.url };
   };
@@ -124,8 +136,8 @@ class GameController {
         draftReview.isRecommended,
         draftReview.text
       );
-      const review = await this.service.addReview(id, draft);
-      res.status(200).json(review);
+      await this.service.addReview(id, draft);
+      return await this.gameById(req, res);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
