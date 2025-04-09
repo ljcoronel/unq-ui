@@ -55,17 +55,23 @@ app.post(
 app.get("/search", tokenController.checkRole("user"), searchController.search);
 
 
-// Games
+
 app.get("/games", 
   tokenController.checkRole("public"), 
   gameController.games);
 
-app.get("/recomended", tokenController.checkRole("public"), gameController.recomendedGames);
+app.get("/games/recommended", tokenController.checkRole("public"), gameController.recomendedGames);
+
 app.get(
   "/users/:userId",
   tokenController.checkRole("public"),
   userController.getUserById
 );
+
+app
+  .route("/games/:gameId")
+  .get(tokenController.checkRole("public"), gameController.gameById)
+  .put(tokenController.checkRole("user"), gameController.addGameById);
 
 app
   .route("/users/:userId/friends")
