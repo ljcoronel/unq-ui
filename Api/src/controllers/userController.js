@@ -6,10 +6,18 @@ const registerBodySchema = object({
   name: string().required(),
   email: string().email().required(),
   password: string().required(),
-  image: string().url(),
+  image: string().url().required(),
+  backgroundImage: string().url().required(),
 })
   .noUnknown(true)
   .strict();
+
+  const loginBodySchema = object({
+    email: string().email().required(),
+    password: string().required(),
+  })
+    .noUnknown(true)
+    .strict();
 
 class UserController {
   constructor(service, tokenController) {
@@ -41,19 +49,19 @@ class UserController {
     })),
   });
 
-  login = (req, res) => {
-    const { email, password } = req.body;
+  login = async (req, res) => {
+    const { email, password } = await loginBodySchema.validate(req.body);
 
     if (!email || !password) {
-      res.status(400).json({ error: "email and password are required" });
+      return res.status(400).json({ error: "email and password are required" });
     }
-    
+
     const user = this.service.users.find(
       (user) => user.email === email && user.password === password
     );
 
     if (!user) {
-      res.status(400).json({ error: "Invalid credentials" });
+      return res.status(400).json({ error: "Invalid credentials" });
     }
 
     const token = this.tokenController.generateToken(user.id);
@@ -66,9 +74,7 @@ class UserController {
       const newUser = await registerBodySchema.validate(req.body);
       const user = this.service.addNewUser(newUser);
       const token = this.tokenController.generateToken(user.id);
-      res
-        .header(HEADER, token)
-        .json({ user: { id: user.id, email: user.email } });
+      res.header(HEADER, token).json(this.loggedUserTransform(user));
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
