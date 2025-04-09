@@ -58,7 +58,7 @@ class GameController {
         relatedGames: game.relatedGames.map((game) => this.transformGame(game)),
       });
     } catch (error) {
-      res.status(404).json({
+      res.status(400).json({
         error: error.message,
       });
     }
@@ -81,7 +81,7 @@ class GameController {
     return { ...simpleGame, mainImage: simpleGame.mainImage.url };
   };
 
-  addGameById = async (req, res) => {
+  addGameToCartById = async (req, res) => {
     try {
       const { id } = req.user;
       const cart = await this.service.addGameToCart(id, req.params.gameId);
@@ -98,7 +98,7 @@ class GameController {
       } = cartUser;
       res.json({ cart: { games: simpleGames, user: simpleUser } });
     } catch (error) {
-      res.status(404).json({
+      res.status(400).json({
         error: error.message,
       });
     }
@@ -110,7 +110,7 @@ class GameController {
       const cart = await this.service.removeGameFromCart(id, req.params.gameId);
       res.status(200).json(cart);
     } catch (error) {
-      res.status(404).json({ error: error.message });
+      res.status(400).json({ error: error.message });
     }
   };
 
@@ -127,7 +127,7 @@ class GameController {
       const review = await this.service.addReview(id, draft);
       res.status(200).json(review);
     } catch (error) {
-      res.status(404).json({ error: error.message });
+      res.status(400).json({ error: error.message });
     }
   };
 }

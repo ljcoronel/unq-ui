@@ -71,7 +71,7 @@ app.get(
 app
   .route("/games/:gameId")
   .get(tokenController.checkRole("public"), gameController.gameById)
-  .put(tokenController.checkRole("user"), gameController.addGameById);
+  .put(tokenController.checkRole("user"), gameController.addGameToCartById);
 
 app
   .route("/users/:userId/friends")

@@ -14,7 +14,7 @@ class TagController {
             const games = await this.service.getGamesByTag(req.params.tagId, req.query.page);
             res.status(200).json(games);
         } catch (error) {
-            res.status(404).json({ error: error.message });
+            res.status(400).json({ error: error.message });
         }
     }
 }

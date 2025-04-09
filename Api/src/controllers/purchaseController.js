@@ -36,10 +36,7 @@ class PurchaseController {
           draftPurchase.cardCvv
         )
       );
-      res.status(201).json({
-        purchase,
-        userId: id,
-      });
+      res.status(201).send("Purchase completed")
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
