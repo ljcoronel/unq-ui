@@ -54,11 +54,24 @@ app.post(
 // Search
 app.get("/search", tokenController.checkRole("user"), searchController.search);
 
+
+
+app.get("/games", 
+  tokenController.checkRole("public"), 
+  gameController.games);
+
+app.get("/games/recommended", tokenController.checkRole("public"), gameController.recomendedGames);
+
 app.get(
   "/users/:userId",
   tokenController.checkRole("public"),
   userController.getUserById
 );
+
+app
+  .route("/games/:gameId")
+  .get(tokenController.checkRole("public"), gameController.gameById)
+  .put(tokenController.checkRole("user"), gameController.addGameById);
 
 app
   .route("/users/:userId/friends")
@@ -69,10 +82,17 @@ app.delete("/games/:gameId", tokenController.checkRole("user"), gameController.r
 
 app.put("/games/:gameId/reviews", tokenController.checkRole("user"), gameController.addReview);
 
+
+//tags
 app.get("/tags", tokenController.checkRole("public"), tagController.tags);
 
 app.get("/tags/:tagId", tokenController.checkRole("public"), tagController.getGamesByTagId);
 
+
+
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
+
+
+
