@@ -52,7 +52,11 @@ class GameController {
     try {
       const gameId = req.params.gameId;
       const game = await this.service.getGame(gameId);
-      res.json(game);
+      res.json({
+        ...game,
+        mainImage: game.mainImage.url,
+        relatedGames: game.relatedGames.map((game) => this.transformGame(game)),
+      });
     } catch (error) {
       res.status(404).json({
         error: error.message,
