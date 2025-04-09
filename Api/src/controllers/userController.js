@@ -66,7 +66,7 @@ class UserController {
 
     const token = this.tokenController.generateToken(user.id);
 
-    res.header(HEADER, token).json(this.loggedUserTransform(user));
+    res.status(201).header(HEADER, token).json(this.loggedUserTransform(user));
   };
 
   register = async (req, res) => {
@@ -74,7 +74,7 @@ class UserController {
       const newUser = await registerBodySchema.validate(req.body);
       const user = this.service.addNewUser(newUser);
       const token = this.tokenController.generateToken(user.id);
-      res.header(HEADER, token).json(this.loggedUserTransform(user));
+      res.status(201).header(HEADER, token).json(this.loggedUserTransform(user));
     } catch (error) {
       res.status(400).json({ error: error.message });
     }

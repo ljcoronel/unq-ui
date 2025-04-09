@@ -36,7 +36,7 @@ class PurchaseController {
           draftPurchase.cardCvv
         )
       );
-      res.json({
+      res.status(201).json({
         purchase,
         userId: id,
       });
