@@ -55,7 +55,7 @@ class GameController {
     gameById = async (req, res ) => {
         try{
             const gameId = req.params.gameId;
-            const game = await this.service.getGame(this.gameById);
+            const game = await this.service.getGame(gameId);
             res.json(game);
         }catch(error){
             res.status(404).json({
