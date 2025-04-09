@@ -21,8 +21,8 @@ const tokenController = new TokenController(gogSystem);
 const userController = new UserController(gogSystem, tokenController);
 const purchaseController = new PurchaseController(gogSystem, tokenController);
 const searchController = new SearchController(gogSystem, tokenController);
-const tagController = new TagController(gogSystem, tokenController);
 const gameController = new GameController(gogSystem, tokenController);
+const tagController = new TagController(gogSystem, tokenController, gameController);
 
 // Auth
 app.post("/login", tokenController.checkRole("public"), userController.login);
