@@ -13,8 +13,6 @@ const gameBodySchema = object({
   .noUnknown(true)
   .strict();
 
-const recomendedGamesSchema = array().max(10);
-
 class GameController {
   constructor(service, tokenController) {
     this.service = service;
@@ -40,17 +38,9 @@ class GameController {
 
   recomendedGames = async (req, res) => {
     try {
-      const recommended = await this.service
-        .getRecommendedGames()
-        .map(({ id, name, mainImage, tags, price }) => ({
-          id,
-          name,
-          mainImage,
-          tags,
-          price,
-        }));
-      recomendedGamesSchema.validate(recommended);
-      res.json(recommended);
+      const recommended = await this.service.getRecommendedGames();
+
+      res.json(recommended.map((game) => this.transformGame(game)));
     } catch (error) {
       res.status(400).json({
         error: error.message,
@@ -84,7 +74,7 @@ class GameController {
       ...simpleGame
     } = game;
 
-    return {...simpleGame, mainImage: simpleGame.mainImage.url};
+    return { ...simpleGame, mainImage: simpleGame.mainImage.url };
   };
 
   addGameById = async (req, res) => {
