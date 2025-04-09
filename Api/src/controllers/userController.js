@@ -17,19 +17,48 @@ class UserController {
     this.tokenController = tokenController;
   }
 
+  loggedUserTransform = (user) => ({
+    id: user.id,
+    email: user.email,
+    name: user.name,
+    image: user.image,
+    backgroundImage: user.backgroundImage,
+    games: user.games.map((game) => ({
+      id: game.id,
+      name: game.name,
+      mainImage: game.mainImage.url,
+      tags: game.tags.map((tag) => ({
+        id: tag.id,
+        name: tag.name,
+        image: {
+          src: tag.image.src,
+        },
+      })),
+      price: {
+        amount: game.price.amount,
+        currency: game.price.currency,
+      },
+    })),
+  });
+
   login = (req, res) => {
     const { email, password } = req.body;
+
     if (!email || !password) {
       res.status(400).json({ error: "email and password are required" });
     }
+    
     const user = this.service.users.find(
       (user) => user.email === email && user.password === password
     );
+
     if (!user) {
       res.status(400).json({ error: "Invalid credentials" });
     }
+
     const token = this.tokenController.generateToken(user.id);
-    res.header(HEADER, token).json({ user: { id: user.id, email } });
+
+    res.header(HEADER, token).json(this.loggedUserTransform(user));
   };
 
   register = async (req, res) => {
