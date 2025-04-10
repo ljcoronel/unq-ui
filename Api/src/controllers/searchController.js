@@ -1,9 +1,10 @@
 import * as yup from "yup";
 
 class SearchController {
-  constructor(service, tokenController) {
+  constructor(service, tokenController, gamesController) {
     this.service = service;
     this.tokenController = tokenController;
+    this.gamesController = gamesController;
   }
 
   validateSearchParams = async (params) => {
@@ -31,7 +32,7 @@ class SearchController {
 
       const filteredGames = list.filter((game) =>
         game.name.toLowerCase().includes(validated.query.toLowerCase())
-      );
+      ).map((game) => this.gamesController.transformGame(game));
 
       res.status(200).json({
         ...rest,
