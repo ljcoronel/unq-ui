@@ -1,6 +1,7 @@
 import { object, string } from "yup";
 
 import { HEADER } from "../constants.js";
+import { transformGame } from "../utils/utils.js";
 
 const registerBodySchema = object({
   name: string().required(),
@@ -94,9 +95,14 @@ class UserController {
     const { id } = req.user;
     try {
       const { games } = await this.service.getCart(id);
+      const user = this.service.users.find((user) => user.id === id);
       res.json({
-        games,
-        userId: id,
+        games: games.map((game) => transformGame(game)),
+        user: {
+          id,
+          name: user.name,
+          image: user.image,
+        },
       });
     } catch (error) {
       res.status(400).json({ error: "Error getting cart" });
@@ -107,8 +113,7 @@ class UserController {
     try {
       const { userId } = req.params;
       const user = await this.service.getUser(userId);
-      const { id, email, name, image } = user;
-      res.json({ user: { id, email, name, image } });
+      res.json(this.loggedUserTransform(user));
     } catch (error) {
       res.status(400).json({ error: error.message });
     }

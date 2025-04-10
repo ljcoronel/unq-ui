@@ -1,8 +1,8 @@
+import { transformGame } from "../utils/utils.js";
 class TagController {
-  constructor(service, tokenController, gamesController) {
+  constructor(service, tokenController) {
     this.service = service;
     this.tokenController = tokenController;
-    this.gamesController = gamesController;
   }
 
   tags = async (req, res) => {
@@ -20,7 +20,7 @@ class TagController {
         .status(200)
         .json({
             ...games,
-            list: games.list.map((game) => this.gamesController.transformGame(game))
+            list: games.list.map((game) => transformGame(game))
         });
     } catch (error) {
       res.status(400).json({ error: error.message });

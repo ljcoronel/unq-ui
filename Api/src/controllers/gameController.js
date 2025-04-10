@@ -1,7 +1,7 @@
 import { object, boolean, string, number, array } from "yup";
 import { DraftReview } from "@unq-ui/gog-model-js/src/model/Drafts.js";
 import { json } from "express";
-
+import { transformGame } from "../utils/utils.js";
 const pageOfGamesSchema = object().shape({
   page: number().integer().min(1).default(1),
 });
@@ -27,7 +27,7 @@ class GameController {
 
       res.json({
         ...gamesFounded,
-        list: gamesFounded.list.map((game) => this.transformGame(game)),
+        list: gamesFounded.list.map((game) => transformGame(game)),
       });
     } catch (error) {
       res.status(400).json({
@@ -40,7 +40,7 @@ class GameController {
     try {
       const recommended = await this.service.getRecommendedGames();
 
-      res.json(recommended.map((game) => this.transformGame(game)));
+      res.json(recommended.map((game) => transformGame(game)));
     } catch (error) {
       res.status(400).json({
         error: error.message,
@@ -61,11 +61,11 @@ class GameController {
           return {
             ...review,
             user: { id, name, image },
-            game: this.transformGame(game),
+            game: transformGame(game),
           };
         }),
         mainImage: game.mainImage.url,
-        relatedGames: game.relatedGames.map((game) => this.transformGame(game)),
+        relatedGames: game.relatedGames.map((game) => transformGame(game)),
       });
     } catch (error) {
       res.status(400).json({
@@ -74,24 +74,7 @@ class GameController {
     }
   };
 
-  transformGame = (game) => {
-    const {
-      description,
-      multimedia,
-      requirement,
-      relatedGames,
-      developer,
-      releaseDate,
-      reviews,
-      esrb,
-      website,
-      ...simpleGame
-    } = game;
 
-
-
-    return { ...simpleGame, mainImage: simpleGame.mainImage.url };
-  };
 
   addGameToCartById = async (req, res) => {
     try {
@@ -99,7 +82,7 @@ class GameController {
       const cart = await this.service.addGameToCart(id, req.params.gameId);
       const cartGames = cart.games;
       const cartUser = cart.user;
-      const simpleGames = cartGames.map((game) => this.transformGame(game));
+      const simpleGames = cartGames.map((game) => transformGame(game));
       const {
         email,
         password,

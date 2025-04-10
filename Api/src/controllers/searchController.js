@@ -1,5 +1,5 @@
 import * as yup from "yup";
-
+import { transformGame } from "../utils/utils.js";
 class SearchController {
   constructor(service, tokenController, gamesController) {
     this.service = service;
@@ -32,7 +32,7 @@ class SearchController {
 
       const filteredGames = list.filter((game) =>
         game.name.toLowerCase().includes(validated.query.toLowerCase())
-      ).map((game) => this.gamesController.transformGame(game));
+      ).map((game) => transformGame(game));
 
       res.status(200).json({
         ...rest,
