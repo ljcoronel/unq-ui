@@ -143,17 +143,7 @@ class UserController {
         userId
       );
 
-      const { id, email, name, image, friends } = newUser;
-      const formattedFriends = friends.map(({ id, name, email, image }) => ({
-        id,
-        name,
-        email,
-        image,
-      }));
-      res.json({
-        user: { id, email, name, image },
-        friends: formattedFriends,
-      });
+      res.json(this.loggedUserTransform(newUser));
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
