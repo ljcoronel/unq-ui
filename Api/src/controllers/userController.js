@@ -12,12 +12,12 @@ const registerBodySchema = object({
   .noUnknown(true)
   .strict();
 
-  const loginBodySchema = object({
-    email: string().email().required(),
-    password: string().required(),
-  })
-    .noUnknown(true)
-    .strict();
+const loginBodySchema = object({
+  email: string().email().required(),
+  password: string().required(),
+})
+  .noUnknown(true)
+  .strict();
 
 class UserController {
   constructor(service, tokenController) {
@@ -74,15 +74,20 @@ class UserController {
       const newUser = await registerBodySchema.validate(req.body);
       const user = this.service.addNewUser(newUser);
       const token = this.tokenController.generateToken(user.id);
-      res.status(201).header(HEADER, token).json(this.loggedUserTransform(user));
+      res
+        .status(201)
+        .header(HEADER, token)
+        .json(this.loggedUserTransform(user));
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   };
 
   getCurrentUser = async (req, res) => {
-    const { id, email, name, image } = req.user;
-    res.json({ user: { id, email, name, image } });
+    const { id } = req.user;
+    const user = this.service.users.find((user) => user.id === id);
+
+    res.json(this.loggedUserTransform(user));
   };
 
   getCurrentCart = async (req, res) => {
