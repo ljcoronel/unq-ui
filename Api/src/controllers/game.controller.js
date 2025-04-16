@@ -5,7 +5,7 @@ import { transformGame } from "../utils/utils.js";
 import { gameBodySchema, pageOfGamesSchema } from "../validators/gameValidators.js";
 
 
-class GameController {
+export class GameController {
   constructor(service, tokenController) {
     this.service = service;
     this.tokenController = tokenController;

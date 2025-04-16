@@ -3,7 +3,7 @@ import { transformGame } from "../utils/utils.js";
 import {
   loginBodySchema,
   registerBodySchema,
-} from "../validators/userValidators.js";
+} from "../validators/user.validators.js";
 
 class UserController {
   constructor(service, tokenController) {
