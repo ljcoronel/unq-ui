@@ -28,15 +28,14 @@ class SearchController {
     try {
       const validated = await this.validateSearchParams({ query, page });
 
-      const { list, ...rest } = await this.service.getGames(validated.page);
-
-      const filteredGames = list.filter((game) =>
-        game.name.toLowerCase().includes(validated.query.toLowerCase())
-      ).map((game) => transformGame(game));
+      const { list, ...rest } = await this.service.searchGame(
+        validated.query,
+        validated.page
+      );
 
       res.status(200).json({
         ...rest,
-        list: filteredGames,
+        list: list.map((game) => transformGame(game)),
       });
     } catch (error) {
       res.status(400).json({
