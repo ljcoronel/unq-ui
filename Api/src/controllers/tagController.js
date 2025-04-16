@@ -16,13 +16,15 @@ class TagController {
         req.params.tagId,
         req.query.page
       );
-      res
-        .status(200)
-        .json({
-            ...games,
-            list: games.list.map((game) => transformGame(game))
-        });
+      res.status(200).json({
+        ...games,
+        list: games.list.map((game) => transformGame(game)),
+      });
     } catch (error) {
+      if (error.message === "Tag not found") {
+        res.status(404).json({ error: error.message });
+        return;
+      }
       res.status(400).json({ error: error.message });
     }
   };
