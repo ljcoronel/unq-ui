@@ -22,8 +22,7 @@ class TagController {
       });
     } catch (error) {
       if (error.message === "Tag not found") {
-        res.status(404).json({ error: error.message });
-        return;
+        return res.status(404).json({ error: error.message });
       }
       res.status(400).json({ error: error.message });
     }

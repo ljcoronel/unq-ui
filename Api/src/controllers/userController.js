@@ -115,6 +115,9 @@ class UserController {
       const user = await this.service.getUser(userId);
       res.json(this.loggedUserTransform(user));
     } catch (error) {
+      if (error.message === "User not found") {
+        return res.status(404).json({ error: error.message });
+      }
       res.status(400).json({ error: error.message });
     }
   };
@@ -124,7 +127,9 @@ class UserController {
     try {
       const users = await this.service.users;
       const user = users.find((user) => user.id === userId);
-      const friends = user.friends.map(userFriend => this.loggedUserTransform(userFriend));
+      const friends = user.friends.map((userFriend) =>
+        this.loggedUserTransform(userFriend)
+      );
 
       res.json(friends);
     } catch (error) {
