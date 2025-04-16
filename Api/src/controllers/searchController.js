@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import { transformGame } from "../utils/utils.js";
+import { searchSchema } from "../validators/searchValidators.js";
 class SearchController {
   constructor(service, tokenController, gamesController) {
     this.service = service;
@@ -8,15 +9,9 @@ class SearchController {
   }
 
   validateSearchParams = async (params) => {
-    const schema = yup.object().shape({
-      query: yup
-        .string()
-        .required('El parámetro "query" es obligatorio')
-        .max(255),
-      page: yup.number().integer().min(1).default(1),
-    });
+    
 
-    return await schema.validate(params, {
+    return await searchSchema.validate(params, {
       abortEarly: false,
       stripUnknown: true,
     });

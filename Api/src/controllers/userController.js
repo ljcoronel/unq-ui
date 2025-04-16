@@ -1,24 +1,9 @@
-import { object, string } from "yup";
-
 import { HEADER } from "../constants.js";
 import { transformGame } from "../utils/utils.js";
-
-const registerBodySchema = object({
-  name: string().required(),
-  email: string().email().required(),
-  password: string().required(),
-  image: string().url().required(),
-  backgroundImage: string().url().required(),
-})
-  .noUnknown(true)
-  .strict();
-
-const loginBodySchema = object({
-  email: string().email().required(),
-  password: string().required(),
-})
-  .noUnknown(true)
-  .strict();
+import {
+  loginBodySchema,
+  registerBodySchema,
+} from "../validators/userValidators.js";
 
 class UserController {
   constructor(service, tokenController) {
@@ -26,7 +11,7 @@ class UserController {
     this.tokenController = tokenController;
   }
 
-  loggedUserTransform = (user) => ({
+  userTransform = (user) => ({
     id: user.id,
     email: user.email,
     name: user.name,
@@ -67,7 +52,7 @@ class UserController {
 
     const token = this.tokenController.generateToken(user.id);
 
-    res.status(201).header(HEADER, token).json(this.loggedUserTransform(user));
+    res.status(201).header(HEADER, token).json(this.userTransform(user));
   };
 
   register = async (req, res) => {
@@ -75,10 +60,7 @@ class UserController {
       const newUser = await registerBodySchema.validate(req.body);
       const user = this.service.addNewUser(newUser);
       const token = this.tokenController.generateToken(user.id);
-      res
-        .status(201)
-        .header(HEADER, token)
-        .json(this.loggedUserTransform(user));
+      res.status(201).header(HEADER, token).json(this.userTransform(user));
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
@@ -88,7 +70,7 @@ class UserController {
     const { id } = req.user;
     const user = this.service.users.find((user) => user.id === id);
 
-    res.json(this.loggedUserTransform(user));
+    res.json(this.userTransform(user));
   };
 
   getCurrentCart = async (req, res) => {
@@ -113,7 +95,7 @@ class UserController {
     try {
       const { userId } = req.params;
       const user = await this.service.getUser(userId);
-      res.json(this.loggedUserTransform(user));
+      res.json(this.userTransform(user));
     } catch (error) {
       if (error.message === "User not found") {
         return res.status(404).json({ error: error.message });
@@ -125,10 +107,9 @@ class UserController {
   getFriendsOfUser = async (req, res) => {
     const { userId } = req.params;
     try {
-      const users = await this.service.users;
-      const user = users.find((user) => user.id === userId);
+      const user = await this.service.getUser(userId);
       const friends = user.friends.map((userFriend) =>
-        this.loggedUserTransform(userFriend)
+        this.userTransform(userFriend)
       );
 
       res.json(friends);
@@ -148,7 +129,7 @@ class UserController {
         userId
       );
 
-      res.json(this.loggedUserTransform(newUser));
+      res.json(this.userTransform(newUser));
     } catch (error) {
       res.status(400).json({ error: error.message });
     }

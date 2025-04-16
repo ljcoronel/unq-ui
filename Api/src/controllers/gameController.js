@@ -1,17 +1,9 @@
-import { object, boolean, string, number, array } from "yup";
+
 import { DraftReview } from "@unq-ui/gog-model-js/src/model/Drafts.js";
 import { json } from "express";
 import { transformGame } from "../utils/utils.js";
-const pageOfGamesSchema = object().shape({
-  page: number().integer().min(1).default(1),
-});
+import { gameBodySchema, pageOfGamesSchema } from "../validators/gameValidators.js";
 
-const gameBodySchema = object({
-  isRecommended: boolean().required(),
-  text: string().required(),
-})
-  .noUnknown(true)
-  .strict();
 
 class GameController {
   constructor(service, tokenController) {
