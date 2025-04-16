@@ -1,6 +1,6 @@
 import express from "express";
-import UserController from "../controllers/userController.js";
-import TokenController from "../controllers/tokenController.js";
+import UserController from "../controllers/user.controller.js";
+import TokenController from "../controllers/token.controller.js";
 import { initGogSystem } from "@unq-ui/gog-model-js";
 
 const router = express.Router();
@@ -15,3 +15,5 @@ router.post(
   tokenController.checkRole("public"),
   userController.register
 );
+
+export default router;

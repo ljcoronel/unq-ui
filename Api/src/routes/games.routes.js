@@ -1,6 +1,7 @@
-import GameController from "./controllers/gameController.js";
-import TokenController from "../controllers/tokenController.js";
+import GameController from "../controllers/game.controller.js";
+import TokenController from "../controllers/token.controller.js";
 import { initGogSystem } from "@unq-ui/gog-model-js";
+import express from "express";
 
 const router = express.Router();
 const gogSystem = initGogSystem();
@@ -32,3 +33,5 @@ router.put(
   tokenController.checkRole("user"),
   gameController.addReview
 );
+
+export default router;

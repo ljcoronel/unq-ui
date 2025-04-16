@@ -1,6 +1,7 @@
 import UserController from "../controllers/user.controller.js";
 import TokenController from "../controllers/token.controller.js";
 import { initGogSystem } from "@unq-ui/gog-model-js";
+import express from "express";
 
 const router = express.Router();
 const gogSystem = initGogSystem();
@@ -29,3 +30,5 @@ router
   .route("/:userId/friends")
   .get(tokenController.checkRole("public"), userController.getFriendsOfUser)
   .put(tokenController.checkRole("user"), userController.addOrRemoveUserFriend);
+
+export default router;

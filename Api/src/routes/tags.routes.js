@@ -1,7 +1,8 @@
-import TagController from "./controllers/tagController.js";
-import TokenController from "../controllers/tokenController.js";
+import TagController from "../controllers/tag.controller.js";
+import TokenController from "../controllers/token.controller.js";
 import { initGogSystem } from "@unq-ui/gog-model-js";
 import { gameController } from "./games.routes.js";
+import express from "express";
 
 const router = express.Router();
 const gogSystem = initGogSystem();
@@ -21,3 +22,5 @@ router.get(
   tokenController.checkRole("public"),
   tagController.getGamesByTagId
 );
+
+export default router;

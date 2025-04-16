@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import { transformGame } from "../utils/utils.js";
-import { searchSchema } from "../validators/searchValidators.js";
+import { searchSchema } from "../validators/search.validators.js";
 class SearchController {
   constructor(service, tokenController, gamesController) {
     this.service = service;

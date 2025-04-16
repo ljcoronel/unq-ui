@@ -1,6 +1,8 @@
-import SearchController from "./controllers/searchController.js";
+import SearchController from "../controllers/search.controller.js";
 import TokenController from "../controllers/token.controller.js";
 import { initGogSystem } from "@unq-ui/gog-model-js";
+import express from "express";
+import { gameController } from "./games.routes.js";
 
 const router = express.Router();
 const gogSystem = initGogSystem();
@@ -12,3 +14,5 @@ const searchController = new SearchController(
   gameController
 );
 router.get("", tokenController.checkRole("user"), searchController.search);
+
+export default router;

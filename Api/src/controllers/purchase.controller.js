@@ -1,5 +1,5 @@
 import { DraftPurchase } from "@unq-ui/gog-model-js/src/model/Drafts.js";
-import { purchaseBodySchema } from "../validators/purchaseValidators.js";
+import { purchaseBodySchema } from "../validators/purchase.validators.js";
 
 class PurchaseController {
   constructor(service, tokenController) {

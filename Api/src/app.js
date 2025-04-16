@@ -3,6 +3,8 @@ import authRoute from "./routes/auth.routes.js";
 import userRoute from "./routes/users.routes.js";
 import purchaseRoute from "./routes/purchase.routes.js";
 import searchRoute from "./routes/search.routes.js";
+import gamesRoute from "./routes/games.routes.js";
+import tagsRoute from "./routes/tags.routes.js";
 
 const app = express();
 

@@ -2,7 +2,7 @@
 import { DraftReview } from "@unq-ui/gog-model-js/src/model/Drafts.js";
 import { json } from "express";
 import { transformGame } from "../utils/utils.js";
-import { gameBodySchema, pageOfGamesSchema } from "../validators/gameValidators.js";
+import { gameBodySchema, pageOfGamesSchema } from "../validators/game.validators.js";
 
 
 export class GameController {
