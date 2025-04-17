@@ -36,23 +36,28 @@ class UserController {
   });
 
   login = async (req, res) => {
-    const { email, password } = await loginBodySchema.validate(req.body);
+    try{
+      const { email, password } = await loginBodySchema.validate(req.body);
 
-    if (!email || !password) {
-      return res.status(400).json({ error: "email and password are required" });
+      if (!email || !password) {
+        return res.status(400).json({ error: "email and password are required" });
+      }
+
+      const user = this.service.users.find(
+        (user) => user.email === email && user.password === password
+      );
+
+      if (!user) {
+        return res.status(400).json({ error: "Invalid credentials" });
+      }
+
+      const token = this.tokenController.generateToken(user.id);
+
+      res.status(200).header(HEADER, token).json(this.userTransform(user));
     }
-
-    const user = this.service.users.find(
-      (user) => user.email === email && user.password === password
-    );
-
-    if (!user) {
-      return res.status(400).json({ error: "Invalid credentials" });
+    catch(error){
+      res.status(400).json({ error: error.message });        
     }
-
-    const token = this.tokenController.generateToken(user.id);
-
-    res.status(201).header(HEADER, token).json(this.userTransform(user));
   };
 
   register = async (req, res) => {
