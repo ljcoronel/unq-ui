@@ -118,6 +118,9 @@ export class GameController {
       await this.service.addReview(id, draft);
       return await this.gameById(req, res);
     } catch (error) {
+      if (error.message === "Game not found") {
+        res.status(404).json({ error: error.message });
+      }
       res.status(400).json({ error: error.message });
     }
   };
