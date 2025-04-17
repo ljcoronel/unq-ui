@@ -61,12 +61,11 @@ export class GameController {
     } catch (error) {
       if (error.message === "Game not found") {
         res.status(404).json({ error: error.message });
+      } else {
+        res.status(400).json({ error: error.message });
       }
-      res.status(400).json({ error: error.message });
     }
   };
-
-
 
   addGameToCartById = async (req, res) => {
     try {
@@ -120,8 +119,9 @@ export class GameController {
     } catch (error) {
       if (error.message === "Game not found") {
         res.status(404).json({ error: error.message });
+      } else {
+        res.status(400).json({ error: error.message });
       }
-      res.status(400).json({ error: error.message });
     }
   };
 }
