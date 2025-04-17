@@ -95,7 +95,11 @@ export class GameController {
     try {
       const { id } = req.user;
       const cart = await this.service.removeGameFromCart(id, req.params.gameId);
-      res.status(200).json(cart);
+      const cartUser = cart.user;
+      const cartGames = cart.games;
+      const simpleGames = cartGames.map((game) => transformGame(game));
+      const {email, password, backgroundImage, games, friends, ...simpleUser} = cartUser;
+      res.status(200).json({cart: { games: simpleGames, user: simpleUser} });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
