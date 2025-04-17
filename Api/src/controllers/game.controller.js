@@ -1,6 +1,5 @@
 
 import { DraftReview } from "@unq-ui/gog-model-js/src/model/Drafts.js";
-import { json } from "express";
 import { transformGame } from "../utils/utils.js";
 import { gameBodySchema, pageOfGamesSchema } from "../validators/game.validators.js";
 
@@ -60,9 +59,10 @@ export class GameController {
         relatedGames: game.relatedGames.map((game) => transformGame(game)),
       });
     } catch (error) {
-      res.status(400).json({
-        error: error.message,
-      });
+      if (error.message === "Game not found") {
+        res.status(404).json({ error: error.message });
+      }
+      res.status(400).json({ error: error.message });
     }
   };
 
