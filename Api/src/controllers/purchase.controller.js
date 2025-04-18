@@ -20,7 +20,7 @@ class PurchaseController {
           draftPurchase.cardCvv
         )
       );
-      res.status(201).send("Purchase completed");
+      res.status(201).json({message:"Purchase completed"});
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
