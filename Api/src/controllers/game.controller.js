@@ -84,7 +84,7 @@ export class GameController {
       } = cartUser;
       res.json({ cart: { games: simpleGames, user: simpleUser } });
     } catch (error) {
-      res.status(400).json({
+      res.status(404).json({
         error: error.message,
       });
     }
