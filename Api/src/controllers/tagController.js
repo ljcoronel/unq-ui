@@ -7,7 +7,7 @@ class TagController {
 
   tags = async (req, res) => {
     const tags = this.service.tags;
-    res.status(200).json(tags);
+    return res.status(200).json(tags);
   };
 
   getGamesByTagId = async (req, res) => {
@@ -16,7 +16,8 @@ class TagController {
         req.params.tagId,
         req.query.page
       );
-      res.status(200).json({
+      
+      return res.status(200).json({
         ...games,
         list: games.list.map((game) => transformGame(game)),
       });
@@ -24,7 +25,8 @@ class TagController {
       if (error.message === "Tag not found") {
         return res.status(404).json({ error: error.message });
       }
-      res.status(400).json({ error: error.message });
+
+      return res.status(500).json({ error: error.message });
     }
   };
 }
