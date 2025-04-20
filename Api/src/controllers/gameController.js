@@ -16,14 +16,16 @@ export class GameController {
 
       const gamesFounded = await this.service.getGames(validate.page);
 
-      res.status(200).json({
+      return res.status(200).json({
         ...gamesFounded,
         list: gamesFounded.list.map((game) => transformGame(game)),
       });
     } catch (error) {
-      res.status(400).json({
-        error: error.message,
-      });
+      if(error.name === 'ValidationError'){
+        return res.status(400).json({ error: error.message });        
+      } else {
+        return res.status(500).json({ error: error.message });        
+      }
     }
   };
 
