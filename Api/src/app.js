@@ -52,7 +52,7 @@ app.post(
 );
 
 // Search
-app.get("/search", tokenController.checkRole("user"), searchController.search);
+app.get("/search", tokenController.checkRole("public"), searchController.search);
 
 
 

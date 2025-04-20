@@ -1,11 +1,10 @@
-import * as yup from "yup";
 import { transformGame } from "../utils/utils.js";
 import { searchSchema } from "../validators/search.validators.js";
+
 class SearchController {
-  constructor(service, tokenController, gamesController) {
+  constructor(service, tokenController) {
     this.service = service;
     this.tokenController = tokenController;
-    this.gamesController = gamesController;
   }
 
   validateSearchParams = async (params) => {
