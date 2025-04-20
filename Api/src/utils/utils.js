@@ -14,3 +14,9 @@ export const transformGame = (game) => {
 
   return { ...simpleGame, mainImage: simpleGame.mainImage.url };
 };
+
+export const transformReview = (review) => {
+  const { game, user, ...simpleReview } = review;
+  const { id, name, image } = user;
+  return { ...simpleReview, user: { id, name, image }, game: transformGame(game) };
+}
