@@ -31,7 +31,7 @@ export class GameController {
 
   recomendedGames = async (req, res) => {
       const recommended = await this.service.getRecommendedGames();
-      res.status(200).json(recommended.map((game) => transformGame(game)));
+      return res.status(200).json(recommended.map((game) => transformGame(game)));
   };
 
   gameById = async (req, res) => {
