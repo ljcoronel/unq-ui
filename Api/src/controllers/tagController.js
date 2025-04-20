@@ -10,7 +10,7 @@ class TagController {
     return res.status(200).json(tags);
   };
 
-  getGamesByTagId = async (req, res) => {
+  getGamesByTagId = async (req, res, next) => {
     try {
       const games = await this.service.getGamesByTag(
         req.params.tagId,
@@ -22,11 +22,7 @@ class TagController {
         list: games.list.map((game) => transformGame(game)),
       });
     } catch (error) {
-      if (error.message === "Tag not found") {
-        return res.status(404).json({ error: error.message });
-      }
-
-      return res.status(500).json({ error: error.message });
+      next(error);
     }
   };
 }

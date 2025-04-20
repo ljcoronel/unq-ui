@@ -16,7 +16,7 @@ class SearchController {
     });
   };
 
-  search = async (req, res) => {
+  search = async (req, res, next) => {
     const { query, page } = req.query;
 
     try {
@@ -32,11 +32,7 @@ class SearchController {
         list: list.map((game) => transformGame(game)),
       });
     } catch (error) {
-      if(error.name === 'ValidationError'){
-        return res.status(400).json({ error: error.message });        
-      } else {
-        return res.status(500).json({ error: error.message });        
-      }
+      next(error);
     }
   };
 }

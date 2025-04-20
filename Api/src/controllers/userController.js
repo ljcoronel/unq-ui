@@ -35,7 +35,7 @@ class UserController {
     })),
   });
 
-  login = async (req, res) => {
+  login = async (req, res, next) => {
     try {
       const { email, password } = await loginBodySchema.validate(req.body);
 
@@ -60,15 +60,11 @@ class UserController {
         .header(HEADER, token)
         .json(this.userTransform(user));
     } catch (error) {
-      if (error.name === "ValidationError") {
-        return res.status(400).json({ error: error.message });
-      } else {
-        return res.status(500).json({ error: error.message });
-      }
+     next(error);
     }
   };
 
-  register = async (req, res) => {
+  register = async (req, res, next) => {
     try {
       const newUser = await registerBodySchema.validate(req.body);
 
@@ -81,11 +77,7 @@ class UserController {
         .header(HEADER, token)
         .json(this.userTransform(user));
     } catch (error) {
-      if (error.name === "ValidationError" || error.name === "UserException") {
-        return res.status(400).json({ error: error.message });
-      } else {
-        return res.status(500).json({ error: error.message });
-      }
+      next(error);
     }
   };
 
@@ -110,21 +102,17 @@ class UserController {
     });
   };
 
-  getUserById = async (req, res) => {
+  getUserById = async (req, res, next) => {
     try {
       const { userId } = req.params;
       const user = await this.service.getUser(userId);
       return res.status(200).json(this.userTransform(user));
     } catch (error) {
-      if (error.message === "User not found") {
-        return res.status(404).json({ error: error.message });
-      } else {
-        return res.status(500).json({ error: error.message });
-      }
+      next(error);
     }
   };
 
-  getFriendsOfUser = async (req, res) => {
+  getFriendsOfUser = async (req, res, next) => {
     const { userId } = req.params;
     try {
       const user = await this.service.getUser(userId);
@@ -134,15 +122,11 @@ class UserController {
 
       return res.status(200).json(friends);
     } catch (error) {
-      if (error.message === "User not found") {
-        return res.status(404).json({ error: error.message });
-      } else {
-        return res.status(500).json({ error: error.message });
-      }
+      next(error);
     }
   };
 
-  addOrRemoveUserFriend = async (req, res) => {
+  addOrRemoveUserFriend = async (req, res, next) => {
     const { id } = req.user;
     const loggedUserId = id;
     const { userId } = req.params;
@@ -158,15 +142,7 @@ class UserController {
 
       return res.status(200).json(simpleFriends);
     } catch (error) {
-      if (error.message === "User not found") {
-        return res.status(404).json({ error: error.message });
-      }
-
-      if (error.name === "UserException") {
-        return res.status(400).json({ error: error.message });
-      }
-
-      return res.status(500).json({ error: error.message });
+     next(error);
     }
   };
 }

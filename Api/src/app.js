@@ -8,6 +8,7 @@ import PurchaseController from "./controllers/purchaseController.js";
 import SearchController from "./controllers/searchController.js";
 import GameController from "./controllers/gameController.js";
 import TagController from "./controllers/tagController.js";
+import { errorHandler } from "./middlewares/errorHandlerMiddleware.js";
 
 const gogSystem = initGogSystem();
 
@@ -86,6 +87,8 @@ app.put("/games/:gameId/reviews", tokenController.checkRole("user"), gameControl
 app.get("/tags", tokenController.checkRole("public"), tagController.tags);
 
 app.get("/tags/:tagId", tokenController.checkRole("public"), tagController.getGamesByTagId);
+
+app.use(errorHandler);
 
 
 app.listen(port, () => {

@@ -11,7 +11,7 @@ export class GameController {
     this.tokenController = tokenController;
   }
 
-  games = async (req, res) => {
+  games = async (req, res, next) => {
     try {
       const validate = await pageOfGamesSchema.validate(req.query);
 
@@ -22,11 +22,7 @@ export class GameController {
         list: gamesFounded.list.map((game) => transformGame(game)),
       });
     } catch (error) {
-      if (error.name === "ValidationError") {
-        return res.status(400).json({ error: error.message });
-      } else {
-        return res.status(500).json({ error: error.message });
-      }
+      next(error);
     }
   };
 
@@ -35,7 +31,7 @@ export class GameController {
     return res.status(200).json(recommended.map((game) => transformGame(game)));
   };
 
-  gameById = async (req, res) => {
+  gameById = async (req, res, next) => {
     try {
       const gameId = req.params.gameId;
       const game = await this.service.getGame(gameId);
@@ -47,15 +43,11 @@ export class GameController {
         relatedGames: game.relatedGames.map((game) => transformGame(game)),
       });
     } catch (error) {
-      if (error.message === "Game not found") {
-        return res.status(404).json({ error: error.message });
-      } else {
-        return res.status(500).json({ error: error.message });
-      }
+      next(error);
     }
   };
 
-  addGameToCartById = async (req, res) => {
+  addGameToCartById = async (req, res, next) => {
     try {
       const { id } = req.user;
       const cart = await this.service.addGameToCart(id, req.params.gameId);
@@ -72,18 +64,11 @@ export class GameController {
       } = cartUser;
       return res.status(200).json({ games: simpleGames, user: simpleUser });
     } catch (error) {
-      if (error.message === "Game not found") {
-        return res.status(404).json({ error: error.message });
-      }
-
-      if (error.name === "PurchaseException") {
-        return res.status(400).json({ error: error.message });
-      }
-      return res.status(500).json({ error: error.message });
+      next(error);
     }
   };
 
-  removeGame = async (req, res) => {
+  removeGame = async (req, res, next) => {
     try {
       const { id } = req.user;
       const cart = await this.service.removeGameFromCart(id, req.params.gameId);
@@ -102,19 +87,11 @@ export class GameController {
 
       return res.status(200).json({ games: simpleGames, user: simpleUser });
     } catch (error) {
-      if (error.message === "Game not found") {
-        return res.status(404).json({ error: error.message });
-      }
-
-      if (error.name === "CartException") {
-        return res.status(400).json({ error: error.message });
-      }
-
-      return res.status(500).json({ error: error.message });
+      next(error);
     }
   };
 
-  addReview = async (req, res) => {
+  addReview = async (req, res, next) => {
     try {
       const { id } = req.user;
       const gameId = req.params.gameId;
@@ -132,18 +109,7 @@ export class GameController {
         relatedGames: game.relatedGames.map((game) => transformGame(game)),
       });
     } catch (error) {
-      if (error.message === "Game not found") {
-        return res.status(404).json({ error: error.message });
-      }
-
-      if (
-        error.name === "ValidationError" ||
-        error.name === "ReviewException"
-      ) {
-        return res.status(400).json({ error: error.message });
-      }
-
-      return res.status(500).json({ error: error.message });
+      next(error);
     }
   };
 }

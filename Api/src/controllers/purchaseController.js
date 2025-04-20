@@ -7,7 +7,7 @@ class PurchaseController {
     this.tokenController = tokenController;
   }
 
-  purchase = async (req, res) => {
+  purchase = async (req, res, next) => {
     try {
       const { id } = req.user;
       const draftPurchase = await purchaseBodySchema.validate(req.body);
@@ -22,12 +22,7 @@ class PurchaseController {
       );
       return res.status(200).json({ message: "Purchase completed" });
     } catch (error) {
-      console.log(error.name)
-      if(error.name === 'ValidationError' || error.name === 'PurchaseException') {
-        return res.status(400).json({ error: error.message });        
-      } else {
-        return res.status(500).json({ error: error.message });        
-      }
+      next(error);
     }
   };
 }
