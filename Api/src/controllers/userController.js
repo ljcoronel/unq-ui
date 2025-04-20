@@ -67,11 +67,18 @@ class UserController {
   register = async (req, res) => {
     try {
       const newUser = await registerBodySchema.validate(req.body);
+
       const user = this.service.addNewUser(newUser);
+
       const token = this.tokenController.generateToken(user.id);
-      res.status(201).header(HEADER, token).json(this.userTransform(user));
+
+      return res.status(201).header(HEADER, token).json(this.userTransform(user));
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      if(error.name === 'ValidationError' || error.name === 'UserException'){
+        return res.status(400).json({ error: error.message });        
+      } else {
+        return res.status(500).json({ error: error.message });        
+      }
     }
   };
 
