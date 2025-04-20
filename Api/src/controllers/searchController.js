@@ -1,47 +1,38 @@
-import * as yup from "yup";
 import { transformGame } from "../utils/utils.js";
+import { searchSchema } from "../validators/search.validators.js";
+
 class SearchController {
-  constructor(service, tokenController, gamesController) {
+  constructor(service, tokenController) {
     this.service = service;
     this.tokenController = tokenController;
-    this.gamesController = gamesController;
   }
 
   validateSearchParams = async (params) => {
-    const schema = yup.object().shape({
-      query: yup
-        .string()
-        .required('El parámetro "query" es obligatorio')
-        .max(255),
-      page: yup.number().integer().min(1).default(1),
-    });
+    
 
-    return await schema.validate(params, {
+    return await searchSchema.validate(params, {
       abortEarly: false,
       stripUnknown: true,
     });
   };
 
-  search = async (req, res) => {
+  search = async (req, res, next) => {
     const { query, page } = req.query;
 
     try {
       const validated = await this.validateSearchParams({ query, page });
 
-      const { list, ...rest } = await this.service.getGames(validated.page);
+      const { list, ...rest } = await this.service.searchGame(
+        validated.query,
+        validated.page
+      );
 
-      const filteredGames = list.filter((game) =>
-        game.name.toLowerCase().includes(validated.query.toLowerCase())
-      ).map((game) => transformGame(game));
-
-      res.status(200).json({
+      return res.status(200).json({
         ...rest,
-        list: filteredGames,
+        list: list.map((game) => transformGame(game)),
       });
     } catch (error) {
-      res.status(400).json({
-        error: error.message,
-      });
+      next(error);
     }
   };
 }

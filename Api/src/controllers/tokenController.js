@@ -20,8 +20,8 @@ class TokenController {
       if (role === 'admin' || role === 'user') {
         const authHeader = req.headers.authorization;
         if (!authHeader) {
-          res.status(401).json({ error: 'Authorization header is required' });
-          return;
+          return res.status(401).json({ error: 'Authorization header is required' });
+          
         }
         try {
           const decoded = this.validateToken(authHeader);
@@ -29,8 +29,7 @@ class TokenController {
           req.user = user;
           next();
         } catch (error) {
-          console.log(error);
-          res.status(401).json({ error: 'Invalid token' });
+          return res.status(401).json({ error: 'Invalid token' });
         }
       } else {
         throw new Error(`Invalid role: ${role}`);
