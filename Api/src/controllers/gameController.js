@@ -39,7 +39,7 @@ export class GameController {
       const gameId = req.params.gameId;
       const game = await this.service.getGame(gameId);
 
-      res.status(200).json({
+      return res.status(200).json({
         ...game,
         reviews: game.reviews.map((review) => transformReview(review)),
         mainImage: game.mainImage.url,
@@ -47,9 +47,9 @@ export class GameController {
       });
     } catch (error) {
       if (error.message === "Game not found") {
-        res.status(404).json({ error: error.message });
+        return res.status(404).json({ error: error.message });
       } else {
-        res.status(500).json({ error: error.message });
+        return res.status(500).json({ error: error.message });
       }
     }
   };
