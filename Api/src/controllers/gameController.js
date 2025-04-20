@@ -69,12 +69,12 @@ export class GameController {
         friends,
         ...simpleUser
       } = cartUser;
-      res.status(200).json({ games: simpleGames, user: simpleUser });
+      return res.status(200).json({ games: simpleGames, user: simpleUser });
     } catch (error) {
       if (error.message === "Game not found") {
-        res.status(404).json({ error: error.message });
+        return res.status(404).json({ error: error.message });
       } else {
-        res.status(500).json({ error: error.message });
+        return res.status(500).json({ error: error.message });
       }
 
     }
