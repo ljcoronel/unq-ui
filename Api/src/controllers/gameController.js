@@ -44,7 +44,11 @@ export class GameController {
         relatedGames: game.relatedGames.map((game) => transformGame(game)),
       });
     } catch (error) {
-      res.status(404).json({ error: error.message });
+      if (error.message === "Game not found") {
+        res.status(404).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: error.message });
+      }
     }
   };
 
@@ -68,7 +72,7 @@ export class GameController {
       if (error.message === "Game not found") {
         res.status(404).json({ error: error.message });
       } else {
-        res.status(409).json({ error: error.message });
+        res.status(500).json({ error: error.message });
       }
 
     }
@@ -109,7 +113,7 @@ export class GameController {
       if (error.message === "Game not found") {
         res.status(404).json({ error: error.message });
       } else {
-        res.status(400).json({ error: error.message });
+        res.status(500).json({ error: error.message });
       }
     }
   };
