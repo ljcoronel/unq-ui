@@ -39,12 +39,6 @@ class UserController {
     try {
       const { email, password } = await loginBodySchema.validate(req.body);
 
-      if (!email || !password) {
-        return res
-          .status(400)
-          .json({ error: "email and password are required" });
-      }
-
       const user = this.service.users.find(
         (user) => user.email === email && user.password === password
       );
@@ -60,7 +54,7 @@ class UserController {
         .header(HEADER, token)
         .json(this.userTransform(user));
     } catch (error) {
-     next(error);
+      next(error);
     }
   };
 
