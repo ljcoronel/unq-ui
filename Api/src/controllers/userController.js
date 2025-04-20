@@ -75,37 +75,30 @@ class UserController {
     const { id } = req.user;
     const user = this.service.users.find((user) => user.id === id);
 
-    res.json(this.userTransform(user));
+    res.status(200).json(this.userTransform(user));
   };
 
   getCurrentCart = async (req, res) => {
     const { id } = req.user;
-    try {
-      const { games } = await this.service.getCart(id);
-      const user = this.service.users.find((user) => user.id === id);
-      res.json({
-        games: games.map((game) => transformGame(game)),
-        user: {
-          id,
-          name: user.name,
-          image: user.image,
-        },
-      });
-    } catch (error) {
-      res.status(400).json({ error: "Error getting cart" });
-    }
+    const { games } = await this.service.getCart(id);
+    const user = this.service.users.find((user) => user.id === id);
+    res.status(200).json({
+      games: games.map((game) => transformGame(game)),
+      user: {
+        id,
+        name: user.name,
+        image: user.image,
+      },
+    });
   };
 
   getUserById = async (req, res) => {
     try {
       const { userId } = req.params;
       const user = await this.service.getUser(userId);
-      res.json(this.userTransform(user));
+      res.status(200).json(this.userTransform(user));
     } catch (error) {
-      if (error.message === "User not found") {
-        return res.status(404).json({ error: error.message });
-      }
-      res.status(400).json({ error: error.message });
+      res.status(404).json({ error: error.message });
     }
   };
 
@@ -117,9 +110,9 @@ class UserController {
         this.userTransform(userFriend)
       );
 
-      res.json(friends);
+      res.status(200).json(friends);
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(404).json({ error: error.message });
     }
   };
 
@@ -133,10 +126,15 @@ class UserController {
         loggedUserId,
         userId
       );
+      const simpleFriends = newUser.friends.map((user) => this.userTransform(user))
 
-      res.json(this.userTransform(newUser));
+      res.status(200).json(simpleFriends);
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      if (error.message === "User not found") {
+        res.status(404).json({ error: error.message });
+      } else {
+        res.status(400).json({ error: error.message });
+      }
     }
   };
 }
