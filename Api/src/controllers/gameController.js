@@ -74,9 +74,12 @@ export class GameController {
     } catch (error) {
       if (error.message === "Game not found") {
         return res.status(404).json({ error: error.message });
-      } else {
-        return res.status(500).json({ error: error.message });
       }
+
+      if (error.name === "PurchaseException") {
+        return res.status(400).json({ error: error.message });
+      }
+      return res.status(500).json({ error: error.message });
     }
   };
 
@@ -133,7 +136,10 @@ export class GameController {
         return res.status(404).json({ error: error.message });
       }
 
-      if (error.name === 'ValidationError' || error.name === "ReviewException") {
+      if (
+        error.name === "ValidationError" ||
+        error.name === "ReviewException"
+      ) {
         return res.status(400).json({ error: error.message });
       }
 

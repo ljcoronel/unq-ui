@@ -20,9 +20,14 @@ class PurchaseController {
           draftPurchase.cardCvv
         )
       );
-      res.status(201).json({ message: "Purchase completed" });
+      return res.status(200).json({ message: "Purchase completed" });
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      console.log(error.name)
+      if(error.name === 'ValidationError' || error.name === 'PurchaseException') {
+        return res.status(400).json({ error: error.message });        
+      } else {
+        return res.status(500).json({ error: error.message });        
+      }
     }
   };
 }
