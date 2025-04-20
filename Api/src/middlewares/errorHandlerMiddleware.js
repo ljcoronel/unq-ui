@@ -1,10 +1,10 @@
-const BadRequestExceptionNames = [
-  "ValidationError",
-  "PurchaseException",
-  "CartException",
-  "ReviewException",
-  "UserException"
-];
+// const BadRequestExceptionNames = [
+//   "ValidationError",
+//   "PurchaseException",
+//   "CartException",
+//   "ReviewException",
+//   "UserException"
+// ];
 
 const NotFoundExceptionNames = [
     "NotFoundGame",
