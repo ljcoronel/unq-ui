@@ -87,10 +87,22 @@ export class GameController {
       const cartUser = cart.user;
       const cartGames = cart.games;
       const simpleGames = cartGames.map((game) => transformGame(game));
+
       const {email, password, backgroundImage, games, friends, ...simpleUser} = cartUser;
-      res.status(200).json({ games: simpleGames, user: simpleUser });
+
+      return res.status(200).json({ games: simpleGames, user: simpleUser });
     } catch (error) {
-      res.status(404).json({ error: error.message });
+      if (error.message === "Game not found") {
+        return res.status(404).json({ error: error.message });
+      }
+
+      if (error.name === "CartException") {
+        return res.status(400).json({ error: error.message });
+      }
+
+
+        return res.status(500).json({ error: error.message });
+      
     }
   };
 

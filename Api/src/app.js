@@ -71,14 +71,13 @@ app.get(
 app
   .route("/games/:gameId")
   .get(tokenController.checkRole("public"), gameController.gameById)
-  .put(tokenController.checkRole("user"), gameController.addGameToCartById);
+  .put(tokenController.checkRole("user"), gameController.addGameToCartById)
+  .delete(tokenController.checkRole("user"), gameController.removeGame);
 
 app
   .route("/users/:userId/friends")
   .get(tokenController.checkRole("public"), userController.getFriendsOfUser)
   .put(tokenController.checkRole("user"), userController.addOrRemoveUserFriend);
-
-app.delete("/games/:gameId", tokenController.checkRole("user"), gameController.removeGame);
 
 app.put("/games/:gameId/reviews", tokenController.checkRole("user"), gameController.addReview);
 
