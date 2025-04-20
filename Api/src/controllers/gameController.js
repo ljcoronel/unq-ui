@@ -1,8 +1,9 @@
-
 import { DraftReview } from "@unq-ui/gog-model-js/src/model/Drafts.js";
 import { transformGame, transformReview } from "../utils/utils.js";
-import { gameBodySchema, pageOfGamesSchema } from "../validators/game.validators.js";
-
+import {
+  gameBodySchema,
+  pageOfGamesSchema,
+} from "../validators/game.validators.js";
 
 export class GameController {
   constructor(service, tokenController) {
@@ -21,17 +22,17 @@ export class GameController {
         list: gamesFounded.list.map((game) => transformGame(game)),
       });
     } catch (error) {
-      if(error.name === 'ValidationError'){
-        return res.status(400).json({ error: error.message });        
+      if (error.name === "ValidationError") {
+        return res.status(400).json({ error: error.message });
       } else {
-        return res.status(500).json({ error: error.message });        
+        return res.status(500).json({ error: error.message });
       }
     }
   };
 
   recomendedGames = async (req, res) => {
-      const recommended = await this.service.getRecommendedGames();
-      return res.status(200).json(recommended.map((game) => transformGame(game)));
+    const recommended = await this.service.getRecommendedGames();
+    return res.status(200).json(recommended.map((game) => transformGame(game)));
   };
 
   gameById = async (req, res) => {
@@ -76,7 +77,6 @@ export class GameController {
       } else {
         return res.status(500).json({ error: error.message });
       }
-
     }
   };
 
@@ -88,7 +88,14 @@ export class GameController {
       const cartGames = cart.games;
       const simpleGames = cartGames.map((game) => transformGame(game));
 
-      const {email, password, backgroundImage, games, friends, ...simpleUser} = cartUser;
+      const {
+        email,
+        password,
+        backgroundImage,
+        games,
+        friends,
+        ...simpleUser
+      } = cartUser;
 
       return res.status(200).json({ games: simpleGames, user: simpleUser });
     } catch (error) {
@@ -100,9 +107,7 @@ export class GameController {
         return res.status(400).json({ error: error.message });
       }
 
-
-        return res.status(500).json({ error: error.message });
-      
+      return res.status(500).json({ error: error.message });
     }
   };
 
@@ -117,7 +122,7 @@ export class GameController {
         draftReview.text
       );
       const game = await this.service.addReview(id, draft);
-      res.status(200).json({
+      return res.status(200).json({
         ...game,
         reviews: game.reviews.map((review) => transformReview(review)),
         mainImage: game.mainImage.url,
@@ -125,10 +130,14 @@ export class GameController {
       });
     } catch (error) {
       if (error.message === "Game not found") {
-        res.status(404).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: error.message });
+        return res.status(404).json({ error: error.message });
       }
+
+      if (error.name === 'ValidationError' || error.name === "ReviewException") {
+        return res.status(400).json({ error: error.message });
+      }
+
+      return res.status(500).json({ error: error.message });
     }
   };
 }
