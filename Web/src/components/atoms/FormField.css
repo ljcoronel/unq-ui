@@ -1,0 +1,23 @@
+.field-form-container{
+    display: flex;
+    flex-direction: column;
+    width: 624px;
+    height: 72px;
+}
+
+.gog-input{
+    border-radius: unset;
+    background-color: #fff;
+    height: 36px;
+    width: 100%;
+}
+
+.form-label{
+    display: block;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #fff;
+    height: 28px;
+}
