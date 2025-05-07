@@ -1,18 +1,41 @@
-import { useState } from 'react'
-import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router'
-import FormField from './components/atoms/formField'
+import React from "react";
+import Button from "./components/atoms/button/Button";
+import Input from "./components/atoms/input/Input";
+import { formatCurrency } from "./utils/money";
+import { ThumbsDown, ThumbsUp } from "lucide-react";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="register" element={<FormField labelText="EMAIL"/>}/>
-      </Routes>
-    </BrowserRouter>
-  )
-}
+    <div className="contenedor">
+      <Button onClick={() => alert("Button clicked!")} variant="primary">
+        Add friend
+      </Button>
+      <Button onClick={() => alert("Button clicked!")} variant="secondary">
+        Add friend
+      </Button>
 
-export default App
+      <Input
+        label="Name"
+        placeholder="Enter your name"
+        type="text"
+        name="name"
+        id="name"
+        value=""
+        onChange={() => {}}
+        disabled={true}
+        error=""
+      />
+
+      <p>{formatCurrency(12456.55, 2)}</p>
+      <ThumbsUp />
+      <ThumbsDown />
+
+      <img
+        src="/gog.png"
+        alt="Example"
+        style={{ width: "100px", height: "100px" }}
+      />
+    </div>
+  );
+}
