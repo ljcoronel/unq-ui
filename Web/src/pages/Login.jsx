@@ -3,11 +3,13 @@ import "../styles/Login.css";
 import Button from "../components/atoms/button/Button";
 import Input from "../components/atoms/input/Input";
 import toast from "react-hot-toast";
-import { api } from "../config/axios.config";
+import { api, setToken } from "../config/axios.config";
+import { useNavigate } from "react-router";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     try {
@@ -19,13 +21,13 @@ export default function Login() {
 
       const token = res.headers["authorization"]; // o el nombre correcto
       if (token) {
-        localStorage.setItem("token", token);
+        setToken(token);
         toast.success("Login successful!");
+        navigate("/");
+        window.location.reload();
       } else {
         toast.error("No token received.");
       }
-
-      console.log("Login response:", res);
     } catch (error) {
       toast.error("Login failed. Please try again.");
       console.error("Login error:", error);

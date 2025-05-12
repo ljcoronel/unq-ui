@@ -88,3 +88,12 @@
   align-items: center;
   justify-content: center;
 }
+.layout-logout{
+  background-color: red;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
