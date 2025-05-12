@@ -16,7 +16,7 @@ export default function Input({
   ...props
 }) {
   const inputId = id || name || "input";
-
+  
   return (
     <div className={`input-container ${className}`}>
       {label && (
