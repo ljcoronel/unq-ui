@@ -3,7 +3,7 @@ import "./Input.css";
 
 export default function Input({
   label,
-  placeholder = "Enter text here",
+  placeholder = "",
   type = "text",
   name,
   id,
@@ -15,8 +15,10 @@ export default function Input({
   required = false,
   ...props
 }) {
-  const inputId = id || name || "input";
-  
+  const randomString = Math.random().toString(36).substring(2, 15);
+  const randomId = `input-${randomString}`;
+  const inputId = id || name || randomId;
+
   return (
     <div className={`input-container ${className}`}>
       {label && (

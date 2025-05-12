@@ -1,19 +1,24 @@
 import React from "react";
-import "./components/atoms/button/Button.css";
-import "./components/atoms/input/Input.css";
-import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router";
-import Register from "./pages/Register"; 
-
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./components/common/Layout";
+import Home from "./pages/Home";
+import Library from "./pages/Library";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Cart from "./pages/Cart";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/register" element={<Register/>} />
-      </Routes>
-    </BrowserRouter>
-    
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/library" element={<Library />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
 }
