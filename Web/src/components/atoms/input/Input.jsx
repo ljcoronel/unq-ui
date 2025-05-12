@@ -3,7 +3,7 @@ import "./Input.css";
 
 export default function Input({
   label,
-  placeholder = "Enter text here",
+  placeholder = "",
   type = "text",
   name,
   id,
