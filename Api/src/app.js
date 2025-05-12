@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 
 import { initGogSystem } from "@unq-ui/gog-model-js";
 
@@ -14,6 +15,16 @@ const gogSystem = initGogSystem();
 
 const app = express();
 const port = 3000;
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", 
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -53,15 +64,19 @@ app.post(
 );
 
 // Search
-app.get("/search", tokenController.checkRole("public"), searchController.search);
+app.get(
+  "/search",
+  tokenController.checkRole("public"),
+  searchController.search
+);
 
+app.get("/games", tokenController.checkRole("public"), gameController.games);
 
-
-app.get("/games", 
-  tokenController.checkRole("public"), 
-  gameController.games);
-
-app.get("/games/recommended", tokenController.checkRole("public"), gameController.recomendedGames);
+app.get(
+  "/games/recommended",
+  tokenController.checkRole("public"),
+  gameController.recomendedGames
+);
 
 app.get(
   "/users/:userId",
@@ -80,16 +95,22 @@ app
   .get(tokenController.checkRole("public"), userController.getFriendsOfUser)
   .put(tokenController.checkRole("user"), userController.addOrRemoveUserFriend);
 
-app.put("/games/:gameId/reviews", tokenController.checkRole("user"), gameController.addReview);
-
+app.put(
+  "/games/:gameId/reviews",
+  tokenController.checkRole("user"),
+  gameController.addReview
+);
 
 //tags
 app.get("/tags", tokenController.checkRole("public"), tagController.tags);
 
-app.get("/tags/:tagId", tokenController.checkRole("public"), tagController.getGamesByTagId);
+app.get(
+  "/tags/:tagId",
+  tokenController.checkRole("public"),
+  tagController.getGamesByTagId
+);
 
 app.use(errorHandler);
-
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
