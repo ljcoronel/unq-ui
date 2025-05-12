@@ -2,19 +2,34 @@ import React, { useState } from "react";
 import "../styles/Login.css";
 import Button from "../components/atoms/button/Button";
 import Input from "../components/atoms/input/Input";
+import toast from "react-hot-toast";
+import { api } from "../config/axios.config";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle login logic here
-    console.log("Email:", email);
-    console.log("Password:", password);
-    // Reset form fields
-    setEmail("");
-    setPassword("");
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const res = await api.post("/login", {
+        email,
+        password,
+      });
+
+      const token = res.headers["authorization"]; // o el nombre correcto
+      if (token) {
+        localStorage.setItem("token", token);
+        toast.success("Login successful!");
+      } else {
+        toast.error("No token received.");
+      }
+
+      console.log("Login response:", res);
+    } catch (error) {
+      toast.error("Login failed. Please try again.");
+      console.error("Login error:", error);
+    }
   };
 
   return (

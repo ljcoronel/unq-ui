@@ -3,6 +3,7 @@ import "./Layout.css";
 import { Search } from "lucide-react";
 import { classNames } from "../../utils/classNames";
 import { Link } from "react-router";
+import { Toaster } from "react-hot-toast";
 
 export default function Layout({ children }) {
   const pathname = window.location.pathname;
@@ -47,6 +48,7 @@ export default function Layout({ children }) {
         </div>
       </header>
       <main className="layout-main">{children}</main>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }
