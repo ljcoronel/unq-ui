@@ -44,14 +44,14 @@ const Register = ()=>{
                 <Input className='register-input-container'
                     label = "EMAIL" 
                     name="email" 
-                    placeholder='Enter your email' 
+                    placeholder='example@mail.com' 
                     type='email' 
                     value = {email} 
                     onChange={ev=>setEmail(ev.target.value)}
                     required />
                 <Input  className='register-input-container'
                     label = "PASSWORD" 
-                    placeholder='Enter your password' 
+                    placeholder='Create a password' 
                     type='password' 
                     value={password} 
                     onChange={ev=>setPassword(ev.target.value)}
