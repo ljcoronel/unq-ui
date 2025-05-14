@@ -37,4 +37,6 @@ export const removeToken = () => {
   localStorage.removeItem("token");
 };
 
+
+
 export const isLoggedIn = !!localStorage.getItem("token");
