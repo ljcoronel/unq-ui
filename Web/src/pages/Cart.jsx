@@ -2,27 +2,34 @@ import React, { useEffect, useState } from 'react'
 import '../styles/Cart.css'
 import Api from '../services/Api'
 import { getToken } from '../config/axios.config'
-import GameOnCart from '../components/molecules/GameOnCart'
+import CartGamesList from '../components/molecules/CartGamesList'
+import CheckoutCart from '../components/molecules/CheckoutCart'
 
 const Cart = () => {
 
   //const navigate = useNavigate();
-  const [gamesOnCart,setGamesOnCart] = useState([]);
+  const [gamesOnCart,setGamesOnCart] = useState([]); //esto lo hago para que no me muestre una lista vacia si no hay juegos
+  const [isEmptyCart,setIsEmptyCart] = useState(true)
   const token = getToken();
+
 
   useEffect(() => {
     Api.currentCart(token).then(res => setGamesOnCart(res.games));
   } ,[]);
 
-  return (
+  useEffect( () => {
+    setIsEmptyCart(!gamesOnCart.length);
+  },[gamesOnCart])
   
+
+  return (
     <div className='cart-container'>
-        <div className='cart-games-container'>
-           {gamesOnCart.map(game => <GameOnCart key = {game.id} game = {game}/>)} 
-        </div>
-        <div className='cart-checkout-box'>checkout</div>
-      </div>
+        <CartGamesList gamesOnCart = {gamesOnCart}  isEmptyCart = {isEmptyCart}/>
+        <CheckoutCart isEmptyCart={isEmptyCart} games = {gamesOnCart} feesPorcentaje = {1} />
+    </div>
+      
   )
+  
 }
 
 export default Cart

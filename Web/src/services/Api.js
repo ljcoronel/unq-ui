@@ -7,10 +7,9 @@ const axiosClient = axios.create({
 }); 
 
 const userRegister = body => axiosClient.post("/register", body)
-        .then(response => response.data.games)
-        .catch(error => {
-            toast.error(`Register failed: ${error.response.data.error}`);
-        });
+        .then(response => response.headers.authorization)
+        .catch(error => Promise.reject(error.response.data.error));
+
 
 const currentCart = token => axiosClient.get("/users/current/cart", 
         {

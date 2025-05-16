@@ -14,7 +14,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const res = await api.post("/login", {
+      const res = await api.post("/login", { //extraer a una funcion
         email,
         password,
       });
@@ -24,7 +24,7 @@ export default function Login() {
         setToken(token);
         toast.success("Login successful!");
         navigate("/");
-        window.location.reload();
+        //window.location.reload(); //jota dijo que si dejamos esto estamos desaprobados
       } else {
         toast.error("No token received.");
       }

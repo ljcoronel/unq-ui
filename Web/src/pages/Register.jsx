@@ -2,14 +2,14 @@ import { use, useState } from 'react'
 import '../styles/Auth.css'
 import Button from '../components/atoms/button/Button'
 import Input from '../components/atoms/input/Input'
-import defaultImage from '../assets/gog.png'
 import Api from '../services/Api'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
+import { setToken } from '../config/axios.config'
 
 
 
-const Register = ()=>{
+const Register = ({setIsLoggedIn})=>{
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -20,7 +20,7 @@ const Register = ()=>{
     
 
 
-    const enviarDatosDeRegistro = (ev) => {
+    const handleRegisterSubmit = (ev) => {
         ev.preventDefault();
         const body = {
             name,
@@ -30,16 +30,21 @@ const Register = ()=>{
             backgroundImage
         };
         
-        Api.userRegister(body).then(() => {
-            toast.success("Register successful");
-            navigate("/");})
+        Api.userRegister(body)
+            .then(res => {
+                toast.success("Register successful");
+                setToken(res);
+                setIsLoggedIn(true);
+                navigate("/");
+                })
+            .catch(error => toast.error(`Register failed: ${error}`));
     }
 
     
 
     return (
         <div className='form-container'>
-            <form className='form-card'  onSubmit={enviarDatosDeRegistro}>
+            <form className='form-card'  onSubmit={handleRegisterSubmit}>
                 <h2 className='card-title'>Create your account</h2>
                 <Input className='register-input-container'
                     label = "EMAIL" 
