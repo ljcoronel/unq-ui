@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import "../../styles/Tags.css";
+import "../../../styles/Tags.css";
 
 export default function TagCard({ tag }) {
   return (

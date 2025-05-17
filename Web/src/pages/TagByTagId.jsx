@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import "../styles/Tags.css";
 import { fetchGamesByTagId } from "../services/tags";
 import { useEffect, useState, useRef, useCallback } from "react";
-import GameCard from "../components/molecules/GameCard";
+import GameCard from "../components/molecules/GameCard/GameCard";
 
 export default function TagByTagId() {
   const { tagId } = useParams();

@@ -1,10 +1,44 @@
-.game-card {
+.game-card-row {
   display: flex;
   align-items: center;
   background-color: white;
   gap: 1rem;
   position: relative;
   height: 150px;
+}
+
+.game-card-column {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.game-card-column .game-image {
+  height: 50%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.game-card-column .game-title {
+  margin-bottom: 5px;
+}
+
+.game-card-column .game-details {
+  height: 50%;
+  width: 100%;
+  justify-content: start;
+  padding: 0.5rem 1rem;
+}
+
+.game-card-column .game-price {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  column-gap: 5px;
+  margin-top: auto;
+  margin-left: auto;
+  padding: 0.5rem 0.8rem;
 }
 
 .game-image {
@@ -24,9 +58,11 @@
 }
 
 .game-title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   text-transform: uppercase;
+  color: var(--dark-grey);
+  text-decoration: none;
 }
 
 .game-tags {
@@ -36,7 +72,7 @@
 }
 
 .game-tag {
-  font-size: 14px;
+  font-size: 10px;
   text-decoration: underline;
   font-weight: 500;
   color: var(--black);
