@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/common/Layout";
 import Home from "./pages/Home";
@@ -7,6 +7,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Cart from "./pages/Cart";
 import { getToken } from "./config/axios.config";
+import Tags from "./pages/Tags";
+import TagByTagId from "./pages/TagByTagId";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,6 +30,8 @@ export default function App() {
           />
           <Route path="/register" element={<Register />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/tags" element={<Tags />} />
+          <Route path="/tag/:tagId" element={<TagByTagId />} />
         </Routes>
       </Layout>
     </Router>

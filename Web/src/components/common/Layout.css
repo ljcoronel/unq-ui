@@ -30,6 +30,8 @@
   padding: 20px 100px 0;
   flex: 1;
   min-height: calc(100vh - 60px);
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .layout-left {
@@ -88,7 +90,7 @@
   align-items: center;
   justify-content: center;
 }
-.layout-logout{
+.layout-logout {
   background-color: red;
   border: none;
   padding: 8px;
