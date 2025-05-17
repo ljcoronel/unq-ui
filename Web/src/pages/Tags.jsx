@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchTags } from "../services/tags";
-import TagCard from "../components/molecules/TagCard";
+import TagCard from "../components/molecules/TagCard/TagCard";
 import "../styles/Tags.css";
 
 export default function Tags() {
@@ -22,8 +22,8 @@ export default function Tags() {
 
   return (
     <section className="tags-container">
-      <h2>BROWSE BY CATEGORY</h2>
-      <div className="tags-list">
+      <h2 className="section-title">BROWSE BY CATEGORY</h2>
+      <div className="list-grid">
         {tags.map((tag) => (
           <TagCard key={tag.id} tag={tag} />
         ))}

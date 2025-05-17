@@ -8,3 +8,28 @@
   --light-violet: #d183d7;
   --red: #dc3545;
 }
+
+.section-title {
+  font-size: 17px;
+  color: var(--dark-grey);
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  margin-bottom: 17px;
+}
+
+section{
+  padding: 10px 0;
+  height: max-content;
+  width: 100%;
+}
+
+.list-grid{
+   display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0 95px;
+  max-width: 1000px;
+  margin: auto;
+}

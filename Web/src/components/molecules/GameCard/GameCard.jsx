@@ -1,10 +1,10 @@
 import "./GameCard.css";
-import { formatCurrency } from "../../utils/money";
+import { formatCurrency } from "../../../utils/money";
 import { Link } from "react-router";
 
-export default function GameCard({ game }) {
+export default function GameCard({ game, format = "row" }) {
   return (
-    <div className="game-card">
+    <div className={`game-card-${format}`}>
       <img src={game.mainImage} alt={game.name} className="game-image" />
       <div className="game-details">
         <Link to={`/game/${game.id}`} className="game-title">
