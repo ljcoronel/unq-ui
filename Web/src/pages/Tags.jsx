@@ -1,14 +1,33 @@
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { fetchTags } from "../services/tags";
+import TagCard from "../components/molecules/TagCard/TagCard";
+import "../styles/Tags.css";
 
-function TagsPage() {
-    const { id } = useParams(); // Obtiene el ID del tag desde la URL
+export default function Tags() {
+  const [tags, setTags] = useState([]);
 
-    return (
-        <div>
-            <h1>Tag ID: {id}</h1>
-            {/* Aquí puedes cargar contenido relacionado con el tag */}
-        </div>
-    );
+  const getTags = async () => {
+    try {
+      const data = await fetchTags();
+      console.log("Tags data:", data);
+      setTags(data);
+    } catch (error) {
+      console.error("Error fetching tags:", error);
+    }
+  };
+
+  useEffect(() => {
+    getTags();
+  }, []);
+
+  return (
+    <section className="tags-container">
+      <h2 className="section-title">BROWSE BY CATEGORY</h2>
+      <div className="list-grid">
+        {tags.map((tag) => (
+          <TagCard key={tag.id} tag={tag} />
+        ))}
+      </div>
+    </section>
+  );
 }
-
-export default TagsPage;

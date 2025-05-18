@@ -21,7 +21,6 @@ api.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       localStorage.removeItem("token");
-      window.location.href = "/login";
     }
     return Promise.reject(error);
   }
@@ -36,5 +35,3 @@ export const getToken = () => {
 export const removeToken = () => {
   localStorage.removeItem("token");
 };
-
-export const isLoggedIn = !!localStorage.getItem("token");
