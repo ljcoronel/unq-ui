@@ -1,8 +1,9 @@
 import axios from "axios";
+import {API_URL} from "../constants.js";
 import toast from "react-hot-toast";
 
 const axiosClient = axios.create({
-    baseURL : "http://localhost:3000"
+    baseURL : API_URL,
 }); 
 
 const userRegister = body => axiosClient.post("/register", body)
@@ -11,7 +12,10 @@ const userRegister = body => axiosClient.post("/register", body)
             toast.error(`Register failed: ${error.response.data.error}`);
         });
 
+const getGame = (gameId) => axiosClient.get(`/games/${gameId}`)
+    .then((response) => response.data);
 
 export default {
-    userRegister
+    userRegister,
+    getGame
 };
