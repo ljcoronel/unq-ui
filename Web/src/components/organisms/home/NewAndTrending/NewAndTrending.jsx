@@ -6,24 +6,24 @@ import Pagination from "../../../molecules/Pagination/Pagination";
 
 export default function NewAndTrending() {
   const [games, setGames] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [actualPage, setActualPage] = useState(1);
   const [pages, setPages] = useState(1);
 
-  const getGames = async () => {
-    const { data } = await api.get("/games");
+  const getGames = async (actualPage = 1) => {
+    const { data } = await api.get(`/games?page=${actualPage}`);
     return data;
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      const { list, currentPage, amountOfPages } = await getGames();
+      const { list, currentPage, amountOfPages } = await getGames(actualPage);
       setGames(list);
-      setCurrentPage(currentPage);
+      setActualPage(currentPage);
       setPages(amountOfPages);
     };
 
     fetchData();
-  }, []);
+  }, [actualPage]);
 
   return (
     <div className="new-and-trending-container">
@@ -34,9 +34,11 @@ export default function NewAndTrending() {
         ))}
       </div>
       <Pagination
-        currentPage={currentPage}
+        currentPage={actualPage}
         totalPages={pages}
-        onPageChange={() => {}}
+        onPageChange={(page) => {
+          setActualPage(page);
+        }}
       />
     </div>
   );
