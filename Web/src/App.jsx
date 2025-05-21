@@ -12,8 +12,7 @@ export default function App() {
   console.log("reload")
 
   const [isLoggedIn , setIsLoggedIn] =  useState(!!getToken());
-  //const [isLoggedIn, setIsLoggedIn] = useState(!!getToken())
-  //useState para saber que tengo usuario logeado y pasarle el seter como prop al layout register y login
+
   return (
     <Router>
       <Layout isLoggedIn={isLoggedIn} logout={() => setIsLoggedIn(false)}>
@@ -23,6 +22,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register setIsLoggedIn = {setIsLoggedIn}/>} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/purchase" element={<Purchase/>}/>
         </Routes>
       </Layout>
     </Router>

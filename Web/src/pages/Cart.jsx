@@ -12,7 +12,6 @@ const Cart = () => {
   const [isEmptyCart,setIsEmptyCart] = useState(true)
   const token = getToken();
 
-
   useEffect(() => {
     Api.currentCart(token).then(res => setGamesOnCart(res.games));
   } ,[]);
