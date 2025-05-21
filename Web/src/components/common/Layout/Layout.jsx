@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Layout.css";
 import { LogOut, Search, ShoppingCart } from "lucide-react";
-import { classNames } from "../../utils/classNames";
+import { classNames } from "../../../utils/classNames";
 import { Link, useNavigate } from "react-router";
 import { Toaster } from "react-hot-toast";
-import { removeToken } from "../../config/axios.config";
+import { removeToken } from "../../../config/axios.config";
 
-export default function Layout({ children, isLoggedIn, logout }) {
+export default function Layout({ children, isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
   const pathname = window.location.pathname;
   const NAVIGATION_ITEMS = [
@@ -48,7 +48,7 @@ export default function Layout({ children, isLoggedIn, logout }) {
               className="layout-logout"
               onClick={() => {
                 removeToken();
-                logout()
+                setIsLoggedIn(false);
                 navigate("/login");
               }}
             >

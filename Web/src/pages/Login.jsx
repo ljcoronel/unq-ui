@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { api, setToken } from "../config/axios.config";
 import { useNavigate } from "react-router";
 
-export default function Login() {
+export default function Login({setIsLoggedIn}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -22,9 +22,9 @@ export default function Login() {
       const token = res.headers["authorization"]; // o el nombre correcto
       if (token) {
         setToken(token);
+        setIsLoggedIn(true);
         toast.success("Login successful!");
         navigate("/");
-        //window.location.reload(); //jota dijo que si dejamos esto estamos desaprobados
       } else {
         toast.error("No token received.");
       }

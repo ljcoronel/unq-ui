@@ -1,11 +1,11 @@
 import EmptyCart from "./EmptyCart"
 import GameOnCart from "./GameOnCart"
 
-const CartGamesList = ({gamesOnCart, isEmptyCart}) => {
+const CartGamesList = ({gamesOnCart}) => {
     
   
   return (
-      isEmptyCart ? (
+      !gamesOnCart.length ? (
         <EmptyCart />
       ) : (
       <div className='cart-games-container'>

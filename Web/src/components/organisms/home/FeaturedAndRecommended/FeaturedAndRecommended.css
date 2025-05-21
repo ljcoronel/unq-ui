@@ -1,0 +1,5 @@
+.featured-image {
+  width: 93%;
+  max-height: 430px;
+  object-fit: cover;
+}

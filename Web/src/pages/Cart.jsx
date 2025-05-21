@@ -8,23 +8,18 @@ import CheckoutCart from '../components/molecules/CheckoutCart'
 const Cart = () => {
 
   //const navigate = useNavigate();
-  const [gamesOnCart,setGamesOnCart] = useState([]); //esto lo hago para que no me muestre una lista vacia si no hay juegos
-  const [isEmptyCart,setIsEmptyCart] = useState(true)
+  const [gamesOnCart,setGamesOnCart] = useState([]);
   const token = getToken();
 
   useEffect(() => {
     Api.currentCart(token).then(res => setGamesOnCart(res.games));
   } ,[]);
 
-  useEffect( () => {
-    setIsEmptyCart(!gamesOnCart.length);
-  },[gamesOnCart])
-  
 
   return (
     <div className='cart-container'>
-        <CartGamesList gamesOnCart = {gamesOnCart}  isEmptyCart = {isEmptyCart}/>
-        <CheckoutCart isEmptyCart={isEmptyCart} games = {gamesOnCart} feesPorcentaje = {1} />
+        <CartGamesList gamesOnCart = {gamesOnCart} />
+        <CheckoutCart gamesOnCart = {gamesOnCart} feesPorcentaje = {1} />
     </div>
       
   )
