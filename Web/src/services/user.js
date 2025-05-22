@@ -1,14 +1,12 @@
 import toast from "react-hot-toast";
 import { api } from "../config/axios.config";
 
-const userRegister = (body) =>
+const userRegister = (body) => 
   api
     .post("/register", body)
-    .then((response) => response.data)
-    .catch((error) => {
-      toast.error(`Register failed: ${error.response.data.error}`);
-    });
+    .then((response) => response.headers.authorization)
+    .catch((error) => Promise.reject(error.response.data.error));
 
 export default {
-  userRegister,
+  userRegister
 };

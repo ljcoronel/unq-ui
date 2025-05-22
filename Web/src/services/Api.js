@@ -6,9 +6,6 @@ const axiosClient = axios.create({
     baseURL : "http://localhost:3000"
 }); 
 
-const userRegister = body => axiosClient.post("/register", body)
-        .then(response => response.headers.authorization)
-        .catch(error => Promise.reject(error.response.data.error));
 
 
 const currentCart = token => axiosClient.get("/users/current/cart", 
