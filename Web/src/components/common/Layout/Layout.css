@@ -84,16 +84,14 @@
 .layout-auth {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 15px;
   align-items: center;
   justify-content: center;
 }
-.layout-logout {
-  background-color: red;
-  border: none;
-  padding: 8px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--light-grey);
 }

@@ -1,0 +1,28 @@
+.user-profile-header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.user-profile-info{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-profile-info .user-avatar{
+    width: 70px;
+    height: 70px;
+}
+
+.user-profile-button{
+    margin: 0;
+    width: 200px;
+}
+
+.user-name{
+    font-size: 20px;
+    font-weight: 600;
+}

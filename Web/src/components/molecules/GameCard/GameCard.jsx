@@ -2,7 +2,7 @@ import "./GameCard.css";
 import { formatCurrency } from "../../../utils/money";
 import { Link } from "react-router";
 
-export default function GameCard({ game, format = "row" }) {
+export default function GameCard({ game, format = "row", withPrice = true }) {
   return (
     <div className={`game-card-${format}`}>
       <img src={game.mainImage} alt={game.name} className="game-image" />
@@ -22,10 +22,12 @@ export default function GameCard({ game, format = "row" }) {
           ))}
         </div>
       </div>
-      <div className="game-price">
-        <span>{game.price.currency}</span>
-        <span>{formatCurrency(game.price.amount, 2)}</span>
-      </div>
+      {withPrice && (
+        <div className="game-price">
+          <span>{game.price.currency}</span>
+          <span>{formatCurrency(game.price.amount, 2)}</span>
+        </div>
+      )}
     </div>
   );
 }
