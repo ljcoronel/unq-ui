@@ -43,7 +43,7 @@ const Register = ({setIsLoggedIn})=>{
     
 
     return (
-        <div className='form-container'>
+        <section className='form-container'>
             <form className='form-card'  onSubmit={handleRegisterSubmit}>
                 <h2 className='card-title'>Create your account</h2>
                 <Input className='register-input-container'
@@ -81,7 +81,7 @@ const Register = ({setIsLoggedIn})=>{
                     required />
                 <Button>Register</Button>
             </form>
-        </div>
+        </section>
     )
 } 
     

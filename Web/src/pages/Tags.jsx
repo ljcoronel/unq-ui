@@ -9,7 +9,6 @@ export default function Tags() {
   const getTags = async () => {
     try {
       const data = await fetchTags();
-      console.log("Tags data:", data);
       setTags(data);
     } catch (error) {
       console.error("Error fetching tags:", error);

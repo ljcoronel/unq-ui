@@ -35,7 +35,7 @@ export default function Login({setIsLoggedIn}) {
   };
 
   return (
-    <div className="login-container">
+    <section className="login-container">
       <form className="login-card" onSubmit={handleSubmit}>
         <h2 className="login-title">Sign in</h2>
         <Input
@@ -54,6 +54,6 @@ export default function Login({setIsLoggedIn}) {
         />
         <Button>Sign in</Button>
       </form>
-    </div>
+    </section>
   );
 }
