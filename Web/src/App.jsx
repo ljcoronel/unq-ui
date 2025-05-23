@@ -10,15 +10,28 @@ import { getToken } from "./config/axios.config";
 import Tags from "./pages/Tags";
 import TagByTagId from "./pages/TagByTagId";
 import Purchase from "./pages/Purchase"
+import UserProfile from "./pages/UserProfile";
+import Api from "./services/user";
 
 export default function App() {
   
   const [isLoggedIn, setIsLoggedIn] = useState(!!getToken());
-  
+  const [user, setUser] = useState(null);
+
+  async function fetchCurrentUser() {
+    const userFounded = await Api.getCurrentUser();
+    setUser(userFounded);
+  }
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchCurrentUser();
+    }
+  }, [isLoggedIn]);
 
   return (
     <BrowserRouter>
-      <Layout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}>
+      <Layout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} user={user}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/library" element={<Library />} />
@@ -31,6 +44,7 @@ export default function App() {
           <Route path="/purchase/:total/:cantProductos" element={<Purchase/>}/>
           <Route path="/tags" element={<Tags />} />
           <Route path="/tag/:tagId" element={<TagByTagId />} />
+          <Route path="/users/:userId" element={<UserProfile currentUser={user} setIsLoggedIn={setIsLoggedIn} />} />
         </Routes>
       </Layout>
     </BrowserRouter>

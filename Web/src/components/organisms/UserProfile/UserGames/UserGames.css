@@ -1,0 +1,12 @@
+.user-games {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.user-games-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 30px;
+}

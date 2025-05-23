@@ -35,14 +35,28 @@ class UserController {
     })),
   });
 
+  userTransformWithReviews = (user) => ({
+    ...this.userTransform(user),
+    reviews: user.games.flatMap(game => game.reviews).map((review) => ({
+      id: review.id,
+      isRecommended: review.isRecommended,
+      text: review.text,
+      game: {
+        id: review.game.id,
+        name: review.game.name,
+        mainImage: review.game.mainImage.url,
+      }, 
+    })),
+  });
+
   login = async (req, res, next) => {
     try {
       const { email, password } = await loginBodySchema.validate(req.body);
 
       const user = this.service.users.find(
         (user) => user.email === email && user.password === password
-      );
-
+      ); 
+ 
       if (!user) {
         return res.status(400).json({ error: "Invalid credentials" });
       }
@@ -61,7 +75,7 @@ class UserController {
   register = async (req, res, next) => {
     try {
       const newUser = await registerBodySchema.validate(req.body);
-
+ 
       const user = this.service.addNewUser(newUser);
 
       const token = this.tokenController.generateToken(user.id);
@@ -100,7 +114,7 @@ class UserController {
     try {
       const { userId } = req.params;
       const user = await this.service.getUser(userId);
-      return res.status(200).json(this.userTransform(user));
+      return res.status(200).json(this.userTransformWithReviews(user));
     } catch (error) {
       next(error);
     }
