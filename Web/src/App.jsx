@@ -9,6 +9,7 @@ import Cart from "./pages/Cart";
 import { getToken } from "./config/axios.config";
 import Tags from "./pages/Tags";
 import TagByTagId from "./pages/TagByTagId";
+import Purchase from "./pages/Purchase"
 
 export default function App() {
   
@@ -27,6 +28,7 @@ export default function App() {
           />
           <Route path="/register" element={<Register setIsLoggedIn = {setIsLoggedIn}/>} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/purchase/:total/:cantProductos" element={<Purchase/>}/>
           <Route path="/tags" element={<Tags />} />
           <Route path="/tag/:tagId" element={<TagByTagId />} />
         </Routes>

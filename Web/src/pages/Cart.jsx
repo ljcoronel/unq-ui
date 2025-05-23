@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import '../styles/Cart.css'
-import Api from '../services/Api'
-import { getToken } from '../config/axios.config'
+import userService from '../services/user'
 import CartGamesList from '../components/molecules/CartGamesList'
 import CheckoutCart from '../components/molecules/CheckoutCart'
+import toast from 'react-hot-toast'
 
 const Cart = () => {
 
-  //const navigate = useNavigate();
   const [gamesOnCart,setGamesOnCart] = useState([]);
-  const token = getToken();
 
   useEffect(() => {
-    Api.currentCart(token).then(res => setGamesOnCart(res.games));
+    userService.currentCart()
+      .then(res => setGamesOnCart(res.games))
+      .catch(error => toast.error(`Register failed: ${error}`));
   } ,[]);
 
 
   return (
     <div className='cart-container'>
         <CartGamesList gamesOnCart = {gamesOnCart} />
-        <CheckoutCart gamesOnCart = {gamesOnCart} feesPorcentaje = {1} />
+        <CheckoutCart gamesOnCart = {gamesOnCart} />
     </div>
       
   )

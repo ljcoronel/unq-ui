@@ -40,6 +40,8 @@
 .cart-game-name-container{
     color: var(--dark-grey);
     text-align: left;
+    width: 40%;
+    padding: 1rem;
 }
 
 .cart-game-price-container{
@@ -56,13 +58,13 @@
 .cart-checkout-box {
     background-color: var(--dark-grey);
     color: aliceblue;
-    padding: 0.7rem;
+    padding: 0.5rem 0.7rem 0.7rem;
     margin-right: 1rem;
     width: 350px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     row-gap: 0.5rem;
     min-height: 300px;
 }

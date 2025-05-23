@@ -1,10 +1,14 @@
+import { useNavigate, useParams } from "react-router";
 import Button from "../atoms/button/Button";
+import { FEES_PORCENTAJE } from "../../constants";
 
-const CheckoutCart = ({feesPorcentaje,gamesOnCart}) => {
+const CheckoutCart = ({gamesOnCart}) => {
 
-    const total =  gamesOnCart.reduce( (res,game) => res + game.price.amount , 0 );
+    const navigate =  useNavigate();
+
+    const total =  gamesOnCart.reduce( (res,game) => res + game.price.amount , 0 ).toFixed(2);
     
-    const discountAmount = (total * feesPorcentaje /100);
+    const discountAmount = (total * FEES_PORCENTAJE /100);
 
     const totalWithDiscounts = total - discountAmount;
 
@@ -16,10 +20,10 @@ const CheckoutCart = ({feesPorcentaje,gamesOnCart}) => {
          ) : (
             <div className="cart-checkout-box">
                 <h3>Checkout</h3>
-                <div className="checkout-cart-row"><span>Products ({gamesOnCart.length})</span><span>{`$ ${total.toFixed(2)}`}</span></div>
-                <div className="checkout-cart-row"><span>Fees %{feesPorcentaje}</span><span>{`$ ${discountAmount.toFixed(2)}`}</span></div>
+                <div className="checkout-cart-row"><span>Products ({gamesOnCart.length})</span><span>{`$ ${total}`}</span></div>
+                <div className="checkout-cart-row"><span>Fees %{FEES_PORCENTAJE}</span><span>{`$ ${discountAmount.toFixed(2)}`}</span></div>
                 <div className="checkout-cart-row checkout-total"><span>Total</span><span>{`$ ${totalWithDiscounts.toFixed(2)}`}</span></div>
-                <Button variant="secondary">Buy</Button>
+                <Button variant="secondary" onClick={()=>navigate(`/purchase/${total}/${gamesOnCart.length}`)} >Buy</Button>
             </div>)
     )
 }
