@@ -20,7 +20,9 @@ export default function Layout({ children, isLoggedIn, setIsLoggedIn, user }) {
     <div className="layout-container">
       <header className="layout-header">
         <div className="layout-left">
-          <img src="/gog.png" alt="GOG Logo" className="layout-logo" />
+          <Link to="/">
+            <img src="/gog.png" alt="GOG Logo" className="layout-logo" />
+          </Link>
         </div>
         <nav className="layout-nav">
           {NAVIGATION_ITEMS.map((item) => (
