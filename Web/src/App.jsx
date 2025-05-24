@@ -9,17 +9,20 @@ import Cart from "./pages/Cart";
 import { getToken } from "./config/axios.config";
 import Tags from "./pages/Tags";
 import TagByTagId from "./pages/TagByTagId";
+import {BrowserRouter} from "react-router";
+import Game from "./pages/Game.jsx";
+import "bootstrap"
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
-    const token = getToken();
+    const token = getToken(); // cambiar de lugar getToken
     if (token) {
       setIsLoggedIn(true);
     }
   }, []);
   return (
-    <Router>
+    <BrowserRouter>
       <Layout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -28,12 +31,13 @@ export default function App() {
             path="/login"
             element={<Login setIsLoggedIn={setIsLoggedIn} />}
           />
+          <Route path="/games/:gameId" element={<Game isLoggedIn={isLoggedIn}/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/tags" element={<Tags />} />
-          <Route path="/tag/:tagId" element={<TagByTagId />} />
+          <Route path="/tags/:tagId" element={<TagByTagId />} />
         </Routes>
       </Layout>
-    </Router>
+    </BrowserRouter>
   );
 }
