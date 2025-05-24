@@ -1,0 +1,59 @@
+.review-card {
+  display: flex;
+  align-items: center;
+  background-color: #eeeeee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
+}
+
+.game-image {
+  width: 200px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.review-content {
+  flex: 1;
+  padding: 16px;
+}
+
+.game-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.review-text {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #444;
+}
+
+.review-icon {
+  background-color: #09acf2; /* fondo celeste */
+  border-radius: 4px;
+  margin-right: 15px;
+  margin-bottom: auto;
+  margin-top: 15px;
+  color: #80d8ff;
+  padding: 3px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.is-recommended{
+   background-color: #09acf2; 
+   color: #80d8ff;
+}
+
+.not-recommended{
+   background-color: #f44336; 
+   color: #ff7961;
+}

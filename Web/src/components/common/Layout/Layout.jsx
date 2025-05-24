@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Layout.css";
 import { LogOut, Search, ShoppingCart } from "lucide-react";
 import { classNames } from "../../../utils/classNames";
@@ -6,19 +6,23 @@ import { Link, useNavigate } from "react-router";
 import { Toaster } from "react-hot-toast";
 import { removeToken } from "../../../config/axios.config";
 
-export default function Layout({ children, isLoggedIn, setIsLoggedIn }) {
+
+export default function Layout({ children, isLoggedIn, setIsLoggedIn, user }) {
   const navigate = useNavigate();
   const pathname = window.location.pathname;
   const NAVIGATION_ITEMS = [
     { name: "STORE", path: "/" },
     { name: "LIBRARY", path: "/library" },
   ];
+  
 
   return (
     <div className="layout-container">
       <header className="layout-header">
         <div className="layout-left">
-          <img src="/gog.png" alt="GOG Logo" className="layout-logo" />
+          <Link to="/">
+            <img src="/gog.png" alt="GOG Logo" className="layout-logo" />
+          </Link>
         </div>
         <nav className="layout-nav">
           {NAVIGATION_ITEMS.map((item) => (
@@ -44,16 +48,11 @@ export default function Layout({ children, isLoggedIn, setIsLoggedIn }) {
             <Link to="/cart">
               <ShoppingCart size={30} color="white" />
             </Link>
-            <button
-              className="layout-logout"
-              onClick={() => {
-                removeToken();
-                setIsLoggedIn(false);
-                navigate("/login");
-              }}
-            >
-              <LogOut size={20} color="white" />
-            </button>
+            {user && (
+              <Link to={`/users/${user.id}`}>
+                <img src={user.image} alt={user.name} className="user-avatar" />
+              </Link>
+            )}
           </div>
         ) : (
           <div className="layout-auth">

@@ -29,7 +29,6 @@ export default function BrowseByCategory() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getCategories();
-      console.log(data);
       setCategories(data.slice(0, 10));
     };
 
