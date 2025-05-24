@@ -12,7 +12,6 @@ import TagByTagId from "./pages/TagByTagId";
 import Purchase from "./pages/Purchase"
 import UserProfile from "./pages/UserProfile";
 import Api from "./services/user";
-import {BrowserRouter} from "react-router";
 import Game from "./pages/Game.jsx";
 import "bootstrap"
 
