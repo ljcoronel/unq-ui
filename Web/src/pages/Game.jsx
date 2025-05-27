@@ -1,7 +1,10 @@
 import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router";
+import {Link, useNavigate, useParams} from "react-router";
 import Api from "../services/Api.js";
 import GameService from "../services/GameService.js";
+import Slider from "../components/molecules/Slider/Slider.jsx";
+import TagCard from "../components/molecules/TagCard/TagCard.jsx";
+import {CirclePlus} from "lucide-react";
 
 const Game = ({isLoggedIn}) => {
     const navigate = useNavigate()
@@ -53,7 +56,7 @@ const Game = ({isLoggedIn}) => {
                         {game.tags.length > 5 ? (
                             <>
                                 {game.tags.slice(0, 5).map((tag) => (
-                                    <a className="text-dark me-2 fw-medium" onClick={() => navigate(`/tags/${tag.id}`)}> {tag.name} </a>
+                                    <a key={tag.id} className="text-dark me-2 fw-medium" onClick={() => navigate(`/tags/${tag.id}`)}> {tag.name} </a>
                                 ))} <a className="text-dark me-2 fw-medium" data-bs-toggle="modal" data-bs-target="#tagsModal"> more... </a>
                                 <div className="modal fade" id="tagsModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div className="modal-dialog">
@@ -64,7 +67,7 @@ const Game = ({isLoggedIn}) => {
                                             </div>
                                             <div className="modal-body">
                                                 {game.tags.map((tag) => (
-                                                    <a data-bs-dismiss="modal" className="text-dark me-2 fw-semibold" onClick={() => navigate(`/tags/${tag.id}`)}> {tag.name} </a>
+                                                    <a key={tag.id} data-bs-dismiss="modal" className="text-dark me-2 fw-semibold" onClick={() => navigate(`/tags/${tag.id}`)}> {tag.name} </a>
                                                 ))}
                                             </div>
                                         </div>
@@ -73,7 +76,7 @@ const Game = ({isLoggedIn}) => {
                             </>
                         ) : (
                             game.tags.map((tag) => (
-                                <a className="text-dark me-2 fw-medium" onClick={() => navigate(`/tags/${tag.id}`)}> {tag.name} </a>
+                                <a key={tag.id} className="text-dark me-2 fw-medium" onClick={() => navigate(`/tags/${tag.id}`)}> {tag.name} </a>
                                 ))
                             )}
                     </div>
@@ -88,7 +91,7 @@ const Game = ({isLoggedIn}) => {
                                     <button className="btn fw-medium" style={{ fontSize: '20px', lineHeight: '28px', backgroundColor: '#7DC215', color: '#212121', width: '172px', height: '56px', borderRadius: '0'}} onClick={() =>
                                         isLoggedIn ? (
                                             GameService.addGameToCart(gameId),
-                                            navigate('/purchase')
+                                            navigate('/cart')
                                         ) : navigate('/login')
                                         }>
                                         Add to cart
@@ -103,12 +106,9 @@ const Game = ({isLoggedIn}) => {
                 </div>
                 <div className="mt-4">
                     <div className="d-flex justify-content-around">
-                        <img src={game.multimedia[0].url} style={{width: '200px', height: '129.36px', objectFit: 'cover'}} alt={game.name}/>
-                        <img src={game.multimedia[1].url} style={{width: '200px', height: '129.36px', objectFit: 'cover'}} alt={game.name}/>
-                        <img src={game.multimedia[2].url} style={{width: '200px', height: '129.36px', objectFit: 'cover'}} alt={game.name}/>
-                        <img src={game.multimedia[3].url} style={{width: '200px', height: '129.36px', objectFit: 'cover'}} alt={game.name}/>
-                        <img src={game.multimedia[4].url} style={{width: '200px', height: '129.36px', objectFit: 'cover'}} alt={game.name}/>
-                        <img src={game.multimedia[5].url} style={{width: '200px', height: '129.36px', objectFit: 'cover'}} alt={game.name}/>
+                        {game.multimedia.map((image, index) => (
+                            <img key={index} src={image.url} style={{width: '200px', height: '129.36px', objectFit: 'cover'}} alt={game.name}/>
+                        ))}
                     </div>
                 </div>
                 <div className="mt-4 w-100 text-start fw-semibold" style={{ fontFamily: 'Inter', fontSize: '22px', lineHeight: '28px' }}>
@@ -125,22 +125,25 @@ const Game = ({isLoggedIn}) => {
                 <div className="mt-4 w-100 text-start fw-semibold" style={{ fontFamily: 'Inter', fontSize: '22px', lineHeight: '28px' }}>
                     <h5>RELATED GAMES</h5>
                 </div>
-                <div id="relatedGamesCarousel" className="carousel slide" data-bs-ride="carousel">
-                    <div className="carousel-inner">
-                        {game.relatedGames.map((game, index) => (
-                            <div className={index === 0 ? 'carousel-item active' : 'carousel-item'}>
-                                <img src={game.mainImage} className="d-block w-100" style={{width: '300px', height: '369.23px', objectFit: 'cover'}} alt={game.name}/>
-                            </div>
-                        ))}
-                    </div>
-                    <button className="carousel-control-prev" type="button" data-bs-target="#relatedGamesCarousel" data-bs-slide="prev">
-                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Previous</span>
-                    </button>
-                    <button className="carousel-control-next" type="button" data-bs-target="#relatedGamesCarousel" data-bs-slide="next">
-                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Next</span>
-                    </button>
+                <div className="category-slider-container">
+                    <Slider
+                        showPagination={false}
+                        showNavigation={true}
+                        autoSlide={false}
+                        slidesPerView={3.5}
+                        loop={false}
+                        buttonSize="md"
+                    > {game.relatedGames.map((game, index) => (
+                                <div key={game.id || index} className="category-container">
+                                    <Link to={`/games/${game.id}`} className="tag">
+                                        <div className="tag-black-cover"></div>
+                                        <img src={game.mainImage} alt={game.name} className="tag-image" />
+                                        <span className="tag-title">{game.name}</span>
+                                    </Link>
+                                </div>
+                            ))
+                        }
+                    </Slider>
                 </div>
                 <div className="mt-4 w-100 text-start fw-semibold" style={{ fontFamily: 'Inter', fontSize: '22px', lineHeight: '28px' }}>
                     <h5>REVIEWS</h5>
@@ -155,13 +158,13 @@ const Game = ({isLoggedIn}) => {
                                         <span className="ms-3"> {user.name} </span>
                                     </div>
                                     <div>
-                                        {review.isRecommended ?
+                                        {game.reviews.find(review => review?.user.id === user.id).isRecommended ?
                                         (<span role="img" aria-label="like"> 👍 </span>) :
                                         (<span role="img" aria-label="dislike"> 👎 </span>)}
                                     </div>
                                 </div>
                                 <div className="card-body">
-                                    <span className="card-text"> {review.text} </span>
+                                    <span className="card-text"> {game.reviews.find(review => review?.user.id === user.id).text} </span>
                                 </div>
                             </div>
                         </div>
@@ -194,9 +197,12 @@ const Game = ({isLoggedIn}) => {
                         </div>
                     )
                 )}
+                <br/>
                 <div className="d-grid gap-5 fw-semibold" style={{ gridTemplateColumns: "1fr 1fr", fontFamily: 'Inter', fontSize: '22px', lineHeight: '28px'}}>
-                        {game.reviews.map((review) => (
-                            <div className="card rounded-0 p-3" style={{ width: '607px', height: '157px', background: '#898989', border: 'none' }}>
+                        {game.reviews
+                            .filter(review => review.user.id !== user?.id)
+                            .map((review) => (
+                            <div key={review.id} className="card rounded-0 p-3" style={{ width: '607px', height: '157px', background: '#898989', border: 'none' }}>
                                 <div className="d-flex justify-content-between align-items-start">
                                     <div className="d-flex align-items-center">
                                         <img src={review.user.image} className="rounded-circle" style={{width: '53px', height: '53px', border: '1.5px solid #EDEDED'}} alt={review.user.name}/>
