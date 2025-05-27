@@ -12,7 +12,7 @@ const ReviewCard = ({ review }) => {
         className="game-image"
       />
       <div className="review-content">
-        <Link to={`/game/${review.game.id}`} className="game-title">
+        <Link to={`/games/${review.game.id}`} className="game-title">
           {review.game.name.toUpperCase()}
         </Link>
 
