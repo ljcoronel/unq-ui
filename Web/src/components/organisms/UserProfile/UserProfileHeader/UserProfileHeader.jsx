@@ -4,6 +4,7 @@ import Button from "../../../atoms/button/Button";
 import { removeToken } from "../../../../config/axios.config";
 import Api from "../../../../services/user";
 import { useNavigate, useNavigation, useRoutes } from "react-router";
+import toast from "react-hot-toast";
 
 export default function UserProfileHeader({
   currentUser,
@@ -24,10 +25,17 @@ export default function UserProfileHeader({
   const addOrRemoveFriend = async (userId) => {
     try {
       await Api.addOrRemoveFriend(userId);
-      console.log("Friend added o removed successfully");
       await getIsFriend();
+      toast.success(
+        isFriend ? "Friend removed successfully!" : "Friend added successfully!"
+      );
     } catch (error) {
       console.error("Error adding friend:", error);
+      toast.error(
+        isFriend
+          ? "Error removing friend. Please try again."
+          : "Error adding friend. Please try again."
+      );
     }
   };
 
@@ -37,7 +45,7 @@ export default function UserProfileHeader({
   };
 
   useEffect(() => {
-    if (!isLoggedUser) {
+    if (!isLoggedUser && !!actualUser) {
       getIsFriend();
     }
   }, [user]);

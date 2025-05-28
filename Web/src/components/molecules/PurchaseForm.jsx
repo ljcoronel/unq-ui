@@ -5,7 +5,7 @@ import userService from "../../services/user";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 
-const PurchaseForm = () => {
+const PurchaseForm = ({userId}) => {
   const [cardNumber, setCardNumber] = useState("");
   const [cardName, setCardName] = useState("");
   const [cardExpiration, setCardExpiration] = useState("");
@@ -26,7 +26,7 @@ const PurchaseForm = () => {
       .userPurchase(body)
       .then((res) => {
         toast.success(res.message);
-        navigate(`/users/${res.userId}`);
+        navigate(`/users/${userId}`);
       })
       .catch((error) => toast.error(`Purchase failed: ${error}`));
   };

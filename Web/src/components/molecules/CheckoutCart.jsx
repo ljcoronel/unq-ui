@@ -1,17 +1,16 @@
 import { useNavigate, useParams } from "react-router";
 import Button from "../atoms/button/Button";
 import { FEES_PORCENTAJE } from "../../constants";
+import { formatCurrency } from "../../utils/money";
 
 const CheckoutCart = ({ gamesOnCart }) => {
   const navigate = useNavigate();
 
-  const total = gamesOnCart
-    .reduce((res, game) => res + game.price.amount, 0)
-    .toFixed(2);
+  const total = gamesOnCart.reduce((res, game) => res + game.price.amount, 0);
 
-  const discountAmount = (total * FEES_PORCENTAJE) / 100;
+  const feesAmount = (total * FEES_PORCENTAJE) / 100;
 
-  const totalWithDiscounts = total - discountAmount;
+  const totalWithFees = +total + feesAmount;
 
   return !gamesOnCart.length ? (
     <div className="cart-checkout-box">
@@ -24,15 +23,15 @@ const CheckoutCart = ({ gamesOnCart }) => {
       <h3>Checkout</h3>
       <div className="checkout-cart-row">
         <span>Products ({gamesOnCart.length})</span>
-        <span>{`$ ${total}`}</span>
+        <span>{formatCurrency(total)}</span>
       </div>
       <div className="checkout-cart-row">
         <span>Fees %{FEES_PORCENTAJE}</span>
-        <span>{`$ ${discountAmount.toFixed(2)}`}</span>
+        <span>{formatCurrency(feesAmount)}</span>
       </div>
       <div className="checkout-cart-row checkout-total">
         <span>Total</span>
-        <span>{`$ ${totalWithDiscounts.toFixed(2)}`}</span>
+        <span>{formatCurrency(totalWithFees)}</span>
       </div>
       <Button
         variant="secondary"

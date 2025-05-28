@@ -50,7 +50,7 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route
             path="/purchase/:total/:cantProductos"
-            element={<Purchase />}
+            element={<Purchase user={user}/>}
           />
           <Route path="/tags" element={<Tags />} />
           <Route path="/tags/:tagId" element={<TagByTagId />} />

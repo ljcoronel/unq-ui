@@ -1,3 +1,5 @@
+import { formatCurrency } from "../../utils/money";
+
 const GameOnCart = ({ game }) => {
   return (
     <div className="game-on-cart-container">
@@ -5,7 +7,7 @@ const GameOnCart = ({ game }) => {
       <div className="cart-game-name-container">{game.name.toUpperCase()}</div>
       <div className="cart-game-price-container">
         <span>{game.price.currency}</span>
-        <span>{game.price.amount.toFixed(2)}</span>
+        <span>{formatCurrency(game.price.amount)}</span>
       </div>
     </div>
   );

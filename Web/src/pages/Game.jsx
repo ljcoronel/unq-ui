@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
-import Api from "../services/Api.js";
+import Api from "../services/user.js";
 import GameService from "../services/GameService.js";
 import Slider from "../components/molecules/Slider/Slider.jsx";
 
@@ -133,15 +133,15 @@ const Game = ({ isLoggedIn }) => {
                         ></button>
                       </div>
                       <div className="modal-body">
-                        {game.tags.map((tag) => (
-                          <a
-                            key={tag.id}
+                        {game.tags.map((tag, i) => (
+                          <Link
+                            key={i}
                             data-bs-dismiss="modal"
                             className="text-dark me-2 fw-semibold"
-                            onClick={() => navigate(`/tags/${tag.id}`)}
+                            to={`/tags/${tag.id}`}
                           >
                             {tag.name}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>
