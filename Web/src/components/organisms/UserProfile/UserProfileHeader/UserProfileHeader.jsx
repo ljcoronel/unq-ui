@@ -13,7 +13,7 @@ export default function UserProfileHeader({
   const isLoggedUser = currentUser?.id === user?.id;
   const actualUser = isLoggedUser ? currentUser : user;
   const [isFriend, setIsFriend] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const logout = () => {
     removeToken();

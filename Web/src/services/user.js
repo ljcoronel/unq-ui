@@ -1,22 +1,22 @@
 import { api } from "../config/axios.config";
 
-const userRegister = (body) => 
+const userRegister = (body) =>
   api
     .post("/register", body)
     .then((response) => response.headers.authorization)
     .catch((error) => Promise.reject(error.response.data.error));
 
-const currentCart = () => 
+const currentCart = () =>
   api
     .get("/users/current/cart")
     .then((response) => response.data)
     .catch((error) => Promise.reject(error.response.data.error));
 
-const userPurchase = (body) => 
+const userPurchase = (body) =>
   api
-    .post("/purchase",body)
+    .post("/purchase", body)
     .then((response) => response.data)
-    .catch((error) => Promise.reject(error.response.data.error))
+    .catch((error) => Promise.reject(error.response.data.error));
 
 const getCurrentUser = () =>
   api
@@ -40,7 +40,7 @@ const addOrRemoveFriend = (userId) =>
     .then((response) => response.data)
     .catch((error) => {
       toast.error(
-        `Failed to add or remove friend: ${error.response.data.error}`
+        `Failed to add or remove friend: ${error.response.data.error}`,
       );
     });
 
@@ -59,5 +59,5 @@ export default {
   addOrRemoveFriend,
   getFriendsOfUser,
   currentCart,
-  userPurchase
+  userPurchase,
 };

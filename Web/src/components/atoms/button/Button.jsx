@@ -11,7 +11,11 @@ export default function Button({ variant = "primary", children, ...props }) {
   return (
     <button
       {...props}
-      className={classNames("button", VARIANT_CLASS_MAP[variant], props.className)}
+      className={classNames(
+        "button",
+        VARIANT_CLASS_MAP[variant],
+        props.className,
+      )}
     >
       {children}
     </button>

@@ -54,7 +54,7 @@ export default function TagByTagId() {
       });
       if (node) observerRef.current.observe(node);
     },
-    [currentPage, amountOfPages]
+    [currentPage, amountOfPages],
   );
 
   return (

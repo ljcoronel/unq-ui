@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router";
 import { Toaster } from "react-hot-toast";
 import { removeToken } from "../../../config/axios.config";
 
-
 export default function Layout({ children, isLoggedIn, setIsLoggedIn, user }) {
   const navigate = useNavigate();
   const pathname = window.location.pathname;
@@ -14,7 +13,6 @@ export default function Layout({ children, isLoggedIn, setIsLoggedIn, user }) {
     { name: "STORE", path: "/" },
     { name: "LIBRARY", path: "/library" },
   ];
-  
 
   return (
     <div className="layout-container">
@@ -30,7 +28,7 @@ export default function Layout({ children, isLoggedIn, setIsLoggedIn, user }) {
               to={item.path}
               className={classNames(
                 "layout-link",
-                pathname === item.path ? "active" : ""
+                pathname === item.path ? "active" : "",
               )}
               key={item.name}
             >

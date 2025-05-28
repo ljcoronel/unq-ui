@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { api, setToken } from "../config/axios.config";
 import { useNavigate } from "react-router";
 
-export default function Login({setIsLoggedIn}) {
+export default function Login({ setIsLoggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -14,7 +14,8 @@ export default function Login({setIsLoggedIn}) {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const res = await api.post("/login", { //extraer a una funcion
+      const res = await api.post("/login", {
+        //extraer a una funcion
         email,
         password,
       });

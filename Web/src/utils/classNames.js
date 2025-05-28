@@ -1,6 +1,6 @@
 export const classNames = (...classes) => {
   return classes.filter(Boolean).join(" ");
-}
+};
 // Usage example
 // import { classNames } from './utils/classNames';
 //

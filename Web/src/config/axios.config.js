@@ -33,5 +33,5 @@ api.interceptors.response.use(
       removeToken();
     }
     return Promise.reject(error);
-  }
+  },
 );

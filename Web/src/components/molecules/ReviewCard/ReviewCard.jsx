@@ -18,9 +18,11 @@ const ReviewCard = ({ review }) => {
 
         <p className="review-text">{review.text}</p>
       </div>
-      <div className={`review-icon ${review.isRecommended ? "is-recommended" : "not-recommended"}`}>
+      <div
+        className={`review-icon ${review.isRecommended ? "is-recommended" : "not-recommended"}`}
+      >
         {review.isRecommended ? (
-          <ThumbsUp size={20}/>
+          <ThumbsUp size={20} />
         ) : (
           <ThumbsDown size={20} />
         )}

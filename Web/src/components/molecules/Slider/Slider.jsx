@@ -16,7 +16,7 @@ export default function Slider({
   autoSlideDelay = 3000,
   loop = true,
   slidesPerView = 1,
-  buttonSize = "md"
+  buttonSize = "md",
 }) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);

@@ -33,7 +33,7 @@ export default function FeaturedAndRecommended() {
   }, []);
 
   return (
-    <div >
+    <div>
       <h2 className="section-title">FEATURED & RECOMMENDED</h2>
       <Slider
         showPagination={true}

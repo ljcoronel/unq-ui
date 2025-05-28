@@ -10,7 +10,9 @@ export default function UserGames({ currentUser }) {
       <h2 className="section-title">GAMES</h2>
       <div className="user-games-list">
         {games.length > 0 ? (
-          games.map((game) => <GameCard game={game} withPrice={false} key={game.id}/>)
+          games.map((game) => (
+            <GameCard game={game} withPrice={false} key={game.id} />
+          ))
         ) : (
           <p>No games available.</p>
         )}

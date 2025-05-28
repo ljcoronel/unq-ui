@@ -21,7 +21,11 @@ export default function UserProfile({ currentUser, setIsLoggedIn }) {
 
   return (
     <section className="user-profile">
-      <UserProfileHeader currentUser={currentUser} user={user} setIsLoggedIn={setIsLoggedIn} />
+      <UserProfileHeader
+        currentUser={currentUser}
+        user={user}
+        setIsLoggedIn={setIsLoggedIn}
+      />
       {currentUser && user && currentUser.id === user.id ? (
         <UserGames currentUser={currentUser} />
       ) : (

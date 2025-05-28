@@ -1,124 +1,120 @@
 .cart-container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-    max-width: 1280px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 1280px;
 }
 
 .cart-games-container {
-    max-width: 828px;
-    color: aliceblue;
-    background-color: var(--dark-grey);
-    padding: 0.7rem 0.7rem 0;
-    border-radius: 8px;
+  max-width: 828px;
+  color: aliceblue;
+  background-color: var(--dark-grey);
+  padding: 0.7rem 0.7rem 0;
+  border-radius: 8px;
 }
 
-
-.game-on-cart-container{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--light-grey);
-    width: 796px;
-    height: 150px;
-    margin-bottom: 0.7rem;
-    font-size: 2rem;
-    font-weight:400;
+.game-on-cart-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--light-grey);
+  width: 796px;
+  height: 150px;
+  margin-bottom: 0.7rem;
+  font-size: 2rem;
+  font-weight: 400;
 }
 
-.cart-game-image{
-    width: 40%;
-    height: 150px;
-    object-fit: cover;
-    object-position: center top;
+.cart-game-image {
+  width: 40%;
+  height: 150px;
+  object-fit: cover;
+  object-position: center top;
 }
 
-.cart-game-name-container{
-    color: var(--dark-grey);
-    text-align: left;
-    width: 40%;
-    padding: 1rem;
+.cart-game-name-container {
+  color: var(--dark-grey);
+  text-align: left;
+  width: 40%;
+  padding: 1rem;
 }
 
-.cart-game-price-container{
-    color: var(--violet);
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: center;
-    margin: auto 0;
+.cart-game-price-container {
+  color: var(--violet);
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  margin: auto 0;
 }
-
 
 .cart-checkout-box {
-    background-color: var(--dark-grey);
-    color: aliceblue;
-    padding: 0.5rem 0.7rem 0.7rem;
-    margin-right: 1rem;
-    width: 350px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    row-gap: 0.5rem;
-    min-height: 300px;
+  background-color: var(--dark-grey);
+  color: aliceblue;
+  padding: 0.5rem 0.7rem 0.7rem;
+  margin-right: 1rem;
+  width: 350px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 0.5rem;
+  min-height: 300px;
 }
 
-.checkout-cart-row{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
+.checkout-cart-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
 }
 
-.checkout-total{
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+.checkout-total {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.cart-checkout-box .button{
-    max-width: 172px;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem ;
-    height: 56px;
-} 
-
-
-.cart-checkout-box h3{
-    margin-bottom: 1.5rem;
+.cart-checkout-box .button {
+  max-width: 172px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  height: 56px;
 }
 
-.empty-checkout-message{
-    font-weight: 500;
-    font-size: 1.5rem;
-    margin: auto 1rem;
-    text-align: justify;
-    
+.cart-checkout-box h3 {
+  margin-bottom: 1.5rem;
 }
 
-.empty-cart-container{
-    width: 60%;
-    max-width: 796px;
-    min-width: 500px;
-    height: 341px;
-    color: var(--light-grey);
-    background-color: var(--dark-grey);
-    padding: 0.7rem 0.7rem 0;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.empty-checkout-message {
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin: auto 1rem;
+  text-align: justify;
 }
 
-.shop-basket-img{
-    width: 125px;
-    height: 120px;
-    margin-top: 51px;
-    margin-bottom: 1rem;
+.empty-cart-container {
+  width: 60%;
+  max-width: 796px;
+  min-width: 500px;
+  height: 341px;
+  color: var(--light-grey);
+  background-color: var(--dark-grey);
+  padding: 0.7rem 0.7rem 0;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shop-basket-img {
+  width: 125px;
+  height: 120px;
+  margin-top: 51px;
+  margin-bottom: 1rem;
 }

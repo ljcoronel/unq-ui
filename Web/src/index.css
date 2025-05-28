@@ -18,14 +18,14 @@
   margin-bottom: 17px;
 }
 
-section{
+section {
   padding: 10px 0;
   height: max-content;
   width: 100%;
 }
 
-.list-grid{
-   display: grid;
+.list-grid {
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.7rem;
   margin: 0;
