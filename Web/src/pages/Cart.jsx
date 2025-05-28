@@ -15,10 +15,10 @@ const Cart = () => {
   }, []);
 
   return (
-    <div className="cart-container">
+    <section className="cart-container">
       <CartGamesList gamesOnCart={gamesOnCart} />
       <CheckoutCart gamesOnCart={gamesOnCart} />
-    </div>
+    </section>
   );
 };
 

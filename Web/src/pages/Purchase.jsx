@@ -12,13 +12,13 @@ const Purchase = ({user}) => {
   const totalWithDiscounts = total - discountAmount;
 
   return (
-    <div className="cart-container">
+    <section className="cart-container">
       <PurchaseForm userId={user.id} />
       <div className="cart-checkout-box">
         <h3>Checkout</h3>
         <div className="checkout-cart-row">
           <span>Products ({cantProductos})</span>
-          <span>{`$ ${total}`}</span>
+          <span>{`$ ${Number(total).toFixed(2)}`}</span>
         </div>
         <div className="checkout-cart-row">
           <span>Fees %{FEES_PORCENTAJE}</span>
@@ -29,7 +29,7 @@ const Purchase = ({user}) => {
           <span>{`$ ${totalWithDiscounts.toFixed(2)}`}</span>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
