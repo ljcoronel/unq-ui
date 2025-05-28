@@ -14,6 +14,7 @@ import { getCurrentUser } from "./services/user";
 import Game from "./pages/Game.jsx";
 import "bootstrap";
 import Search from "./pages/Search.jsx";
+import AuthGuard from "./guards/AuthGuard.jsx";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState();
@@ -52,17 +53,27 @@ export default function App() {
             path="/register"
             element={<Register setIsLoggedIn={setIsLoggedIn} />}
           />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={
+            <AuthGuard>
+              <Cart />
+            </AuthGuard>
+          } />
           <Route
             path="/purchase/:total/:cantProductos"
-            element={<Purchase user={user} />}
+            element={
+              <AuthGuard>
+                <Purchase user={user} />
+              </AuthGuard>
+            }
           />
           <Route path="/tags" element={<Tags />} />
           <Route path="/tags/:tagId" element={<TagByTagId />} />
           <Route
             path="/users/:userId"
             element={
-              <UserProfile currentUser={user} setIsLoggedIn={setIsLoggedIn} />
+              <AuthGuard>
+                <UserProfile currentUser={user} setIsLoggedIn={setIsLoggedIn} />
+              </AuthGuard>
             }
           />
           <Route path="/search" element={<Search />} />

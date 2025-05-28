@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import Slider from "../components/molecules/Slider/Slider.jsx";
 import { addGameToCart, getGame } from "../services/game.js";
-import {getCurrentUser} from "../services/user.js";
+import { getCurrentUser } from "../services/user.js";
 
 const Game = ({ isLoggedIn }) => {
   const navigate = useNavigate();
@@ -28,6 +28,15 @@ const Game = ({ isLoggedIn }) => {
         .catch((error) => setError(error.response.data.message));
     }
   }, []);
+
+  const addGameToCart = (gameId) => {
+    if (isLoggedIn) {
+      addGameToCart(gameId);
+      navigate("/cart");
+    } else {
+      navigate("/login");
+    }
+  };
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -208,11 +217,7 @@ const Game = ({ isLoggedIn }) => {
                       height: "56px",
                       borderRadius: "0",
                     }}
-                    onClick={() =>
-                      isLoggedIn
-                        ? (addGameToCart(gameId), navigate("/cart"))
-                        : navigate("/login")
-                    }
+                    onClick={() => addGameToCart(gameId)}
                   >
                     Add to cart
                   </button>
