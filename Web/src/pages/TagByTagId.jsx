@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams, useSearchParams } from "react-router";
 import "../styles/Tags.css";
 import { fetchGamesByTagId } from "../services/tags";
 import { useEffect, useState, useRef, useCallback } from "react";
@@ -6,8 +6,8 @@ import GameCard from "../components/molecules/GameCard/GameCard";
 
 export default function TagByTagId() {
   const { tagId } = useParams();
-  const tagName = new URLSearchParams(window.location.search).get("tagName");
-
+  const [searchParams] = useSearchParams();
+  const tagName = searchParams.get("tagName") || "Unknown Tag";
   const [games, setGames] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [amountOfPages, setAmountOfPages] = useState(1);
@@ -54,7 +54,7 @@ export default function TagByTagId() {
       });
       if (node) observerRef.current.observe(node);
     },
-    [currentPage, amountOfPages],
+    [currentPage, amountOfPages]
   );
 
   return (

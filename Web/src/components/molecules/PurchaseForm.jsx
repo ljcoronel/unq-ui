@@ -26,7 +26,7 @@ const PurchaseForm = () => {
       .userPurchase(body)
       .then((res) => {
         toast.success(res.message);
-        navigate("/library");
+        navigate(`/users/${res.userId}`);
       })
       .catch((error) => toast.error(`Purchase failed: ${error}`));
   };

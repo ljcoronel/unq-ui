@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  BrowserRouter,
-} from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Layout from "./components/common/Layout/Layout";
 import Home from "./pages/Home";
-import Library from "./pages/Library";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Cart from "./pages/Cart";
@@ -19,6 +13,7 @@ import UserProfile from "./pages/UserProfile";
 import Api from "./services/user";
 import Game from "./pages/Game.jsx";
 import "bootstrap";
+import Search from "./pages/Search.jsx";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!getToken());
@@ -37,10 +32,9 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Layout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} user={user}>
+      <Layout isLoggedIn={isLoggedIn} user={user}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/library" element={<Library />} />
           <Route
             path="/login"
             element={<Login setIsLoggedIn={setIsLoggedIn} />}
@@ -66,6 +60,7 @@ export default function App() {
               <UserProfile currentUser={user} setIsLoggedIn={setIsLoggedIn} />
             }
           />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </Layout>
     </BrowserRouter>

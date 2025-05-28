@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from "react";
-import "./Layout.css";
-import { LogOut, Search, ShoppingCart } from "lucide-react";
+import { Search, ShoppingCart } from "lucide-react";
 import { classNames } from "../../../utils/classNames";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { Toaster } from "react-hot-toast";
-import { removeToken } from "../../../config/axios.config";
+import "./Layout.css";
 
-export default function Layout({ children, isLoggedIn, setIsLoggedIn, user }) {
+export default function Layout({ children, isLoggedIn, user }) {
+  const location = useLocation();
+  const pathname = location.pathname;
   const navigate = useNavigate();
-  const pathname = window.location.pathname;
+
   const NAVIGATION_ITEMS = [
-    { name: "STORE", path: "/" },
-    { name: "LIBRARY", path: "/library" },
+    { name: "STORE", path: "/", show: true },
+
+    {
+      name: "LIBRARY",
+      path: `/users/${user?.id}`,
+      show: isLoggedIn && !!user,
+    },
   ];
 
   return (
@@ -23,12 +28,12 @@ export default function Layout({ children, isLoggedIn, setIsLoggedIn, user }) {
           </Link>
         </div>
         <nav className="layout-nav">
-          {NAVIGATION_ITEMS.map((item) => (
+          {NAVIGATION_ITEMS.filter((item) => item.show).map((item) => (
             <Link
               to={item.path}
               className={classNames(
                 "layout-link",
-                pathname === item.path ? "active" : "",
+                pathname === item.path ? "active" : ""
               )}
               key={item.name}
             >
@@ -36,10 +41,22 @@ export default function Layout({ children, isLoggedIn, setIsLoggedIn, user }) {
             </Link>
           ))}
 
-          <div className="layout-search">
+          <form
+            name="search"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const searchQuery = e.target.elements[0].value.trim();
+              if (searchQuery) {
+                navigate(`/search?query=${searchQuery}`);
+              }
+              e.target.reset();
+              e.target.blur();
+            }}
+            className="layout-search"
+          >
             <Search className="search-icon" />
             <input type="text" placeholder="SEARCH" />
-          </div>
+          </form>
         </nav>
         {isLoggedIn ? (
           <div className="layout-auth">

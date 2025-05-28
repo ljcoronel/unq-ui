@@ -3,8 +3,6 @@ import { Link, useNavigate, useParams } from "react-router";
 import Api from "../services/Api.js";
 import GameService from "../services/GameService.js";
 import Slider from "../components/molecules/Slider/Slider.jsx";
-import TagCard from "../components/molecules/TagCard/TagCard.jsx";
-import { CirclePlus } from "lucide-react";
 
 const Game = ({ isLoggedIn }) => {
   const navigate = useNavigate();
@@ -66,8 +64,7 @@ const Game = ({ isLoggedIn }) => {
                 color: "#EDEDED",
               }}
             >
-              {" "}
-              {game.name}{" "}
+              {game.name}
             </h1>
           </div>
         </div>
@@ -76,25 +73,20 @@ const Game = ({ isLoggedIn }) => {
           style={{ fontFamily: "Inter", lineHeight: "28px", color: "#212121" }}
         >
           <div>
-            <span> Developer: </span>{" "}
+            <span> Developer: </span>
             <span className="text-decoration-underline fw-medium">
-              {" "}
-              {game.developer.name}{" "}
+              {game.developer.name}
             </span>
           </div>
           <div>
-            <span> Website: </span>{" "}
+            <span> Website: </span>
             <span className="text-decoration-underline fw-medium">
-              {" "}
-              {game.website}{" "}
+              {game.website}
             </span>
           </div>
           <div>
-            <span> Release Date: </span>{" "}
-            <span className="fw-medium">
-              {" "}
-              {game.releaseDate.split("T")[0]}{" "}
-            </span>
+            <span> Release Date: </span>
+            <span className="fw-medium">{game.releaseDate.split("T")[0]}</span>
           </div>
           <div>
             <span> Tags: </span>
@@ -106,17 +98,15 @@ const Game = ({ isLoggedIn }) => {
                     className="text-dark me-2 fw-medium"
                     onClick={() => navigate(`/tags/${tag.id}`)}
                   >
-                    {" "}
-                    {tag.name}{" "}
+                    {tag.name}
                   </a>
-                ))}{" "}
+                ))}
                 <a
                   className="text-dark me-2 fw-medium"
                   data-bs-toggle="modal"
                   data-bs-target="#tagsModal"
                 >
-                  {" "}
-                  more...{" "}
+                  more...
                 </a>
                 <div
                   className="modal fade"
@@ -150,8 +140,7 @@ const Game = ({ isLoggedIn }) => {
                             className="text-dark me-2 fw-semibold"
                             onClick={() => navigate(`/tags/${tag.id}`)}
                           >
-                            {" "}
-                            {tag.name}{" "}
+                            {tag.name}
                           </a>
                         ))}
                       </div>
@@ -166,8 +155,7 @@ const Game = ({ isLoggedIn }) => {
                   className="text-dark me-2 fw-medium"
                   onClick={() => navigate(`/tags/${tag.id}`)}
                 >
-                  {" "}
-                  {tag.name}{" "}
+                  {tag.name}
                 </a>
               ))
             )}
@@ -206,7 +194,7 @@ const Game = ({ isLoggedIn }) => {
                       color: "#EDEDED",
                     }}
                   >
-                    {game.price.currency}{" "}
+                    {game.price.currency}
                     {Math.round(game.price.amount * 10 ** 2) / 10 ** 2}
                   </div>
                   <button
@@ -269,28 +257,23 @@ const Game = ({ isLoggedIn }) => {
         >
           <h5>REQUIREMENTS</h5>
           <div style={{ fontSize: "20px" }}>
-            OS:{" "}
+            OS:
+            <span className="fw-medium">{game.requirement.os.join(", ")}</span>
+          </div>
+          <div style={{ fontSize: "20px" }}>
+            Processor
             <span className="fw-medium">
-              {" "}
-              {game.requirement.os.join(", ")}{" "}
+              {game.requirement.processor.join(", ")}
             </span>
           </div>
           <div style={{ fontSize: "20px" }}>
-            Processor{" "}
-            <span className="fw-medium">
-              {" "}
-              {game.requirement.processor.join(", ")}{" "}
-            </span>
-          </div>
-          <div style={{ fontSize: "20px" }}>
-            Memory:{" "}
+            Memory:
             <span className="fw-medium"> {game.requirement.memory}gb </span>
           </div>
           <div style={{ fontSize: "20px" }}>
-            Graphics{" "}
+            Graphics
             <span className="fw-medium">
-              {" "}
-              {game.requirement.graphics.join(", ")}{" "}
+              {game.requirement.graphics.join(", ")}
             </span>
           </div>
         </div>
@@ -309,7 +292,6 @@ const Game = ({ isLoggedIn }) => {
             loop={false}
             buttonSize="md"
           >
-            {" "}
             {game.relatedGames.map((game, index) => (
               <div key={game.id || index} className="category-container">
                 <Link to={`/games/${game.id}`} className="tag">
@@ -368,24 +350,21 @@ const Game = ({ isLoggedIn }) => {
                     {game.reviews.find((review) => review?.user.id === user.id)
                       .isRecommended ? (
                       <span role="img" aria-label="like">
-                        {" "}
-                        👍{" "}
+                        👍
                       </span>
                     ) : (
                       <span role="img" aria-label="dislike">
-                        {" "}
-                        👎{" "}
+                        👎
                       </span>
                     )}
                   </div>
                 </div>
                 <div className="card-body">
                   <span className="card-text">
-                    {" "}
                     {
                       game.reviews.find((review) => review?.user.id === user.id)
                         .text
-                    }{" "}
+                    }
                   </span>
                 </div>
               </div>
@@ -417,8 +396,7 @@ const Game = ({ isLoggedIn }) => {
                   className="ms-3"
                   style={{ fontSize: "22px", lineHeight: "28px" }}
                 >
-                  {" "}
-                  {user.name}{" "}
+                  {user.name}
                 </span>
               </div>
               <form>
@@ -433,12 +411,10 @@ const Game = ({ isLoggedIn }) => {
                     style={{ display: "inline-flex", alignItems: "center" }}
                   >
                     <span role="img" aria-label="like">
-                      {" "}
-                      👍{" "}
+                      👍
                     </span>
                     <span role="img" aria-label="dislike">
-                      {" "}
-                      👎{" "}
+                      👎
                     </span>
                   </span>
                 </div>
@@ -511,7 +487,10 @@ const Game = ({ isLoggedIn }) => {
                 }}
               >
                 <div className="d-flex justify-content-between align-items-start">
-                  <div className="d-flex align-items-center">
+                  <Link
+                    to={`/users/${review.user.id}`}
+                    className="d-flex align-items-center text-decoration-none"
+                  >
                     <img
                       src={review.user.image}
                       className="rounded-circle"
@@ -523,20 +502,17 @@ const Game = ({ isLoggedIn }) => {
                       alt={review.user.name}
                     />
                     <span className="ms-3" style={{ color: "#EDEDED" }}>
-                      {" "}
-                      {review.user.name}{" "}
+                      {review.user.name}
                     </span>
-                  </div>
+                  </Link>
                   <div>
                     {review.isRecommended ? (
                       <span role="img" aria-label="like">
-                        {" "}
-                        👍{" "}
+                        👍
                       </span>
                     ) : (
                       <span role="img" aria-label="dislike">
-                        {" "}
-                        👎{" "}
+                        👎
                       </span>
                     )}
                   </div>
