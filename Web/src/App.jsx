@@ -54,14 +54,14 @@ export default function App() {
             element={<Register setIsLoggedIn={setIsLoggedIn} />}
           />
           <Route path="/cart" element={
-            <AuthGuard>
+            <AuthGuard isLoggedIn={isLoggedIn}>
               <Cart />
             </AuthGuard>
           } />
           <Route
             path="/purchase/:total/:cantProductos"
             element={
-              <AuthGuard>
+              <AuthGuard isLoggedIn={isLoggedIn}>
                 <Purchase user={user} />
               </AuthGuard>
             }
@@ -71,7 +71,7 @@ export default function App() {
           <Route
             path="/users/:userId"
             element={
-              <AuthGuard>
+              <AuthGuard isLoggedIn={isLoggedIn}>
                 <UserProfile currentUser={user} setIsLoggedIn={setIsLoggedIn} />
               </AuthGuard>
             }
