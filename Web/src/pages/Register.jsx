@@ -2,7 +2,7 @@ import { use, useState } from "react";
 import "../styles/Auth.css";
 import Button from "../components/atoms/button/Button";
 import Input from "../components/atoms/input/Input";
-import userService from "../services/user";
+import { userRegister } from "../services/user";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { setToken } from "../config/axios.config";
@@ -25,8 +25,8 @@ const Register = ({ setIsLoggedIn }) => {
       backgroundImage,
     };
 
-    userService
-      .userRegister(body)
+    
+      userRegister(body)
       .then((res) => {
         toast.success("Register successful");
         setToken(res);

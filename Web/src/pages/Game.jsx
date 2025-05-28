@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
-import Api from "../services/user.js";
-import GameService from "../services/GameService.js";
 import Slider from "../components/molecules/Slider/Slider.jsx";
+import { addGameToCart, getGame } from "../services/game.js";
+import {getCurrentUser} from "../services/user.js";
 
 const Game = ({ isLoggedIn }) => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Game = ({ isLoggedIn }) => {
   useEffect(() => {
     setLoading(true);
     setError("");
-    GameService.getGame(gameId)
+    getGame(gameId)
       .then((response) => setGame(response))
       .catch((error) => setError(error.response.data.message))
       .finally(() => setLoading(false));
@@ -23,7 +23,7 @@ const Game = ({ isLoggedIn }) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      Api.getCurrentUser()
+      getCurrentUser()
         .then((response) => setUser(response))
         .catch((error) => setError(error.response.data.message));
     }
@@ -210,7 +210,7 @@ const Game = ({ isLoggedIn }) => {
                     }}
                     onClick={() =>
                       isLoggedIn
-                        ? (GameService.addGameToCart(gameId), navigate("/cart"))
+                        ? (addGameToCart(gameId), navigate("/cart"))
                         : navigate("/login")
                     }
                   >

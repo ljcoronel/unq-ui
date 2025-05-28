@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./UserProfileHeader.css";
 import Button from "../../../atoms/button/Button";
 import { removeToken } from "../../../../config/axios.config";
-import Api from "../../../../services/user";
+import { getFriendsOfUser } from "../../../../services/user";
 import { useNavigate, useNavigation, useRoutes } from "react-router";
 import toast from "react-hot-toast";
 
@@ -22,9 +22,9 @@ export default function UserProfileHeader({
     navigate("/");
   };
 
-  const addOrRemoveFriend = async (userId) => {
+  const handleAddOrRemoveFriend = async (userId) => {
     try {
-      await Api.addOrRemoveFriend(userId);
+      await addOrRemoveFriend(userId);
       await getIsFriend();
       toast.success(
         isFriend ? "Friend removed successfully!" : "Friend added successfully!"
@@ -40,7 +40,7 @@ export default function UserProfileHeader({
   };
 
   const getIsFriend = async () => {
-    const friends = await Api.getFriendsOfUser(currentUser.id);
+    const friends = await getFriendsOfUser(currentUser.id);
     setIsFriend(friends.some((friend) => friend.id === actualUser.id));
   };
 
@@ -63,7 +63,7 @@ export default function UserProfileHeader({
       <Button
         className="user-profile-button"
         onClick={() => {
-          isLoggedUser ? logout() : addOrRemoveFriend(actualUser.id);
+          isLoggedUser ? logout() : handleAddOrRemoveFriend(actualUser.id);
         }}
       >
         {isLoggedUser ? "Logout" : isFriend ? "Remove Friend" : "Add Friend"}

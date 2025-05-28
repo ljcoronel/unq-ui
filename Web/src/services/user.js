@@ -1,63 +1,65 @@
 import { api } from "../config/axios.config";
+import toast from "react-hot-toast";
 
-const userRegister = (body) =>
-  api
-    .post("/register", body)
-    .then((response) => response.headers.authorization)
-    .catch((error) => Promise.reject(error.response.data.error));
+export const userRegister = async (body) => {
+  try {
+    const response = await api.post("/register", body);
+    return response.headers.authorization;
+  } catch (error) {
+    return Promise.reject(error.response.data.error);
+  }
+};
 
-const currentCart = () =>
-  api
-    .get("/users/current/cart")
-    .then((response) => response.data)
-    .catch((error) => Promise.reject(error.response.data.error));
+export const currentCart = async () => {
+  try {
+    const response = await api.get("/users/current/cart");
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error.response.data.error);
+  }
+};
 
-const userPurchase = (body) =>
-  api
-    .post("/purchase", body)
-    .then((response) => response.data)
-    .catch((error) => Promise.reject(error.response.data.error));
+export const userPurchase = async (body) => {
+  try {
+    const response = await api.post("/purchase", body);
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error.response.data.error);
+  }
+};
 
-const getCurrentUser = () =>
-  api
-    .get("/users/current")
-    .then((response) => response.data)
-    .catch((error) => {
-      toast.error(`Failed to fetch user data: ${error.response.data.error}`);
-    });
+export const getCurrentUser = async () => {
+  try {
+    const response = await api.get("/users/current");
+    return response.data;
+  } catch (error) {
+    toast.error(`Failed to fetch user data: ${error.response.data.error}`);
+  }
+};
 
-const getUserById = (id) =>
-  api
-    .get(`/users/${id}`)
-    .then((response) => response.data)
-    .catch((error) => {
-      toast.error(`Failed to fetch user data: ${error.response.data.error}`);
-    });
+export const getUserById = async (id) => {
+  try {
+    const response = await api.get(`/users/${id}`);
+    return response.data;
+  } catch (error) {
+    toast.error(`Failed to fetch user data: ${error.response.data.error}`);
+  }
+};
 
-const addOrRemoveFriend = (userId) =>
-  api
-    .put(`/users/${userId}/friends`)
-    .then((response) => response.data)
-    .catch((error) => {
-      toast.error(
-        `Failed to add or remove friend: ${error.response.data.error}`,
-      );
-    });
+export const addOrRemoveFriend = async (userId) => {
+  try {
+    const response = await api.put(`/users/${userId}/friends`);
+    return response.data;
+  } catch (error) {
+    toast.error(`Failed to add or remove friend: ${error.response.data.error}`);
+  }
+};
 
-const getFriendsOfUser = (userId) =>
-  api
-    .get(`/users/${userId}/friends`)
-    .then((response) => response.data)
-    .catch((error) => {
-      toast.error(`Failed to fetch friends: ${error.response.data.error}`);
-    });
-
-export default {
-  userRegister,
-  getCurrentUser,
-  getUserById,
-  addOrRemoveFriend,
-  getFriendsOfUser,
-  currentCart,
-  userPurchase,
+export const getFriendsOfUser = async (userId) => {
+  try {
+    const response = await api.get(`/users/${userId}/friends`);
+    return response.data;
+  } catch (error) {
+    toast.error(`Failed to fetch friends: ${error.response.data.error}`);
+  }
 };

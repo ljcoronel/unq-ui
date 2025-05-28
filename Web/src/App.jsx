@@ -10,17 +10,22 @@ import Tags from "./pages/Tags";
 import TagByTagId from "./pages/TagByTagId";
 import Purchase from "./pages/Purchase";
 import UserProfile from "./pages/UserProfile";
-import Api from "./services/user";
+import { getCurrentUser } from "./services/user";
 import Game from "./pages/Game.jsx";
 import "bootstrap";
 import Search from "./pages/Search.jsx";
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!getToken());
+  const [isLoggedIn, setIsLoggedIn] = useState();
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const token = getToken();
+    setIsLoggedIn(!!token);
+  }, []);
+
   async function fetchCurrentUser() {
-    const userFounded = await Api.getCurrentUser();
+    const userFounded = await getCurrentUser();
     setUser(userFounded);
   }
 
@@ -50,7 +55,7 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route
             path="/purchase/:total/:cantProductos"
-            element={<Purchase user={user}/>}
+            element={<Purchase user={user} />}
           />
           <Route path="/tags" element={<Tags />} />
           <Route path="/tags/:tagId" element={<TagByTagId />} />

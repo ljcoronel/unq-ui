@@ -13,9 +13,3 @@ export const formatCurrency = (value, decimal = 2) => {
 
   return new Intl.NumberFormat("en-US", options).format(value);
 };
-
-/* EXAMPLE USAGE
-import { formatCurrency } from "./utils/money";
-const formattedValue = formatCurrency(1234.56); // "$1,234.56"
-console.log(formattedValue);
-*/

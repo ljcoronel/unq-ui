@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Input from "../atoms/input/Input";
 import Button from "../atoms/button/Button";
-import userService from "../../services/user";
+import { userPurchase } from "../../services/user";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 
@@ -22,8 +22,8 @@ const PurchaseForm = ({userId}) => {
       cardExpiration,
     };
 
-    userService
-      .userPurchase(body)
+    
+      userPurchase(body)
       .then((res) => {
         toast.success(res.message);
         navigate(`/users/${userId}`);

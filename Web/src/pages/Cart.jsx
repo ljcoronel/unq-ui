@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import "../styles/Cart.css";
-import userService from "../services/user";
 import CartGamesList from "../components/molecules/CartGamesList";
 import CheckoutCart from "../components/molecules/CheckoutCart";
 import toast from "react-hot-toast";
+import { currentCart } from "../services/user";
 
 const Cart = () => {
   const [gamesOnCart, setGamesOnCart] = useState([]);
 
   useEffect(() => {
-    userService
-      .currentCart()
+      currentCart()
       .then((res) => setGamesOnCart(res.games))
       .catch((error) => toast.error(`Register failed: ${error}`));
   }, []);
