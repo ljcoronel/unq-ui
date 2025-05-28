@@ -27,7 +27,7 @@ export default function UserProfile({ currentUser, setIsLoggedIn }) {
         setIsLoggedIn={setIsLoggedIn}
       />
       {currentUser && user && currentUser.id === user.id ? (
-        <UserGames currentUser={currentUser} />
+        <UserGames currentUser={user} />
       ) : (
         <UserReviews user={user} />
       )}

@@ -4,7 +4,6 @@ import { useParams } from "react-router";
 import PurchaseForm from "../components/molecules/PurchaseForm";
 
 const Purchase = ({user}) => {
-  console.log("Purchase component rendered with user:", user);
   const { total, cantProductos } = useParams();
 
   const discountAmount = (total * FEES_PORCENTAJE) / 100;
