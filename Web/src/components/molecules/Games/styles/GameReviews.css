@@ -1,0 +1,33 @@
+.game-reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem; /* gap-5 equivale a 3rem */
+  font-family: 'Inter';
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+.game-review-card {
+  width: 607px;
+  height: 157px;
+  background: #898989;
+  border: none;
+  padding: 1rem;
+  border-radius: 0;
+}
+
+.game-review-user-img {
+  width: 53px;
+  height: 53px;
+  border: 1.5px solid #EDEDED;
+}
+
+.game-review-user-name {
+  color: #EDEDED;
+  margin-left: 1rem;
+}
+
+.game-review-body {
+  color: #EDEDED;
+}

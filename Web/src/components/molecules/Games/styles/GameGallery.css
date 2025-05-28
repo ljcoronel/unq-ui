@@ -1,0 +1,11 @@
+.gallery-main-image {
+  width: 1280px;
+  height: 548px;
+  object-fit: cover;
+}
+
+.gallery-thumbnail {
+  width: 200px;
+  height: 129.36px;
+  object-fit: cover;
+}

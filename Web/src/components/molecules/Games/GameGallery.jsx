@@ -1,10 +1,11 @@
+import "./styles/GameGallery.css";
 export default function GameGallery({ multimedia, name }) {
   return (
     <>
       <div className="mt-4">
         <img
           src={multimedia[0].url}
-          style={{ width: '1280px', height: '548px', objectFit: 'cover' }}
+          className="gallery-main-image"
           alt={name}
         />
       </div>
@@ -14,7 +15,7 @@ export default function GameGallery({ multimedia, name }) {
             <img
               key={index}
               src={image.url}
-              style={{ width: '200px', height: '129.36px', objectFit: 'cover' }}
+              className="gallery-thumbnail"
               alt={name}
             />
           ))}

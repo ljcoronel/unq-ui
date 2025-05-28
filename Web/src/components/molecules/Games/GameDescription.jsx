@@ -1,8 +1,10 @@
+import "./styles/GameDescription.css";
+
 export default function GameDescription({ description }) {
   return (
-    <div className="mt-4 w-100 text-start fw-semibold" style={{ fontFamily: 'Inter', fontSize: '22px', lineHeight: '28px' }}>
+    <div className="mt-4 w-100 text-start fw-semibold game-description-container">
       <h5>ABOUT THIS GAME</h5>
-      <p style={{ fontSize: '16px' }}>{description}</p>
+      <p className="game-description-text">{description}</p>
     </div>
   );
 }

@@ -1,0 +1,17 @@
+.game-header-image {
+  width: 1280px;
+  height: 459px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.game-header-title-wrapper {
+  bottom: 29.75px;
+}
+
+.game-header-title {
+  font-family: 'Inter';
+  font-size: 48px;
+  line-height: 28px;
+  color: #EDEDED;
+}

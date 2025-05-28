@@ -1,5 +1,5 @@
-import './GameReviewForm.css';
-import Button from '../../atoms/Button/Button.jsx';
+import Button from "../../atoms/button/Button";
+import "./styles/GameReviewForm.css";
 export default function GameReviewForm({ user }) {
   return (
     <div className="card review-form-container text-light fw-semibold p-4">
@@ -16,8 +16,12 @@ export default function GameReviewForm({ user }) {
         <div className="mb-3 d-flex align-items-center">
           <label className="mb-0 me-3 review-label">Recommended</label>
           <span className="d-inline-flex align-items-center">
-            <span role="img" aria-label="like">👍</span>
-            <span role="img" aria-label="dislike" className="ms-2">👎</span>
+            <span role="img" aria-label="like">
+              👍
+            </span>
+            <span role="img" aria-label="dislike" className="ms-2">
+              👎
+            </span>
           </span>
         </div>
 
@@ -30,9 +34,7 @@ export default function GameReviewForm({ user }) {
         </div>
 
         <div className="d-flex justify-content-center">
-          <Button>
-            Add review
-          </Button>
+          <Button>Add review</Button>
         </div>
       </form>
     </div>
