@@ -2,34 +2,36 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import Slider from "../components/molecules/Slider/Slider.jsx";
 import { addGameToCart, getGame } from "../services/game.js";
-import { getCurrentUser } from "../services/user.js";
 
-const Game = ({ isLoggedIn }) => {
+const Game = ({ isLoggedIn, user }) => {
   const navigate = useNavigate();
   const { gameId } = useParams();
   const [loading, setLoading] = useState(true);
   const [game, setGame] = useState(null);
-  const [user, setUser] = useState(null);
   const [error, setError] = useState("");
 
+  const fetchGameById = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      const response = await getGame(gameId);
+      setGame(response);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      if (error.response && error.response.data) {
+        setError(error.response.data.error);
+      } else {
+        setError("An unexpected error occurred");
+      }
+    }
+  };
+
   useEffect(() => {
-    setLoading(true);
-    setError("");
-    getGame(gameId)
-      .then((response) => setGame(response))
-      .catch((error) => setError(error.response.data.message))
-      .finally(() => setLoading(false));
+    fetchGameById();
   }, [gameId]);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      getCurrentUser()
-        .then((response) => setUser(response))
-        .catch((error) => setError(error.response.data.message));
-    }
-  }, []);
-
-  const addGameToCart = (gameId) => {
+  const handleAddGameToCart = (gameId) => {
     if (isLoggedIn) {
       addGameToCart(gameId);
       navigate("/cart");
@@ -43,7 +45,7 @@ const Game = ({ isLoggedIn }) => {
   }
 
   if (error) {
-    return <h1>{error}</h1>;
+    return <h1>Error: {error}</h1>;
   }
 
   return (
@@ -217,7 +219,7 @@ const Game = ({ isLoggedIn }) => {
                       height: "56px",
                       borderRadius: "0",
                     }}
-                    onClick={() => addGameToCart(gameId)}
+                    onClick={() => handleAddGameToCart(gameId)}
                   >
                     Add to cart
                   </button>
