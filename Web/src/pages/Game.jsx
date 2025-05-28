@@ -93,7 +93,7 @@ export default function Game({ isLoggedIn, user }) {
               )}
             />
           ) : (
-            <GameReviewForm user={user} />
+            <GameReviewForm user={user} game={game} />
           ))}
 
         <br />

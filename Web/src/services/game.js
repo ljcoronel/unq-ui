@@ -17,3 +17,12 @@ export const addGameToCart = async (gameId) => {
     throw error;
   }
 };
+
+  export const addReviewToGame = async (gameId, body) => {
+    try {
+      const response = await api.put(`/games/${gameId}/reviews`, body);
+      return response.data
+    } catch (error) {
+      throw error;
+    }
+  }
