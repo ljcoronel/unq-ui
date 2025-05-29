@@ -2,13 +2,14 @@ import { useState } from "react";
 import { FEES_PORCENTAJE } from "../constants";
 import { useParams } from "react-router";
 import PurchaseForm from "../components/molecules/PurchaseForm";
+import { formatCurrency } from "../utils/money";
 
 const Purchase = ({user}) => {
   const { total, cantProductos } = useParams();
 
-  const discountAmount = (total * FEES_PORCENTAJE) / 100;
+  const feesAmount = (total * FEES_PORCENTAJE) / 100;
 
-  const totalWithDiscounts = total - discountAmount;
+  const totalWithFees = +total + feesAmount;
 
   return (
     <section className="cart-container">
@@ -17,15 +18,15 @@ const Purchase = ({user}) => {
         <h3>Checkout</h3>
         <div className="checkout-cart-row">
           <span>Products ({cantProductos})</span>
-          <span>{`$ ${Number(total).toFixed(2)}`}</span>
+          <span>{formatCurrency(total)}</span>
         </div>
         <div className="checkout-cart-row">
           <span>Fees %{FEES_PORCENTAJE}</span>
-          <span>{`$ ${discountAmount.toFixed(2)}`}</span>
+          <span>{formatCurrency(feesAmount)}</span>
         </div>
         <div className="checkout-cart-row checkout-total">
           <span>Total</span>
-          <span>{`$ ${totalWithDiscounts.toFixed(2)}`}</span>
+          <span>{formatCurrency(totalWithFees)}</span>
         </div>
       </div>
     </section>
