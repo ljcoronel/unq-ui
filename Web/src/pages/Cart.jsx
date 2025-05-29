@@ -7,13 +7,20 @@ import { currentCart } from "../services/user";
 
 const Cart = () => {
   const [gamesOnCart, setGamesOnCart] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
       currentCart()
-      .then((res) => setGamesOnCart(res.games))
+      .then((res) => {
+        setGamesOnCart(res.games);
+        setLoading(false)})
       .catch((error) => toast.error(`Register failed: ${error}`));
   }, []);
 
+  if(loading){
+    return (<h1>Loading...</h1>)
+  }  
+  
   return (
     <section className="cart-container">
       <CartGamesList gamesOnCart={gamesOnCart} />
