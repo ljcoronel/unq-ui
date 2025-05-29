@@ -47,7 +47,7 @@ export default function App() {
           />
           <Route
             path="/games/:gameId"
-            element={<Game isLoggedIn={isLoggedIn} user={user}/>}
+            element={<Game isLoggedIn={isLoggedIn} user={user} fetchCurrentUser={fetchCurrentUser}/>}
           />
           <Route
             path="/register"

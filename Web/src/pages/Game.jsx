@@ -10,12 +10,16 @@ import GameRequirements from "../components/molecules/Games/GameRequirements.jsx
 import GameRelatedSlider from "../components/molecules/Games/GameRelatedSlider.jsx";
 import GameReviews from "../components/molecules/Games/GameReviews.jsx";
 
-export default function Game({ isLoggedIn, user }) {
+export default function Game({ isLoggedIn, user, fetchCurrentUser }) {
   const navigate = useNavigate();
   const { gameId } = useParams();
   const [loading, setLoading] = useState(true);
   const [game, setGame] = useState(null);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetchCurrentUser();
+  }, []);
 
   const fetchGameById = async () => {
     try {
