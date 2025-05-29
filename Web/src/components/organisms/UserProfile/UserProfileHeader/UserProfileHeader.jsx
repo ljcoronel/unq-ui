@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./UserProfileHeader.css";
 import Button from "../../../atoms/button/Button";
 import { removeToken } from "../../../../config/axios.config";
-import { getFriendsOfUser } from "../../../../services/user";
+import { getFriendsOfUser, addOrRemoveFriend } from "../../../../services/user";
 import { useNavigate, useNavigation, useRoutes } from "react-router";
 import toast from "react-hot-toast";
 
