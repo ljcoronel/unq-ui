@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../styles/Login.css";
 import Button from "../components/atoms/button/Button";
 import Input from "../components/atoms/input/Input";
@@ -15,12 +15,11 @@ export default function Login({ setIsLoggedIn }) {
     try {
       e.preventDefault();
       const res = await api.post("/login", {
-        //extraer a una funcion
         email,
         password,
       });
 
-      const token = res.headers["authorization"]; // o el nombre correcto
+      const token = res.headers["authorization"];
       if (token) {
         setToken(token);
         setIsLoggedIn(true);

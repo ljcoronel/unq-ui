@@ -1,20 +1,18 @@
-import * as game from "../../../services/game.js";
-import {useEffect, useState} from "react";
-import "./styles/GameReviewForm.css"
-import {addReviewToGame} from "../../../services/game.js";
+import { useState } from "react";
+import "./styles/GameReviewForm.css";
+import { addReviewToGame } from "../../../services/game.js";
+import { ThumbsDown, ThumbsUp } from "lucide-react";
+import Button from "../../atoms/button/Button.jsx";
 
-export default function GameReviewForm({ user, game}) {
+export default function GameReviewForm({ user, game }) {
+  const [review, setReview] = useState({ isRecommended: false });
 
-  const [review, setReview] = useState({isRecommended: false});
-
-  useEffect(() => {
-    console.log(review)
-  }, [review]);
-
-  const addReview = () => {addReviewToGame(game.id, review)}
+  const addReview = () => {
+    addReviewToGame(game.id, review);
+  };
 
   return (
-    <div className="card review-form-container text-light fw-semibold p-4" style={{background: '#6E1D72'}}>
+    <div className="card review-form-container text-light fw-semibold p-4">
       <div className="d-flex align-items-center mb-3">
         <img
           src={user.image}
@@ -25,11 +23,21 @@ export default function GameReviewForm({ user, game}) {
       </div>
 
       <form>
-        <div className="mb-3 d-flex align-items-center" >
-          <label className="mb-0 me-3" style={{ fontSize: '22px', lineHeight: '28px' }}>Recommended</label>
-          <span style={{ display: 'inline-flex', alignItems: 'center' }}>
-            <span role="img" aria-label="like" className={`${review.isRecommended  ? "active" : ""}`} onClick={() => setReview({...review, isRecommended: true})}>👍</span>
-            <span role="img" aria-label="dislike" className={`${!review.isRecommended ? "active" : ""}`} onClick={() => setReview({...review, isRecommended: false})}>👎</span>
+        <div className="mb-3 d-flex align-items-center">
+          <label className="mb-0 me-3 review-label">Recommended</label>
+          <span className="recommendation-toggle d-flex align-items-center gap-2">
+            <div
+              className={`review-icon is-recommended cursor-pointer ${review.isRecommended ? "selected" : ""}`}
+              onClick={() => setReview({ ...review, isRecommended: true })}
+            >
+              <ThumbsUp size={20} />
+            </div>
+            <div
+              className={`review-icon not-recommended cursor-pointer ${!review.isRecommended ? "selected" : ""}`}
+              onClick={() => setReview({ ...review, isRecommended: false })}
+            >
+              <ThumbsDown size={20} />
+            </div>
           </span>
         </div>
 
@@ -39,22 +47,20 @@ export default function GameReviewForm({ user, game}) {
 
         <div className="mb-4">
           <textarea
-              required={true}
-            className="form-control"
-            style={{ border: 'none', fontSize: '18px', lineHeight: '24px', minHeight: '90px' }}
-            onChange={ (e) => setReview({...review, text: e.target.value})}
+            required
+            className="form-control review-textarea"
+            onChange={(e) => setReview({ ...review, text: e.target.value })}
           />
         </div>
 
         <div className="d-flex justify-content-center">
-          <button onClick={() => {addReview()}}
-            className="btn"
-            style={{ background: '#6E1D72', borderRadius: '6px', width: '172px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
+          <Button
+            onClick={addReview}
           >
-            <span className="fw-medium" style={{ fontSize: '20px', lineHeight: '28px' }}>Add review</span>
-          </button>
+            <span className="fw-medium review-button-text">Add review</span>
+          </Button>
         </div>
       </form>
-    </div>);
-
+    </div>
+  );
 }

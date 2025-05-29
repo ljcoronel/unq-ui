@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import Button from "../atoms/button/Button";
 import { FEES_PORCENTAJE } from "../../constants";
 import { formatCurrency } from "../../utils/money";
@@ -13,7 +13,7 @@ const CheckoutCart = ({ gamesOnCart }) => {
   const totalWithFees = +total + feesAmount;
 
   return !gamesOnCart.length ? (
-    <div className="cart-checkout-box">
+    <div className="cart-checkout-box empty">
       <span className="empty-checkout-message">
         Here you will see your cart total amount
       </span>

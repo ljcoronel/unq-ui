@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FEES_PORCENTAJE } from "../constants";
 import { useParams } from "react-router";
 import PurchaseForm from "../components/molecules/PurchaseForm";

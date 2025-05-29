@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import UserProfileHeader from "../components/organisms/UserProfile/UserProfileHeader/UserProfileHeader";
 import UserReviews from "../components/organisms/UserProfile/UserReviews/UserReviews";
 import { getUserById } from "../services/user";

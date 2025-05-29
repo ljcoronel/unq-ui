@@ -1,14 +1,6 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { api } from "../../../../config/axios.config";
 import "./BrowseByCategory.css";
-
-// Swiper React components y módulos
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";

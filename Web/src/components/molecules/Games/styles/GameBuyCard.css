@@ -1,31 +1,24 @@
 .game-buy-card {
-  width: 1280px;
   height: 112px;
-  background-color: #898989;
-  color: #EDEDED;
+  background-color: var(--grey-2);
+  color: var(--light-grey);
   font-family: 'Inter';
 }
 
 .game-buy-title {
-  font-size: 32px;
+  font-size: 25px;
   line-height: 28px;
   font-weight: 600;
-  color: #EDEDED;
+  color: var(--light-grey);
 }
 
 .game-buy-price {
-  font-size: 32px;
+  font-size: 20px;
   line-height: 36px;
   font-weight: 600;
-  color: #EDEDED;
+  color: var(--light-grey);
 }
 
-.game-buy-button {
-  font-size: 20px;
-  line-height: 28px;
-  background-color: #7DC215;
-  color: #212121;
-  width: 172px;
-  height: 56px;
-  border-radius: 0;
+.game-buy-button{
+  width: 120px;
 }

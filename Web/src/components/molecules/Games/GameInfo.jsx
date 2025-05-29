@@ -4,7 +4,7 @@ export default function GameInfo({ game }) {
   const navigate = useNavigate();
 
   return (
-    <div className="mt-4 w-100 text-start fs-5 fw-semibold lh-base text-dark">
+    <div className="mt-4 w-100 text-start fs-6 fw-semibold lh-base text-dark">
       <div>
         <span>Developer: </span>
         <span className="text-decoration-underline fw-medium">
@@ -55,7 +55,7 @@ export default function GameInfo({ game }) {
                 <div className="modal-content">
                   <div className="modal-header">
                     <h5
-                      className="modal-title fw-semibold fs-2"
+                      className="modal-title fw-semibold fs-4"
                       id="tagsModalLabel"
                     >
                       All tags

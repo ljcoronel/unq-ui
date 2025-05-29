@@ -1,0 +1,19 @@
+.game-review-body {
+  font-weight: 600;
+  color: var(--light-grey);
+  font-size: 17px; 
+  line-height: 1.5;
+}
+
+.game-user-image {
+  width: 53px;
+  height: 53px;
+}
+
+.game-own-review{
+  background-color: var(--grey-2);
+}
+
+.game-own-review .review-icon{
+  margin: 0;
+}

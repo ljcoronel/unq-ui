@@ -1,3 +1,4 @@
+import Button from "../../atoms/button/Button";
 import "./styles/GameBuyCard.css"
 
 export default function GameBuyCard({ game, onAddToCart }) {
@@ -13,12 +14,13 @@ export default function GameBuyCard({ game, onAddToCart }) {
               {game.price.currency}
               {Math.round(game.price.amount * 100) / 100}
             </div>
-            <button
-              className="btn fw-medium game-buy-button"
+            <Button
+            variant="secondary"
               onClick={onAddToCart}
+              className="game-buy-button"
             >
               Add to cart
-            </button>
+            </Button>
           </div>
         </div>
       </div>

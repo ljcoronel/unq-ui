@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -32,7 +32,6 @@ export default function Slider({
           nextEl: nextRef.current,
         }}
         onBeforeInit={(swiper) => {
-          // Asignar los botones a mano antes de que inicie Swiper
           swiper.params.navigation.prevEl = prevRef.current;
           swiper.params.navigation.nextEl = nextRef.current;
         }}

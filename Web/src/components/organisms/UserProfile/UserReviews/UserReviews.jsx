@@ -1,4 +1,3 @@
-import React from "react";
 import "./UserReviews.css";
 import ReviewCard from "../../../molecules/ReviewCard/ReviewCard";
 

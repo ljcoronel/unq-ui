@@ -3,7 +3,8 @@ import Slider from '../../molecules/Slider/Slider.jsx';
 
 export default function GameRelatedSlider({ relatedGames }) {
   return (
-    <div className="category-slider-container">
+    <div className="mt-4 category-slider-container">
+      <h5 className="fw-semibold mb-3">RELATED GAMES</h5>
       <Slider showPagination={false} showNavigation={true} autoSlide={false} slidesPerView={3.5} loop={false} buttonSize="md">
         {relatedGames.map((game, index) => (
           <div key={game.id || index} className="category-container">

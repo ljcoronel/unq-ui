@@ -1,33 +1,41 @@
 .game-reviews-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem; /* gap-5 equivale a 3rem */
-  font-family: 'Inter';
-  font-size: 22px;
+  row-gap: 12px;
+  column-gap: 3rem;
+  font-family: "Inter";
+  font-size: 15px;
   line-height: 28px;
   font-weight: 600;
 }
 
+.game-reviews-grid .review-icon {
+  margin: 0;
+}
+
 .game-review-card {
-  width: 607px;
-  height: 157px;
-  background: #898989;
+  width: 100%;
+  min-height: 120px;
+  background: var(--grey-2);
   border: none;
   padding: 1rem;
   border-radius: 0;
 }
 
 .game-review-user-img {
-  width: 53px;
-  height: 53px;
-  border: 1.5px solid #EDEDED;
+  width: 35px;
+  height: 35px;
+  border: 1.5px solid var(--light-grey);
 }
 
 .game-review-user-name {
-  color: #EDEDED;
+  color: var(--light-grey);
   margin-left: 1rem;
+  font-size: 17px;
 }
 
-.game-review-body {
-  color: #EDEDED;
+.game-review-text {
+  font-weight: 600;
+  color: var(--light-grey);
+  font-size: 17px;
 }

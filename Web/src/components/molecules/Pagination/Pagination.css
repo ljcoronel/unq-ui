@@ -2,10 +2,12 @@
   gap: 0.5rem;
   margin-top: 2rem;
   flex-wrap: wrap;
+  padding: 0;
+  margin-bottom:0;
 }
 
 .page-item .page-link {
-  background-color: #f8f9fa;
+  background-color: var(--light-grey);
   border: 2px solid var(--light-violet);
   color: var(--light-violet);
   font-weight: bold;
@@ -34,9 +36,9 @@
 .page-item.disabled .page-link {
   opacity: 0.5;
   cursor: not-allowed;
-  background-color: #f0f0f0;
-  border-color: #ccc;
-  color: #999;
+  background-color: var(--light-grey);
+  border-color: var(--light-grey);
+  color: var(--grey-2);
   box-shadow: none;
   transform: none;
 }

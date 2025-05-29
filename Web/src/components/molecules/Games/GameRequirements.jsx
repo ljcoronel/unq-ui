@@ -1,7 +1,7 @@
 export default function GameRequirements({ requirement }) {
   return (
     <div className="mt-4 w-100 text-start fw-semibold fs-22 lh-28">
-      <h5>REQUIREMENTS</h5>
+      <h5 className="fw-semibold">REQUIREMENTS</h5>
       <div className="fs-20">
         OS: <span className="fw-medium">{requirement.os.join(', ')}</span>
       </div>

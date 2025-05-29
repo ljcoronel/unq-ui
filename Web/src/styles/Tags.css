@@ -53,3 +53,7 @@
   margin: auto;
   padding-bottom: 2rem;
 }
+
+.tags-container .pagination {
+  margin-top: 0;
+}

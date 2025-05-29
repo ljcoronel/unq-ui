@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import "../styles/Auth.css";
 import Button from "../components/atoms/button/Button";
 import Input from "../components/atoms/input/Input";

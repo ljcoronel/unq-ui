@@ -1,36 +1,34 @@
 .review-form-container {
-  font-family: 'Inter', sans-serif;
-  background-color: #898989;
+  font-family: "Inter", sans-serif;
   border: none;
   border-radius: 8px;
-  height: 365px;
+  background: var(--grey-2);
 }
 
 .review-user-image {
   width: 50px;
   height: 50px;
-  border: 2px solid #EDEDED;
+  border: 2px solid var(--light-grey);
 }
 
 .review-user-name {
-  font-size: 22px;
-  line-height: 28px;
+  font-size: 15px;
 }
 
 .review-label {
-  font-size: 22px;
-  line-height: 28px;
+  font-size: 16px;
 }
 
 .review-textarea {
   border: none;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
   min-height: 90px;
+  background: var(--grey-2);
+  color: var(--light-grey);
 }
 
 .review-submit-button {
-  background-color: #6E1D72;
+  background-color: #6e1d72;
   border-radius: 6px;
   width: 172px;
   height: 56px;
@@ -41,10 +39,24 @@
 }
 
 .review-button-text {
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 15px;
+  
 }
 
-.active {
-  background: var(--grey);
+.recommendation-toggle {
+  display: inline-flex;
+  align-items: center;
+}
+
+
+.recommendation-toggle .review-icon{
+  margin: 0;
+}
+
+.is-recommended.selected {
+  box-shadow: 0px 0px 7px #09acf2;
+}
+
+.not-recommended.selected {
+  box-shadow: 0px 0px 7px #f44336;
 }

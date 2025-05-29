@@ -1,6 +1,4 @@
-import React from "react";
 import "./UserGames.css";
-import ReviewCard from "../../../molecules/ReviewCard/ReviewCard";
 import GameCard from "../../../molecules/GameCard/GameCard";
 
 export default function UserGames({ currentUser }) {

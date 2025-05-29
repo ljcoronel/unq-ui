@@ -8,8 +8,6 @@ import GameGallery from "../components/molecules/Games/GameGallery.jsx";
 import GameDescription from "../components/molecules/Games/GameDescription.jsx";
 import GameRequirements from "../components/molecules/Games/GameRequirements.jsx";
 import GameRelatedSlider from "../components/molecules/Games/GameRelatedSlider.jsx";
-import GameOwnReview from "../components/molecules/Games/GameOwnReview.jsx";
-import GameReviewForm from "../components/molecules/Games/GameReviewForm.jsx";
 import GameReviews from "../components/molecules/Games/GameReviews.jsx";
 
 export default function Game({ isLoggedIn, user }) {
@@ -58,48 +56,22 @@ export default function Game({ isLoggedIn, user }) {
   }
 
   return (
-    <>
-      <div className="container px-0" style={{ maxWidth: "1280px" }}>
-        <GameHeader image={game.mainImage} title={game.name} />
-        <GameInfo game={game} />
-        {!user?.games.some((game) => game.id === gameId) && (
-          <GameBuyCard
-            game={game}
-            onAddToCart={() => handleAddGameToCart(gameId)}
-          />
-        )}
-        <GameGallery multimedia={game.multimedia} name={game.name} />
-        <GameDescription description={game.description} />
-        <GameRequirements requirement={game.requirement} />
-        <div
-          className="mt-4 w-100 text-start fw-semibold"
-          style={{ fontFamily: "Inter", fontSize: "22px", lineHeight: "28px" }}
-        >
-          <h5>RELATED GAMES</h5>
-        </div>
-        <GameRelatedSlider relatedGames={game.relatedGames} />
-        <div
-          className="mt-4 w-100 text-start fw-semibold"
-          style={{ fontFamily: "Inter", fontSize: "22px", lineHeight: "28px" }}
-        >
-          <h5>REVIEWS</h5>
-        </div>
-        {user?.games.some((game) => game.id === gameId) &&
-          (game.reviews.some((userReview) => userReview.user.id === user.id) ? (
-            <GameOwnReview
-              user={user}
-              review={game.reviews.find(
-                (review) => review?.user.id === user.id
-              )}
-            />
-          ) : (
-            <GameReviewForm user={user} game={game} />
-          ))}
+    <section>
+      <GameHeader image={game.mainImage} title={game.name} />
+      <GameInfo game={game} />
+      {!user?.games.some((game) => game.id === gameId) && (
+        <GameBuyCard
+          game={game}
+          onAddToCart={() => handleAddGameToCart(gameId)}
+        />
+      )}
+      <GameGallery multimedia={game.multimedia} name={game.name} />
+      <GameDescription description={game.description} />
+      <GameRequirements requirement={game.requirement} />
+      <GameRelatedSlider relatedGames={game.relatedGames} />
+      
 
-        <br />
-
-        <GameReviews reviews={game.reviews} currentUserId={user?.id} />
-      </div>
-    </>
+      <GameReviews game={game} user={user} />
+    </section>
   );
 }

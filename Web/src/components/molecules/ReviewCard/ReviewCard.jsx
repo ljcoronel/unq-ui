@@ -1,4 +1,3 @@
-import React from "react";
 import "./ReviewCard.css";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
 import { Link } from "react-router";
