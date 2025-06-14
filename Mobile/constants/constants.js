@@ -1,1 +1,1 @@
-export const API_URL = 'http://localhost:3000'
+export const API_URL = '192.168.1.55:3000' //ipconfig
