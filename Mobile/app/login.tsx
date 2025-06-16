@@ -4,6 +4,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
 import SafeScreen from "../components/SafeScreen";
 import { colors } from "../constants/colors";
@@ -15,7 +16,12 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const handleLogin = async (email: string, password: string) => {
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
     setIsLoading(true);
     await login(email, password);
     setIsLoading(false);
@@ -40,14 +46,17 @@ export default function Login() {
             value={password}
             onChangeText={setPassword}
           />
+          {error && <Text style={styles.error}>{error}</Text>}
           <TouchableOpacity
             style={styles.button}
             onPress={() => handleLogin(email, password)}
             disabled={isLoading}
           >
-            <Text style={styles.buttonText}>
-              {isLoading ? "Loading..." : "Sign in"}
-            </Text>
+            {isLoading ? (
+              <ActivityIndicator size="small" color="#fff" />
+            ) : (
+              <Text style={styles.buttonText}>Sign in</Text>
+            )}
           </TouchableOpacity>
         </View>
       </View>
@@ -108,5 +117,10 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 24,
     fontWeight: "500",
+  },
+  error: {
+    color: "red",
+    fontSize: 16,
+    marginBottom: 16,
   },
 });
