@@ -26,7 +26,7 @@ export default function SplashScreen() {
     ]).start();
 
     const timer = setTimeout(() => {
-      router.replace("/home");
+      router.replace(isAuthenticated ? "/home" : "/login");
     }, 2000);
 
     return () => clearTimeout(timer);

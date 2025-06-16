@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
-import { Game } from "@/context/GamesContext";
 import GameCard from "@/components/GameCard";
+import { Game } from "@/types/games.types";
 
 export default function GameList({ games }: { games: Game[] }) {
   return (

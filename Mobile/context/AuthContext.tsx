@@ -1,13 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { api, setToken, getToken, removeToken } from "../config/axios.config";
 import { User } from "@/types/user.types";
-
-
+import { router } from "expo-router";
 
 interface AuthContextType {
   isAuthenticated: boolean;
   user: User | null;
-  login: () => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -28,17 +27,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    const autoLogin = async () => {
+    const fetchAndSetCurrentUser = async () => {
       try {
         const token = await getToken();
-
-        if (!token) {
-          await login();
+        if (token) {
+          await getCurrentUser();
+          router.replace("/home");
         } else {
-          setIsAuthenticated(true);
+          setIsAuthenticated(false);
+          setUser(null);
+          router.replace("/login");
         }
-
-        await getCurrentUser();
       } catch (error) {
         console.error("Auto login error:", error);
         await removeToken();
@@ -47,18 +46,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
-    autoLogin();
-  }, []);
+    if (isAuthenticated) {
+      fetchAndSetCurrentUser();
+    }
+  }, [isAuthenticated]);
 
-  const login = async () => {
+  const login = async (email: string, password: string) => {
     try {
       const res = await api.post("/login", {
-        email: "a@gmail.com",
-        password: "a",
+        email,
+        password,
       });
 
       const token = res.headers["authorization"];
-
       if (token) {
         await setToken(token);
         setIsAuthenticated(true);
@@ -77,6 +77,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       await removeToken();
       setIsAuthenticated(false);
       setUser(null);
+      router.replace("/login");
     } catch (error) {
       console.error("Logout error:", error);
       throw error;

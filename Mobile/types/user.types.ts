@@ -1,4 +1,4 @@
-import { Review } from "./games.types";
+import { Game, Review } from "./games.types";
 
 export interface UserTag {
   id: string;
@@ -12,20 +12,12 @@ export interface UserGamePrice {
   [key: string]: any;
 }
 
-export interface UserGame {
-  id: string;
-  mainImage: string;
-  name: string;
-  price: UserGamePrice;
-  tags: UserTag[];
-}
-
 export interface User {
   id: string;
   email: string;
   name: string;
   image?: string;
-  games: UserGame[];
+  games: Game[];
   tags: UserTag[];
   reviews: Review[];
 }

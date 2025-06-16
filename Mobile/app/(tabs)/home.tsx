@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { Text, StyleSheet, ScrollView } from "react-native";
 import { colors } from "../../constants/colors";
 import { useEffect, useState } from "react";
 import { api } from "@/config/axios.config";
-import { Game } from "@/context/GamesContext";
 import { sectionTitle } from "@/constants/styles";
 import SafeScreen from "@/components/SafeScreen";
 import GameList from "@/components/GameList";
+import { Game } from "@/types/games.types";
 
 export default function HomeScreen() {
   const [featuredAndRecommended, setFeaturedAndRecommended] = useState<Game[]>(

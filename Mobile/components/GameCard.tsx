@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
-import { Game } from "@/context/GamesContext";
+import { Game } from "@/types/games.types";
 import { colors } from "@/constants/colors";
 
 export default function GameCard({ game }: { game: Game }) {

@@ -1,22 +1,8 @@
-import {
-  View,
-  Text,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  StyleSheet,
-  Modal,
-} from "react-native";
-import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
-import { useState, useEffect } from "react";
-import { Ionicons } from "@expo/vector-icons";
-import SafeScreen from "@/components/SafeScreen";
+import { Text, ScrollView, StyleSheet } from "react-native";
+import { useLocalSearchParams } from "expo-router";
 
 export default function GameScreen() {
   const { id } = useLocalSearchParams();
-  const router = useRouter();
-
-  const navigation = useNavigation();
 
   return (
     <ScrollView>

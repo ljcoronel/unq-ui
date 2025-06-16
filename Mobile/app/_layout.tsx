@@ -12,6 +12,7 @@ export default function RootLayout() {
           <UserProvider>
             <Stack screenOptions={{ headerShown: false }} initialRouteName="splash">
               <Stack.Screen name="splash" />
+              <Stack.Screen name="login" />
               <Stack.Screen name="(tabs)" />
               <Stack.Screen
                 name="game/[id]"
@@ -21,7 +22,6 @@ export default function RootLayout() {
               />
               <Stack.Screen
                 name="user/[id]"
-                
                 options={{
                   headerShown: true,
                 }}

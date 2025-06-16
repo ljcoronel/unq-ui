@@ -35,9 +35,7 @@ export default function UserProfile({
         <View>
           <Text style={styles.username}>{user.name || "[USER-LOGIN]"}</Text>
           {isCurrentUser ? (
-            <TouchableOpacity style={styles.logoutButton} onPress={() => {
-              router.push("/user/u_4")
-            }}>
+            <TouchableOpacity style={styles.logoutButton} onPress={logout}>
               <Text style={styles.logoutText}>Logout</Text>
             </TouchableOpacity>
           ) : (
