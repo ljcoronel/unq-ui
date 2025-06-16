@@ -46,9 +46,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
-    if (isAuthenticated) {
-      fetchAndSetCurrentUser();
-    }
+    fetchAndSetCurrentUser();
   }, [isAuthenticated]);
 
   const login = async (email: string, password: string) => {
