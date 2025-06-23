@@ -1,52 +1,64 @@
-import {Tabs} from "expo-router";
-import React from "react";
-import {Ionicons} from "@expo/vector-icons";
-import { StyleSheet } from "react-native";
+import { Tabs } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { Image } from "react-native";
+import { colors } from "@/constants/colors";
+import { useAuth } from "@/context/AuthContext";
 
-export default function TabLayout() {
-    return (
-        <Tabs screenOptions={{tabBarShowLabel: false, tabBarActiveTintColor: "#6E1D72"}}>
-            <Tabs.Screen
-                name="home"
-                options={{
-                    headerShown: false,
-                    tabBarIcon: ({color}) => (<Ionicons name="home" color={color} />),
-                }}
+export default function TabsLayout() {
+  const { user } = useAuth();
+
+  return (
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: colors.violet,
+        tabBarInactiveTintColor: colors.grey2,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          height: 80,
+          paddingTop: 8,
+        },
+        animation: "shift",  
+        headerShown: false,
+        
+      }}
+    >
+      <Tabs.Screen
+        name="home"
+
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="home" size={32} color={color} />
+          ),
+          
+        }}
+      />
+      <Tabs.Screen
+        name="search"
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="search" size={32} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="cart"
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="cart" size={32} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          tabBarIcon: () => (
+            <Image
+              source={{uri: user?.image}}
+              style={{ width: 32, height: 32, borderRadius: 50, borderWidth: 1, borderColor: colors.violet }}
             />
-            <Tabs.Screen
-                name="search"
-                options={{
-                    headerShown: false,
-                    tabBarIcon: ({color}) => (<Ionicons name="search" color={color} />),
-                }}
-            />
-            <Tabs.Screen
-                name="cart"
-                options={{
-                    title: "CART",
-                    tabBarIcon: ({color}) => (<Ionicons name="cart" color={color} />),
-                }}
-            />
-            <Tabs.Screen
-                name="library"
-                options={{
-                    headerShown: false,
-                    tabBarIcon: ({color}) => (<Ionicons name="person-circle" color={color} />),
-                }}
-            />
-        </Tabs>
-    );
+          ),
+        }}
+      />
+    </Tabs>
+  );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#FFFFFF',
-        width: 393,
-        height: 68,
-        justifyContent: 'space-between',
-        paddingTop: 10,
-        paddingRight: 32,
-        paddingBottom: 10,
-        paddingLeft: 32,
-    },
-})

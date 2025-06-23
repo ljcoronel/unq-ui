@@ -1,17 +1,35 @@
 import { Stack } from "expo-router";
-import {UserProvider} from "@/context/UserContext";
-import MainView from "@/components/MainView/mainView";
+import { AuthProvider } from "../context/AuthContext";
+import { GamesProvider } from "../context/GamesContext";
+import { UserProvider } from "../context/UserContext";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function RootLayout() {
   return (
-      <UserProvider>
-          <MainView>
-            <Stack initialRouteName="login" screenOptions={{ animation: "slide_from_bottom" }}>
-              <Stack.Screen name="login" options={{ headerShown: false }} />
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              <Stack.Screen name="purchase" options={{ headerTitle: "CHECKOUT" }} />
+    <SafeAreaProvider>
+      <AuthProvider>
+        <GamesProvider>
+          <UserProvider>
+            <Stack screenOptions={{ headerShown: false }} initialRouteName="splash">
+              <Stack.Screen name="splash" />
+              <Stack.Screen name="login" />
+              <Stack.Screen name="(tabs)" />
+              <Stack.Screen
+                name="game/[id]"
+                options={{
+                  headerShown: true,
+                }}
+              />
+              <Stack.Screen
+                name="user/[id]"
+                options={{
+                  headerShown: true,
+                }}
+              />
             </Stack>
-          </MainView>
-      </UserProvider>
+          </UserProvider>
+        </GamesProvider>
+      </AuthProvider>
+    </SafeAreaProvider>
   );
 }
