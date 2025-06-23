@@ -1,7 +1,13 @@
 export const colors = {
-    background: '#D9D9D9',
-    secondaryGogColor: '#898989',
-    primaryText: '#212121',
-    secondaryText: '#EDEDED',
-    button: '#7DC215',
-}
+  violet: "#6E1D72",
+  grey: "#D9D9D9",
+  lightGrey: "#EDEDED",
+  darkGrey: "#212121",
+  green: "#7DC215",
+  grey2: "#898989",
+  lightViolet: "#d183d7",
+  red: "#ff7961",
+} as const;
+
+// Tipos para TypeScript
+export type ColorKey = keyof typeof colors;

@@ -3,30 +3,8 @@ import {useEffect, useState} from "react";
 import UserService from "@/services/UserService";
 import {ActivityIndicator, StyleSheet, View, Text, TouchableOpacity, TextInput} from "react-native";
 import PurchaseService from "@/services/PurchaseService";
-
-type Cart = {
-    games: {
-        id: string,
-        name: string,
-        mainImage: string,
-        tags: {
-            id: string,
-            name: string,
-            image: {
-                src: string
-            }
-        }[],
-        price: {
-            amount: number,
-            currency: string
-        }
-    }[],
-    user: {
-        id: string,
-        name: string,
-        image: string
-    }
-}
+import type {Cart} from "@/types/cart.type";
+import {colors} from "@/theme/colors";
 
 const Purchase = () => {
     const router = useRouter();
@@ -48,7 +26,7 @@ const Purchase = () => {
         try {
             setError(null);
             await PurchaseService.purchaseGames(name, number, expiration, cvv);
-            router.replace("/(tabs)/library");
+            router.replace("/(tabs)/profile");
         } catch (e:any) {
             setError(e);
         }
@@ -114,6 +92,11 @@ const Purchase = () => {
                         Buy
                     </Text>
                 </TouchableOpacity>
+                {error &&
+                    <Text style={styles.error}>
+                        {error.message}
+                    </Text>
+                }
             </View>
         </View>
     )
@@ -122,13 +105,13 @@ const Purchase = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#D9D9D9',
+        backgroundColor: colors.grey,
         gap: 16,
         padding: 16,
         alignItems:'center',
     },
     priceContainer: {
-        backgroundColor: '#898989',
+        backgroundColor: colors.grey2,
         width: 361,
         height: 120,
         borderRadius: 8,
@@ -142,14 +125,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     priceDetailsFees: {
-        color: '#EDEDED',
+        color: colors.lightGrey,
         fontFamily: 'Inter',
         fontWeight: '300',
         fontSize: 18,
         lineHeight: 28,
     },
     priceDetailsTotal: {
-        color: '#EDEDED',
+        color: colors.lightGrey,
         fontFamily: 'Inter',
         fontWeight: '500',
         fontSize: 24,
@@ -166,19 +149,19 @@ const styles = StyleSheet.create({
         height: 64,
     },
     cardDetailText: {
-        color: '#212121',
+        color: colors.darkGrey,
         fontFamily: 'Inter',
         fontWeight: '500',
         fontSize: 20,
         lineHeight: 28,
     },
     input: {
-        backgroundColor: '#EDEDED',
+        backgroundColor: colors.lightGrey,
         height: 36,
         paddingVertical: 0,
     },
     buyButton: {
-        backgroundColor: '#7DC215',
+        backgroundColor: colors.green,
         width: 345,
         height: 56,
         borderRadius: 4,
@@ -186,11 +169,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     buttonText: {
-        color: '#212121',
+        color: colors.darkGrey,
         fontFamily: 'Inter',
         fontWeight: '500',
         fontSize: 20,
         lineHeight: 28,
+    },
+    error: {
+        color: "red",
+        fontSize: 16,
+        marginBottom: 16,
     },
 });
 

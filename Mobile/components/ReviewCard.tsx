@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
-import { colors } from "@/constants/colors";
+import { colors } from "@/theme/colors";
 import { Review } from "@/types/games.types";
 import { Ionicons } from "@expo/vector-icons";
 

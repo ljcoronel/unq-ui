@@ -2,34 +2,12 @@ import {ActivityIndicator, StyleSheet, Text, View, Image, TouchableOpacity, Flat
 import {useRouter} from "expo-router";
 import {useEffect, useState} from "react";
 import UserService from "@/services/UserService";
-
-type Cart = {
-    games: {
-        id: string,
-        name: string,
-        mainImage: string,
-        tags: {
-            id: string,
-            name: string,
-            image: {
-                src: string
-            }
-        }[],
-        price: {
-            amount: number,
-            currency: string
-        }
-    }[],
-    user: {
-        id: string,
-        name: string,
-        image: string
-    }
-}
+import type {Cart as CartType} from "@/types/cart.type";
+import {colors} from "@/theme/colors";
 
 const Cart = () => {
     const router = useRouter();
-    const [cart, setCart] = useState<Cart | null>(null);
+    const [cart, setCart] = useState<CartType | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
@@ -128,7 +106,7 @@ const Cart = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#D9D9D9',
+        backgroundColor: colors.grey,
     },
     cartWithoutGamesContainer: {
         flex: 1,
@@ -148,13 +126,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     text: {
-        color: '#212121',
+        color: colors.darkGrey,
         fontFamily: 'Inter',
         fontWeight: '500',
         fontSize: 32,
     },
     addGamesButton: {
-        backgroundColor: '#7DC215',
+        backgroundColor: colors.green,
         width: 172,
         height: 56,
         borderRadius: 4,
@@ -162,7 +140,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     buttonText: {
-        color: '#212121',
+        color: colors.darkGrey,
         fontFamily: 'Inter',
         fontWeight: '500',
         fontSize: 20,
@@ -177,7 +155,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     gameCartList: {
-        backgroundColor: '#898989',
+        backgroundColor: colors.grey2,
         width: 377,
         height: 586,
         borderRadius: 8,
@@ -191,18 +169,18 @@ const styles = StyleSheet.create({
         gap: 16,
     },
     header: {
-        color: '#EDEDED',
+        color: colors.lightGrey,
         fontFamily: 'Inter',
         fontSize: 24,
         lineHeight: 18,
     },
     headerLine: {
         height: 1,
-        backgroundColor: '#EDEDED',
+        backgroundColor: colors.lightGrey,
         marginBottom: 16,
     },
     gameCartContainer: {
-        backgroundColor: '#EDEDED',
+        backgroundColor: colors.lightGrey,
         borderRadius: 8,
         paddingBottom: 8,
         gap: 8,
@@ -217,7 +195,7 @@ const styles = StyleSheet.create({
         gap: 8,
     },
     gameCartTitle: {
-        color: '#212121',
+        color: colors.darkGrey,
         fontFamily: 'Inter',
         fontWeight: '600',
         fontSize: 32,
@@ -225,7 +203,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     gameCartPrice: {
-        color: '#6E1D72',
+        color: colors.violet,
         fontFamily: 'Inter',
         fontWeight: '600',
         fontSize: 16,
@@ -235,7 +213,7 @@ const styles = StyleSheet.create({
         height: 16,
     },
     gameCartPurchaseContainer: {
-        backgroundColor: '#898989',
+        backgroundColor: colors.grey2,
         width: 377,
         height: 192,
         borderRadius: 8,
@@ -249,21 +227,21 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     gameCartPurchaseFees: {
-        color: '#EDEDED',
+        color: colors.lightGrey,
         fontFamily: 'Inter',
         fontWeight: '300',
         fontSize: 18,
         lineHeight: 28,
     },
     gameCartPurchaseTotal: {
-        color: '#EDEDED',
+        color: colors.lightGrey,
         fontFamily: 'Inter',
         fontWeight: '500',
         fontSize: 24,
         lineHeight: 28,
     },
     buyButton: {
-        backgroundColor: '#7DC215',
+        backgroundColor: colors.green,
         width: 345,
         height: 56,
         borderRadius: 4,
