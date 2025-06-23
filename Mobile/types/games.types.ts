@@ -19,9 +19,27 @@ export interface Game {
   price: GamePrice;
 }
 
+export interface FullGame extends Game{
+  description: string,
+  multimedia: {url:string}[],
+  requirement: Requirement,
+  relatedGames: Game[],
+  developer: {name: string},
+  releaseDate: string,
+  reviews: Review[],
+  website: string ,
+}
+
 export interface Review {
   id: string;
   isRecommended: boolean;
   text: string;
   game: Pick<Game, "id" | "name" | "mainImage">;
+}
+
+export interface Requirement{
+  os: string[],
+  processor: string,
+  memory: Number,
+  graphics: string[]
 }
