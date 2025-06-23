@@ -1,10 +1,12 @@
 import {useRouter} from "expo-router";
 import {useEffect, useState} from "react";
 import UserService from "@/services/UserService";
-import {ActivityIndicator, StyleSheet, View, Text, TouchableOpacity, TextInput} from "react-native";
+import {ActivityIndicator, StyleSheet, View} from "react-native";
 import PurchaseService from "@/services/PurchaseService";
 import type {Cart} from "@/types/cart.type";
 import {colors} from "@/theme/colors";
+import PurchasePrice from "@/components/PurchasePrice/purchasePrice";
+import PurchaseForm from "@/components/PurchaseForm/purchaseForm";
 
 const Purchase = () => {
     const router = useRouter();
@@ -44,60 +46,18 @@ const Purchase = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.priceContainer}>
-                <View style={styles.priceDetails}>
-                    <Text style={styles.priceDetailsFees}>
-                        Fees 1%
-                    </Text>
-                    <Text style={styles.priceDetailsFees}>
-                        $ {(total * 0.01).toFixed(2).replace('.',',')}
-                    </Text>
-                </View>
-                <View style={styles.priceDetails}>
-                    <Text style={styles.priceDetailsTotal}>
-                        Total
-                    </Text>
-                    <Text style={styles.priceDetailsTotal}>
-                        $ {(total + total * 0.01).toFixed(2).replace('.',',')}
-                    </Text>
-                </View>
-            </View>
-            <View style={styles.userCardForm}>
-                <View style={styles.cardDetail}>
-                    <Text style={styles.cardDetailText}>
-                        CARD HOLDER NAME
-                    </Text>
-                    <TextInput style={styles.input} value={name} onChangeText={setName} autoCapitalize={"characters"}/>
-                </View>
-                <View style={styles.cardDetail}>
-                    <Text style={styles.cardDetailText}>
-                        NUMBER
-                    </Text>
-                    <TextInput style={styles.input} value={number} onChangeText={setNumber} keyboardType={"number-pad"} maxLength={16}/>
-                </View>
-                <View style={styles.cardDetail}>
-                    <Text style={styles.cardDetailText}>
-                        CVV
-                    </Text>
-                    <TextInput style={styles.input} value={cvv} onChangeText={setCvv} keyboardType={"number-pad"} maxLength={3}/>
-                </View>
-                <View style={styles.cardDetail}>
-                    <Text style={styles.cardDetailText}>
-                        EXPIRATION DATE
-                    </Text>
-                    <TextInput style={styles.input} value={expiration} onChangeText={setExpiration} maxLength={5}/>
-                </View>
-                <TouchableOpacity style={styles.buyButton} onPress={handlePurchase}>
-                    <Text style={styles.buttonText}>
-                        Buy
-                    </Text>
-                </TouchableOpacity>
-                {error &&
-                    <Text style={styles.error}>
-                        {error.message}
-                    </Text>
-                }
-            </View>
+            <PurchasePrice total={total}/>
+            <PurchaseForm
+                name={name}
+                setName={setName}
+                number={number}
+                setNumber={setNumber}
+                cvv={cvv}
+                setCvv={setCvv}
+                expiration={expiration}
+                setExpiration={setExpiration}
+                onPress={handlePurchase}
+                error={error}/>
         </View>
     )
 }
@@ -109,76 +69,6 @@ const styles = StyleSheet.create({
         gap: 16,
         padding: 16,
         alignItems:'center',
-    },
-    priceContainer: {
-        backgroundColor: colors.grey2,
-        width: 361,
-        height: 120,
-        borderRadius: 8,
-        paddingVertical: 24,
-        paddingHorizontal: 16,
-        gap: 16,
-    },
-    priceDetails: {
-        height: 28,
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-    },
-    priceDetailsFees: {
-        color: colors.lightGrey,
-        fontFamily: 'Inter',
-        fontWeight: '300',
-        fontSize: 18,
-        lineHeight: 28,
-    },
-    priceDetailsTotal: {
-        color: colors.lightGrey,
-        fontFamily: 'Inter',
-        fontWeight: '500',
-        fontSize: 24,
-        lineHeight: 28,
-    },
-    userCardForm: {
-        width: 361,
-        height: 472,
-        paddingVertical: 16,
-        paddingHorizontal: 8,
-        gap: 32,
-    },
-    cardDetail: {
-        height: 64,
-    },
-    cardDetailText: {
-        color: colors.darkGrey,
-        fontFamily: 'Inter',
-        fontWeight: '500',
-        fontSize: 20,
-        lineHeight: 28,
-    },
-    input: {
-        backgroundColor: colors.lightGrey,
-        height: 36,
-        paddingVertical: 0,
-    },
-    buyButton: {
-        backgroundColor: colors.green,
-        width: 345,
-        height: 56,
-        borderRadius: 4,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    buttonText: {
-        color: colors.darkGrey,
-        fontFamily: 'Inter',
-        fontWeight: '500',
-        fontSize: 20,
-        lineHeight: 28,
-    },
-    error: {
-        color: "red",
-        fontSize: 16,
-        marginBottom: 16,
     },
 });
 
