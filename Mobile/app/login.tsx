@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import SafeScreen from "../components/SafeScreen";
-import { colors } from "../constants/colors";
+import { colors } from "../theme/colors";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 

@@ -1,7 +1,7 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet } from "react-native";
 import { ReactNode } from "react";
-import { colors } from "@/constants/colors";
+import { colors } from "@/theme/colors";
 
 export default function SafeScreen({ children }: { children: ReactNode }) {
   return (

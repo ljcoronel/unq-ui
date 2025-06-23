@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
   FlatList,
 } from "react-native";
-import { colors } from "../../constants/colors";
+import { colors } from "../../theme/colors";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { sectionTitle } from "@/constants/styles";
 import SafeScreen from "@/components/SafeScreen";
