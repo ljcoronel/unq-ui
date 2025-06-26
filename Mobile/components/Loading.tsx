@@ -1,5 +1,5 @@
 import { View, ActivityIndicator, Text, StyleSheet } from "react-native";
-import { colors } from "@/constants/colors";
+import { colors } from "@/theme/colors";
 
 export default function Loading({
   message = "Cargando...",

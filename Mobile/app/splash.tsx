@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { View, Image, StyleSheet, Animated, Easing } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "../context/AuthContext";
-import { colors } from "../constants/colors";
+import { colors } from "../theme/colors";
 
 export default function SplashScreen() {
   const router = useRouter();

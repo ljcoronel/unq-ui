@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
   FlatList,
 } from "react-native";
-import { colors } from "../../constants/colors";
+import { colors } from "../../theme/colors";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { sectionTitle } from "@/constants/styles";
 import SafeScreen from "@/components/SafeScreen";
@@ -94,7 +94,13 @@ export default function SearchScreen() {
                   No se encontraron resultados
                 </Text>
               </View>
-            ) : null
+            ) : (
+              <View style={styles.noResultsContainer}>
+                <Text style={styles.noResultsText}>
+                  Comienza a buscar juegos
+                </Text>
+              </View>
+            )
           }
           onEndReached={handleEndReached}
           onEndReachedThreshold={0.5}

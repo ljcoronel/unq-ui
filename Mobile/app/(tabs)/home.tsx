@@ -1,5 +1,5 @@
 import { Text, StyleSheet, ScrollView } from "react-native";
-import { colors } from "../../constants/colors";
+import { colors } from "../../theme/colors";
 import { useEffect, useState } from "react";
 import { api } from "@/config/axios.config";
 import { sectionTitle } from "@/constants/styles";

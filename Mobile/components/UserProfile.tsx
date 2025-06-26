@@ -7,7 +7,7 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { colors } from "@/constants/colors";
+import { colors } from "@/theme/colors";
 import { useAuth } from "@/context/AuthContext";
 import GameCard from "./GameCard";
 import { sectionTitle } from "@/constants/styles";

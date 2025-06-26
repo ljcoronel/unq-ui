@@ -1,7 +1,7 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { Game } from "@/types/games.types";
-import { colors } from "@/constants/colors";
+import { colors } from "@/theme/colors";
 
 export default function GameCard({ game }: { game: Game }) {
   const router = useRouter();

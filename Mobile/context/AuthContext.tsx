@@ -8,6 +8,7 @@ interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  updateUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -39,7 +40,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           router.replace("/login");
         }
       } catch (error) {
-        console.error("Auto login error:", error);
         await removeToken();
         setIsAuthenticated(false);
         setUser(null);
@@ -82,6 +82,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const updateUser = async () => {
+    const response = await api.get("/users/current");
+    setUser(response.data);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -89,6 +94,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         user,
         login,
         logout,
+        updateUser,
       }}
     >
       {children}
