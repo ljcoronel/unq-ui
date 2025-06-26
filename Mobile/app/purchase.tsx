@@ -32,8 +32,8 @@ const Purchase = () => {
       await PurchaseService.purchaseGames(name, number, expiration, cvv);
       await updateUser();
       router.replace("/(tabs)/profile");
-    } catch (e: any) {
-      setError(e);
+    } catch (e:unknown) {
+      setError(e instanceof Error ? e : new Error("Error al comprar"));
     }
   };
 
