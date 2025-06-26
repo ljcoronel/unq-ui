@@ -10,7 +10,6 @@ import SafeScreen from "../components/SafeScreen";
 import { colors } from "../theme/colors";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
-import { Stack } from "expo-router";
 
 export default function Login() {
   const { login } = useAuth();

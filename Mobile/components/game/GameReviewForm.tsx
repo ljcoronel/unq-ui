@@ -1,6 +1,6 @@
 import { colors } from "@/theme/colors";
 import { useGames } from "@/context/GamesContext";
-import { FullGame, Review } from "@/types/games.types";
+import { FullGame } from "@/types/games.types";
 import { User } from "@/types/user.types";
 import { Feather } from "@expo/vector-icons";
 import { useState } from "react";

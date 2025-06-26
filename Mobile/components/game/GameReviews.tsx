@@ -1,4 +1,4 @@
-import { FullGame, Review } from "@/types/games.types";
+import { FullGame } from "@/types/games.types";
 import { User } from "@/types/user.types";
 import { Image, StyleSheet, Text, View, Pressable } from "react-native";
 import GameOwnReview from "./GameOwnReview";

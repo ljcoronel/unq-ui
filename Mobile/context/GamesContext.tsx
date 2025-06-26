@@ -1,5 +1,5 @@
 import { api } from "@/config/axios.config";
-import { FullGame, Game, Review } from "@/types/games.types";
+import { FullGame, Game } from "@/types/games.types";
 import React, { createContext, useContext, useState } from "react";
 
 interface GamesContextType {

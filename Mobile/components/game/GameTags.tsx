@@ -1,10 +1,9 @@
 import { colors } from "@/theme/colors";
 import { GameTag } from "@/types/games.types";
-import { AntDesign, Entypo, Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
+import { Entypo } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
   Modal,
-  Pressable,
   StyleSheet,
   Text,
   TouchableOpacity,

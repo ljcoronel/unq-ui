@@ -1,10 +1,9 @@
-import { Text, ScrollView, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useLocalSearchParams, useNavigation } from "expo-router";
-import SafeScreen from "@/components/SafeScreen";
 import { useAuth } from "@/context/AuthContext";
 import { useGames } from "@/context/GamesContext";
 import { useEffect, useState } from "react";
-import { FullGame, Game } from "@/types/games.types";
+import { FullGame } from "@/types/games.types";
 import Loading from "@/components/Loading";
 import GamePage from "@/components/GamePage";
 

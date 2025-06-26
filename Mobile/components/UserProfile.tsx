@@ -13,7 +13,6 @@ import GameCard from "./GameCard";
 import { sectionTitle } from "@/constants/styles";
 import { Review } from "@/types/games.types";
 import ReviewCard from "./ReviewCard";
-import { router } from "expo-router";
 
 export default function UserProfile({
   isCurrentUser,

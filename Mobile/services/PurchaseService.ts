@@ -1,4 +1,4 @@
-import { api, getToken } from "@/config/axios.config";
+import { api } from "@/config/axios.config";
 
 const purchaseGames = async (
   cardName: string,

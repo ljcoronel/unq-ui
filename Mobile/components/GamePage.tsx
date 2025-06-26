@@ -1,6 +1,6 @@
 import { FullGame } from "@/types/games.types";
 import { User } from "@/types/user.types";
-import { Image, ScrollView, Text, View, StyleSheet } from "react-native";
+import { Image, ScrollView, StyleSheet } from "react-native";
 import GameDescription from "./game/GameDescription";
 import GameGallery from "./game/GameGallery";
 import GameInfo from "./game/GameInfo";
@@ -9,7 +9,6 @@ import GameRelatedSlider from "./game/GameRelatedSlider";
 import GameReviews from "./game/GameReviews";
 import GameBuyCard from "./game/GameBuyCard";
 import { colors } from "@/theme/colors";
-import GameTags from "./game/GameTags";
 
 export default function GamePage({
   game,
