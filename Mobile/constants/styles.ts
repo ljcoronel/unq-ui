@@ -11,3 +11,13 @@ export const sectionTitle = StyleSheet.create({
     textTransform: "uppercase",
   },
 });
+
+export const headerStyles = StyleSheet.create({
+  header: {
+    color: colors.darkGrey,
+    fontFamily: "Inter",
+    fontWeight: "600",
+    fontSize: 25,
+    lineHeight: 28,
+  },
+});

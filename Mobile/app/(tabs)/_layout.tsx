@@ -1,8 +1,9 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { Image, StyleSheet } from "react-native";
+import { Image } from "react-native";
 import { colors } from "@/theme/colors";
 import { useAuth } from "@/context/AuthContext";
+import {headerStyles} from "@/constants/styles";
 
 export default function TabsLayout() {
   const { user } = useAuth();
@@ -42,7 +43,7 @@ export default function TabsLayout() {
         options={{
           title: "CART",
           headerShown: true,
-          headerTitleStyle: styles.header,
+            headerTitleStyle: headerStyles.header,
           tabBarIcon: ({ color }) => (
             <Ionicons name="cart" size={32} color={color} />
           ),
@@ -68,13 +69,3 @@ export default function TabsLayout() {
     </Tabs>
   );
 }
-
-const styles = StyleSheet.create({
-  header: {
-    color: colors.darkGrey,
-    fontFamily: "Inter",
-    fontWeight: "600",
-    fontSize: 25,
-    lineHeight: 28,
-  },
-});

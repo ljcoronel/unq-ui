@@ -3,8 +3,7 @@ import { AuthProvider } from "../context/AuthContext";
 import { GamesProvider } from "../context/GamesContext";
 import { UserProvider } from "../context/UserContext";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { StyleSheet } from "react-native";
-import { colors } from "@/theme/colors";
+import {headerStyles} from "@/constants/styles";
 
 export default function RootLayout() {
   return (
@@ -24,19 +23,21 @@ export default function RootLayout() {
                 options={{
                   headerTitle: "CHECKOUT",
                   headerShown: true,
-                  headerTitleStyle: styles.header,
+                  headerTitleStyle: headerStyles.header,
                 }}
               />
               <Stack.Screen
                 name="game/[id]"
                 options={{
                   headerShown: true,
+                  headerTitleStyle: headerStyles.header,
                 }}
               />
               <Stack.Screen
                 name="user/[id]"
                 options={{
                   headerShown: true,
+                  headerTitleStyle: headerStyles.header,
                 }}
               />
             </Stack>
@@ -46,13 +47,3 @@ export default function RootLayout() {
     </SafeAreaProvider>
   );
 }
-
-export const styles = StyleSheet.create({
-  header: {
-    color: colors.darkGrey,
-    fontFamily: "Inter",
-    fontWeight: "600",
-    fontSize: 25,
-    lineHeight: 28,
-  },
-});
