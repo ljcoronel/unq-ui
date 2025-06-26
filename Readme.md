@@ -11,3 +11,9 @@ Se modifico para la entrega de web en endpoint /users/:userId para que traiga la
 El juego Grand Theft Auto IV no renderiza porque en el gog model en el apartado de Requirement/Graphics se espera un String y se recibe un numero
 
 Se agrego ademas un paquete para manejar el cors entre front y back
+
+Dispositivos usados para mobile:
+- Maximiliano Borrajo: Emulador Android - MediumPhone - API 36
+- Ezequiel Ibarra: Iphone 12
+- Lucas Coronel: Lg k61
+- Nicolás Ploza; Moto g13
