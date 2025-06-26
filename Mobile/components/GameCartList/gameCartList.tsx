@@ -1,8 +1,13 @@
 import {FlatList, Text, View} from "react-native";
 import GameCart from "@/components/GameCart/gameCart";
 import {gameCartListStyles} from "@/components/GameCartList/gameCartList.styles";
+import {GameCart as GameCartType} from "@/types/gameCart.type";
 
-const GameCartList = ({ games }) => {
+type GameCartListProps = {
+    games: GameCartType[];
+}
+
+const GameCartList = ({ games } : GameCartListProps) => {
     return (
         <FlatList
             style={gameCartListStyles.gameCartList}

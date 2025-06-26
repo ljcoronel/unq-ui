@@ -1,7 +1,11 @@
 import {Text, TouchableOpacity} from "react-native";
 import {addGamesButtonStyles} from "@/components/AddGamesButton/addGamesButton.styles";
 
-const AddGamesButton = ({ onPress }) => {
+type AddGamesButtonProps = {
+    onPress: () => void;
+}
+
+const AddGamesButton = ({ onPress } : AddGamesButtonProps) => {
     return (
         <TouchableOpacity style={addGamesButtonStyles.addGamesButton} onPress={onPress}>
             <Text style={addGamesButtonStyles.buttonText}>

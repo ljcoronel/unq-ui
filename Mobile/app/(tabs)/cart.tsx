@@ -2,7 +2,7 @@ import {ActivityIndicator, StyleSheet, View} from 'react-native'
 import {useRouter} from "expo-router";
 import {useEffect, useState} from "react";
 import UserService from "@/services/UserService";
-import type {Cart as CartType} from "@/types/cart.type";
+import {Cart as CartType} from "@/types/cart.type";
 import {colors} from "@/theme/colors";
 import CartWithoutGames from "@/components/CartWithoutGames/cartWithoutGames";
 import CartWithGames from "@/components/CartWithGames/cartWithGames";

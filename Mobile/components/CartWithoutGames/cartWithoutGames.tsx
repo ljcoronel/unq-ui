@@ -2,7 +2,11 @@ import {Image, Text, View} from "react-native";
 import AddGamesButton from "@/components/AddGamesButton/addGamesButton";
 import {cartWithoutGamesStyles} from "@/components/CartWithoutGames/cartWithoutGames.styles";
 
-const CartWithoutGames = ({ onPress }) => {
+type CartWithoutGamesProps = {
+    onPress: () => void;
+}
+
+const CartWithoutGames = ({ onPress } : CartWithoutGamesProps) => {
     return (
         <View style={cartWithoutGamesStyles.cartWithoutGamesContainer}>
             <View style={cartWithoutGamesStyles.imageContainer}>

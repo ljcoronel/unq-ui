@@ -7,6 +7,7 @@ import type {Cart} from "@/types/cart.type";
 import {colors} from "@/theme/colors";
 import PurchasePrice from "@/components/PurchasePrice/purchasePrice";
 import PurchaseForm from "@/components/PurchaseForm/purchaseForm";
+import {useAuth} from "@/context/AuthContext";
 
 const Purchase = () => {
     const router = useRouter();
@@ -17,6 +18,7 @@ const Purchase = () => {
     const [number, setNumber] = useState<string>('');
     const [cvv, setCvv] = useState<string>('');
     const [expiration, setExpiration] = useState<string>('');
+    const {updateUser} = useAuth();
 
     useEffect(() => {
         UserService.getTheCartOfLoggedUser()
@@ -28,6 +30,7 @@ const Purchase = () => {
         try {
             setError(null);
             await PurchaseService.purchaseGames(name, number, expiration, cvv);
+            await updateUser();
             router.replace("/(tabs)/profile");
         } catch (e:any) {
             setError(e);
