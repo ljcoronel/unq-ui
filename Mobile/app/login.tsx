@@ -10,6 +10,7 @@ import SafeScreen from "../components/SafeScreen";
 import { colors } from "../theme/colors";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
+import { Stack } from "expo-router";
 
 export default function Login() {
   const { login } = useAuth();
@@ -46,7 +47,7 @@ export default function Login() {
             value={password}
             onChangeText={setPassword}
           />
-          {error && <Text style={styles.error}>{error}</Text>}
+          {!!error && <Text style={styles.error}>{error}</Text>}
           <TouchableOpacity
             style={styles.button}
             onPress={() => handleLogin(email, password)}

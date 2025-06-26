@@ -94,7 +94,13 @@ export default function SearchScreen() {
                   No se encontraron resultados
                 </Text>
               </View>
-            ) : null
+            ) : (
+              <View style={styles.noResultsContainer}>
+                <Text style={styles.noResultsText}>
+                  Comienza a buscar juegos
+                </Text>
+              </View>
+            )
           }
           onEndReached={handleEndReached}
           onEndReachedThreshold={0.5}
