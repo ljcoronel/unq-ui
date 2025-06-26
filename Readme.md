@@ -17,3 +17,6 @@ Dispositivos usados para mobile:
 - Ezequiel Ibarra: Iphone 12
 - Lucas Coronel: Lg k61
 - Nicolás Ploza; Moto g13
+
+Para mobile, crear archivo constants/constants.ts con las variables definidas en constants/constants.example.ts
+Importante reemplazar API_URL por IP local
