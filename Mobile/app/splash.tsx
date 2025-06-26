@@ -1,16 +1,15 @@
 import { useEffect, useRef } from "react";
 import { View, Image, StyleSheet, Animated, Easing } from "react-native";
-import { useRouter } from "expo-router";
 import { useAuth } from "../context/AuthContext";
 import { colors } from "../theme/colors";
 
 export default function SplashScreen() {
-  const router = useRouter();
-  const { isAuthenticated } = useAuth();
+  const { setAppStarted } = useAuth();
   const scaleAnim = useRef(new Animated.Value(0.8)).current;
   const opacityAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
+
     Animated.parallel([
       Animated.timing(scaleAnim, {
         toValue: 1,
@@ -26,11 +25,11 @@ export default function SplashScreen() {
     ]).start();
 
     const timer = setTimeout(() => {
-      router.replace(isAuthenticated ? "/home" : "/login");
-    }, 2000);
+      setAppStarted(true)
+    }, 1000);
 
     return () => clearTimeout(timer);
-  }, [isAuthenticated]);
+  }, []);
 
   return (
     <View style={styles.container}>

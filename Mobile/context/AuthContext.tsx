@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, SetStateAction, Dispatch } from "react";
 import { api, setToken, getToken, removeToken } from "../config/axios.config";
 import { User } from "@/types/user.types";
 import { router } from "expo-router";
@@ -9,6 +9,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   updateUser: () => Promise<void>;
+  setAppStarted: Dispatch<SetStateAction<boolean>>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -16,6 +17,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [isAppStarted, setAppStarted] = useState<boolean>(false);
 
   const getCurrentUser = async () => {
     try {
@@ -28,26 +30,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    const fetchAndSetCurrentUser = async () => {
-      try {
-        const token = await getToken();
-        if (token) {
-          await getCurrentUser();
-          router.replace("/home");
-        } else {
+    if(isAppStarted){
+      const fetchAndSetCurrentUser = async () => {
+        try {
+          const token = await getToken();
+          if (token) {
+            await getCurrentUser();
+            router.replace("/home");
+          } else {
+            setIsAuthenticated(false);
+            setUser(null);
+            router.replace("/login");
+          }
+        } catch (error) {
+          await removeToken();
           setIsAuthenticated(false);
           setUser(null);
-          router.replace("/login");
         }
-      } catch (error) {
-        await removeToken();
-        setIsAuthenticated(false);
-        setUser(null);
-      }
-    };
-
-    fetchAndSetCurrentUser();
-  }, [isAuthenticated]);
+      };
+  
+      fetchAndSetCurrentUser();
+    }
+  }, [isAuthenticated, isAppStarted]);
 
   const login = async (email: string, password: string) => {
     try {
@@ -95,6 +99,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         login,
         logout,
         updateUser,
+        setAppStarted,
       }}
     >
       {children}
