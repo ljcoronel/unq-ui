@@ -8,10 +8,6 @@ export interface UserTag {
   };
 }
 
-export interface UserGamePrice {
-  [key: string]: any;
-}
-
 export interface User {
   id: string;
   email: string;
