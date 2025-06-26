@@ -15,10 +15,7 @@ export default function GameCard({ game }: { game: Game }) {
         <Text style={styles.gameTitle}>{game.name}</Text>
         <View style={styles.gameTagsContainer}>
           {game.tags.map((tag, idx) => (
-            <Text
-              key={`${game.id}-${tag.id}-${idx}`}
-              style={styles.gameTag}
-            >
+            <Text key={`${game.id}-${tag.id}-${idx}`} style={styles.gameTag}>
               {tag.name}
             </Text>
           ))}
@@ -64,4 +61,4 @@ const styles = StyleSheet.create({
     fontFamily: "Inter",
     textDecorationLine: "underline",
   },
-}); 
+});

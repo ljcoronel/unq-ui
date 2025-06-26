@@ -9,7 +9,6 @@ export default function SplashScreen() {
   const opacityAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-
     Animated.parallel([
       Animated.timing(scaleAnim, {
         toValue: 1,
@@ -25,7 +24,7 @@ export default function SplashScreen() {
     ]).start();
 
     const timer = setTimeout(() => {
-      setAppStarted(true)
+      setAppStarted(true);
     }, 1000);
 
     return () => clearTimeout(timer);

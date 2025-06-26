@@ -15,7 +15,9 @@ export default function ReviewCard({ review }: { review: Review }) {
         <Ionicons
           name={review.isRecommended ? "thumbs-up" : "thumbs-down"}
           size={32}
-          style={review.isRecommended ? styles.isRecommended : styles.notRecommended}
+          style={
+            review.isRecommended ? styles.isRecommended : styles.notRecommended
+          }
         />
       </View>
       <Image
@@ -72,14 +74,14 @@ const styles = StyleSheet.create({
     fontFamily: "Inter",
   },
   isRecommended: {
-    color: '#80d8ff',
-    backgroundColor: '#09acf2',
+    color: "#80d8ff",
+    backgroundColor: "#09acf2",
     padding: 3,
     borderRadius: 5,
   },
   notRecommended: {
-    color:  '#f44336',
-    backgroundColor: '#ff7961',
+    color: "#f44336",
+    backgroundColor: "#ff7961",
     padding: 3,
     borderRadius: 5,
   },

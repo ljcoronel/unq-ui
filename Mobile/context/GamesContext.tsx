@@ -11,7 +11,11 @@ interface GamesContextType {
   error: string | null;
   setError: (error: string | null) => void;
   addGameToCart: (id: string) => Promise<void>;
-  addReview: (gameId: string, isRecomended: boolean, text: string) => Promise<void>;
+  addReview: (
+    gameId: string,
+    isRecomended: boolean,
+    text: string,
+  ) => Promise<void>;
 }
 
 const GamesContext = createContext<GamesContextType | undefined>(undefined);
@@ -21,7 +25,7 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const getGameById = async (id: string) =>{
+  const getGameById = async (id: string) => {
     const response = await api.get(`/games/${id}`);
     return response.data;
   };
@@ -34,15 +38,20 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const addReview = async (gameId: string, isRecommended: boolean, text: string) => {
+  const addReview = async (
+    gameId: string,
+    isRecommended: boolean,
+    text: string,
+  ) => {
     try {
-      await api.put(`/games/${gameId}/reviews`,{
-        isRecommended, 
-        text});
-    } catch (error){
+      await api.put(`/games/${gameId}/reviews`, {
+        isRecommended,
+        text,
+      });
+    } catch (error) {
       throw error;
     }
-  }
+  };
 
   return (
     <GamesContext.Provider

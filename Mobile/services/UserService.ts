@@ -1,10 +1,9 @@
-import {api} from "@/config/axios.config";
+import { api } from "@/config/axios.config";
 
 const getTheCartOfLoggedUser = async () => {
-    return api.get(`/users/current/cart`)
-        .then((response) => response.data);
-}
+  return api.get(`/users/current/cart`).then((response) => response.data);
+};
 
 export default {
-    getTheCartOfLoggedUser,
-}
+  getTheCartOfLoggedUser,
+};

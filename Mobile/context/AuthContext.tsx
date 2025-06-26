@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useState, useEffect, SetStateAction, Dispatch } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  SetStateAction,
+  Dispatch,
+} from "react";
 import { api, setToken, getToken, removeToken } from "../config/axios.config";
 import { User } from "@/types/user.types";
 import { router } from "expo-router";
@@ -30,7 +37,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    if(isAppStarted){
+    if (isAppStarted) {
       const fetchAndSetCurrentUser = async () => {
         try {
           const token = await getToken();
@@ -48,7 +55,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setUser(null);
         }
       };
-  
+
       fetchAndSetCurrentUser();
     }
   }, [isAuthenticated, isAppStarted]);

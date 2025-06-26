@@ -9,7 +9,7 @@ import { Game } from "@/types/games.types";
 
 export default function HomeScreen() {
   const [featuredAndRecommended, setFeaturedAndRecommended] = useState<Game[]>(
-    []
+    [],
   );
 
   useEffect(() => {

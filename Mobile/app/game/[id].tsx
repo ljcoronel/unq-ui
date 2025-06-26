@@ -10,34 +10,31 @@ import GamePage from "@/components/GamePage";
 
 export default function GameScreen() {
   const { id } = useLocalSearchParams();
-  const [isLoading,setLoading] = useState(true);
-  const {user: currentUser} = useAuth();
-  const {getGameById} = useGames(); 
+  const [isLoading, setLoading] = useState(true);
+  const { user: currentUser } = useAuth();
+  const { getGameById } = useGames();
   const [game, setGame] = useState<FullGame | null>(null);
   const navigation = useNavigation();
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchGame = async () => {
       const game = await getGameById(id as string);
       setGame(game);
       setLoading(false);
       navigation.setOptions({
-        title: game?.name.toUpperCase()
+        title: game?.name.toUpperCase(),
       });
-    }
-    fetchGame();  
-  },[game])
+    };
+    fetchGame();
+  }, [game]);
 
-  if(isLoading){
-    return <Loading/>;
+  if (isLoading) {
+    return <Loading />;
   }
 
   return (
     <View>
-      <GamePage
-        game = {game!}
-        currentUser = {currentUser!}
-      />
+      <GamePage game={game!} currentUser={currentUser!} />
     </View>
   );
 }

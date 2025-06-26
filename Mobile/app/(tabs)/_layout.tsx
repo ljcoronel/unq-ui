@@ -17,19 +17,16 @@ export default function TabsLayout() {
           height: 80,
           paddingTop: 8,
         },
-        animation: "shift",  
+        animation: "shift",
         headerShown: false,
-        
       }}
     >
       <Tabs.Screen
         name="home"
-
         options={{
           tabBarIcon: ({ color }) => (
             <Ionicons name="home" size={32} color={color} />
           ),
-          
         }}
       />
       <Tabs.Screen
@@ -43,9 +40,9 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="cart"
         options={{
-            title: "CART",
-            headerShown: true,
-            headerTitleStyle: styles.header,
+          title: "CART",
+          headerShown: true,
+          headerTitleStyle: styles.header,
           tabBarIcon: ({ color }) => (
             <Ionicons name="cart" size={32} color={color} />
           ),
@@ -56,8 +53,14 @@ export default function TabsLayout() {
         options={{
           tabBarIcon: () => (
             <Image
-              source={{uri: user?.image}}
-              style={{ width: 32, height: 32, borderRadius: 50, borderWidth: 1, borderColor: colors.violet }}
+              source={{ uri: user?.image }}
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: 50,
+                borderWidth: 1,
+                borderColor: colors.violet,
+              }}
             />
           ),
         }}
@@ -67,11 +70,11 @@ export default function TabsLayout() {
 }
 
 const styles = StyleSheet.create({
-    header: {
-        color: colors.darkGrey,
-        fontFamily: 'Inter',
-        fontWeight: '600',
-        fontSize: 25,
-        lineHeight: 28,
-    }
-})
+  header: {
+    color: colors.darkGrey,
+    fontFamily: "Inter",
+    fontWeight: "600",
+    fontSize: 25,
+    lineHeight: 28,
+  },
+});

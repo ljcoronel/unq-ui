@@ -59,5 +59,5 @@ api.interceptors.response.use(
       // usando el router de expo
     }
     return Promise.reject(error);
-  }
+  },
 );
