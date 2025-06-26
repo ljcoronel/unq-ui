@@ -2,7 +2,12 @@ import {Text, View} from "react-native";
 import BuyButton from "@/components/BuyButton/buyButton";
 import {gameCartPurchaseStyles} from "@/components/GameCartPurchase/gameCartPurchase.styles";
 
-const GameCartPurchase = ({ total, onPress }) => {
+type GameCartPurchaseProps = {
+    total: number;
+    onPress: () => void;
+}
+
+const GameCartPurchase = ({ total, onPress } : GameCartPurchaseProps) => {
     return (
         <View style={gameCartPurchaseStyles.gameCartPurchaseContainer}>
             <View style={gameCartPurchaseStyles.gameCartPurchaseDetails}>

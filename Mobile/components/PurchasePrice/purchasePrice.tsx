@@ -2,7 +2,11 @@ import {Text, View} from "react-native";
 import {purchasePriceStyles} from "@/components/PurchasePrice/purchasePrice.styles";
 import {gameCartPurchaseStyles} from "@/components/GameCartPurchase/gameCartPurchase.styles";
 
-const PurchasePrice = ({ total }) => {
+type PurchasePriceProps = {
+    total: number;
+}
+
+const PurchasePrice = ({ total } : PurchasePriceProps) => {
     return (
         <View style={purchasePriceStyles.priceContainer}>
             <View style={gameCartPurchaseStyles.gameCartPurchaseDetails}>

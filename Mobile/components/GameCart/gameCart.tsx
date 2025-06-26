@@ -1,7 +1,12 @@
 import {Image, Text, View} from "react-native";
 import {gameCartStyles} from "@/components/GameCart/gameCart.styles";
+import {GameCart as GameCartType} from "@/types/gameCart.type";
 
-const GameCart = ({ game }) => {
+type GameCartProps = {
+    game: GameCartType;
+}
+
+const GameCart = ({ game } : GameCartProps) => {
     return(
         <View style={gameCartStyles.gameCartContainer}>
             <Image style={gameCartStyles.gameCartImage} source={{ uri: game.mainImage }}/>

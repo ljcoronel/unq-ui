@@ -2,7 +2,20 @@ import {Text, TextInput, View} from "react-native";
 import BuyButton from "@/components/BuyButton/buyButton";
 import {purchaseFormStyles} from "@/components/PurchaseForm/purchaseForm.styles";
 
-const PurchaseForm = ({ name, setName, number, setNumber, cvv, setCvv, expiration, setExpiration, onPress, error}) => {
+type PurchaseFormProps = {
+    name: string;
+    setName: (name: string) => void;
+    number: string;
+    setNumber: (value: string) => void;
+    cvv: string;
+    setCvv: (value: string) => void;
+    expiration: string;
+    setExpiration: (value: string) => void;
+    onPress: () => void;
+    error: Error | null;
+}
+
+const PurchaseForm = ({ name, setName, number, setNumber, cvv, setCvv, expiration, setExpiration, onPress, error} : PurchaseFormProps) => {
     return (
         <View style={purchaseFormStyles.userCardForm}>
             <View style={purchaseFormStyles.cardDetail}>
