@@ -4,7 +4,7 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import GameOwnReview from "./GameOwnReview";
 import GameReviewForm from "./GameReviewForm";
 import { Feather } from "@expo/vector-icons";
-import { colors } from "@/constants/colors";
+import { colors } from "@/theme/colors";
 
 export default function GameReviews({game, currentUser} : {game: FullGame, currentUser: User}){
     return(

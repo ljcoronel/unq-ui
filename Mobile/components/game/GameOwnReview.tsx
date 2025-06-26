@@ -1,4 +1,4 @@
-import { colors } from "@/constants/colors";
+import { colors } from "@/theme/colors";
 import { FullGame, Review } from "@/types/games.types";
 import { User } from "@/types/user.types";
 import {Feather} from "@expo/vector-icons";

@@ -1,4 +1,4 @@
-import { colors } from "@/constants/colors";
+import { colors } from "@/theme/colors";
 import { useGames } from "@/context/GamesContext";
 import { FullGame, Review } from "@/types/games.types";
 import { User } from "@/types/user.types";

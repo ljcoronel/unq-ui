@@ -1,4 +1,4 @@
-import { colors } from "@/constants/colors";
+import { colors } from "@/theme/colors";
 import { useGames } from "@/context/GamesContext";
 import { FullGame } from "@/types/games.types";
 import { router } from "expo-router";

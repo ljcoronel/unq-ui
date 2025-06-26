@@ -1,4 +1,4 @@
-import { colors } from "@/constants/colors";
+import { colors } from "@/theme/colors";
 import { GameTag } from "@/types/games.types";
 import { AntDesign, Entypo, Ionicons } from "@expo/vector-icons";
 import { useState } from "react";

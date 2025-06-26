@@ -1,4 +1,4 @@
-import { colors } from "@/constants/colors";
+import { colors } from "@/theme/colors";
 import { Game } from "@/types/games.types";
 import { router } from "expo-router";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, ImageBackground } from "react-native";

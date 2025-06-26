@@ -8,7 +8,7 @@ import GameRequirements from "./game/GameRequirements";
 import GameRelatedSlider from "./game/GameRelatedSlider";
 import GameReviews from "./game/GameReviews";
 import GameBuyCard from "./game/GameBuyCard";
-import { colors } from "@/constants/colors";
+import { colors } from "@/theme/colors";
 import GameTags from "./game/GameTags";
 
 export default function GamePage({
