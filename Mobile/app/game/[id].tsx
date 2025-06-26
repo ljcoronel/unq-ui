@@ -1,4 +1,4 @@
-import { Text, ScrollView, StyleSheet } from "react-native";
+import { Text, ScrollView, StyleSheet, View } from "react-native";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import SafeScreen from "@/components/SafeScreen";
 import { useAuth } from "@/context/AuthContext";
@@ -22,23 +22,23 @@ export default function GameScreen() {
       setGame(game);
       setLoading(false);
       navigation.setOptions({
-        title: game?.name
+        title: game?.name.toUpperCase()
       });
     }
     fetchGame();  
-  },[])
+  },[game])
 
   if(isLoading){
     return <Loading/>;
   }
 
   return (
-    <SafeScreen>
+    <View>
       <GamePage
         game = {game!}
         currentUser = {currentUser!}
       />
-    </SafeScreen>
+    </View>
   );
 }
 

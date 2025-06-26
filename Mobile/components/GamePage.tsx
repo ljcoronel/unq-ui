@@ -8,43 +8,44 @@ import GameRequirements from "./game/GameRequirements";
 import GameRelatedSlider from "./game/GameRelatedSlider";
 import GameReviews from "./game/GameReviews";
 import GameBuyCard from "./game/GameBuyCard";
+import { colors } from "@/constants/colors";
+import GameTags from "./game/GameTags";
 
 export default function GamePage({
-    game, 
-    currentUser 
-}:{
-    game: FullGame , 
-    currentUser: User
-} ){
+        game, 
+        currentUser 
+    }:{
+        game: FullGame , 
+        currentUser: User
+    } ){
 
 
 
 
     return (
-        <ScrollView>
+        <ScrollView style={styles.pageGameContainer}>
             <Image source={{uri : game.mainImage}} style={styles.gameImage}/>
-            <GameInfo developer={game.developer.name} website={game.website} release={game.releaseDate}/>
+            <GameInfo developer={game.developer.name} website={game.website} release={game.releaseDate} tags={game.tags}/>
+            
             {!currentUser?.games.some((userGame) => userGame.id === game.id) && (
-                <GameBuyCard/>
+                <GameBuyCard game={game}/>
             )}
             <GameGallery multimedia={game.multimedia}/>
             <GameDescription description={game.description}/>
             <GameRequirements requirement={game.requirement}/>
             <GameRelatedSlider relatedGames={game.relatedGames}/>
-            <GameReviews reviews={game.reviews}/>
-            
-            <View>
-                <Text>game page</Text>
-            </View>
+            <GameReviews game={game} currentUser={currentUser}/>
         </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
+  pageGameContainer:{
+    backgroundColor: colors.grey,
+  },
   gameImage: {
+    margin: 0,
     width: "100%",
     height: 180,
-    resizeMode: "cover",
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    resizeMode: "cover"
 }});

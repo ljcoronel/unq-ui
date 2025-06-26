@@ -1,3 +1,5 @@
+import { User } from "./user.types";
+
 export interface GameTag {
   id: string;
   name: string;
@@ -35,6 +37,7 @@ export interface Review {
   isRecommended: boolean;
   text: string;
   game: Pick<Game, "id" | "name" | "mainImage">;
+  user: Pick<User, "id" | "image" | "name">
 }
 
 export interface Requirement{

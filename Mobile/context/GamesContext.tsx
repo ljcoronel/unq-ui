@@ -1,5 +1,5 @@
 import { api } from "@/config/axios.config";
-import { FullGame, Game } from "@/types/games.types";
+import { FullGame, Game, Review } from "@/types/games.types";
 import React, { createContext, useContext, useState } from "react";
 
 interface GamesContextType {
@@ -10,6 +10,8 @@ interface GamesContextType {
   setLoading: (loading: boolean) => void;
   error: string | null;
   setError: (error: string | null) => void;
+  addGameToCart: (id: string) => Promise<void>;
+  addReview: (gameId: string, isRecomended: boolean, text: string) => Promise<void>;
 }
 
 const GamesContext = createContext<GamesContextType | undefined>(undefined);
@@ -24,6 +26,24 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
     return response.data;
   };
 
+  const addGameToCart = async (id: string) => {
+    try {
+      await api.put(`/games/${id}`);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const addReview = async (gameId: string, isRecommended: boolean, text: string) => {
+    try {
+      await api.put(`/games/${gameId}/reviews`,{
+        isRecommended, 
+        text});
+    } catch (error){
+      throw error;
+    }
+  }
+
   return (
     <GamesContext.Provider
       value={{
@@ -34,6 +54,8 @@ export function GamesProvider({ children }: { children: React.ReactNode }) {
         setLoading,
         error,
         setError,
+        addGameToCart,
+        addReview,
       }}
     >
       {children}
