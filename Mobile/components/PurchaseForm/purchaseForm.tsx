@@ -44,7 +44,7 @@ const PurchaseForm = ({
         <TextInput
           style={purchaseFormStyles.input}
           value={number}
-          placeholder="1234 5678 9012 3456"
+          placeholder="16 digits"
           onChangeText={setNumber}
           keyboardType={"number-pad"}
           maxLength={16}
