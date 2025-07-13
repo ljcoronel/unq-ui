@@ -34,6 +34,7 @@ const PurchaseForm = ({
         <TextInput
           style={purchaseFormStyles.input}
           value={name}
+          placeholder="Name"
           onChangeText={setName}
           autoCapitalize={"characters"}
         />
@@ -43,6 +44,7 @@ const PurchaseForm = ({
         <TextInput
           style={purchaseFormStyles.input}
           value={number}
+          placeholder="1234 5678 9012 3456"
           onChangeText={setNumber}
           keyboardType={"number-pad"}
           maxLength={16}
@@ -53,6 +55,7 @@ const PurchaseForm = ({
         <TextInput
           style={purchaseFormStyles.input}
           value={cvv}
+          placeholder="3 digits"
           onChangeText={setCvv}
           keyboardType={"number-pad"}
           maxLength={3}
@@ -63,6 +66,7 @@ const PurchaseForm = ({
         <TextInput
           style={purchaseFormStyles.input}
           value={expiration}
+          placeholder="MM/YY"
           onChangeText={setExpiration}
           maxLength={5}
         />
