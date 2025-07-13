@@ -37,6 +37,7 @@ const PurchaseForm = ({userId}) => {
       <Input
         className="register-input-container"
         label="CARD HOLDER NAME"
+        placeholder="Name"
         value={cardName}
         onChange={(ev) => setCardName(ev.target.value)}
         required
@@ -44,6 +45,7 @@ const PurchaseForm = ({userId}) => {
       <Input
         className="register-input-container"
         label="NUMBER"
+        placeholder="16 digits"
         value={cardNumber}
         onChange={(ev) => setCardNumber(ev.target.value)}
         required
@@ -51,6 +53,7 @@ const PurchaseForm = ({userId}) => {
       <Input
         className="register-input-container"
         label="CVV"
+        placeholder="3 digits"
         value={cardCvv}
         onChange={(ev) => setCardCvv(ev.target.value)}
         required

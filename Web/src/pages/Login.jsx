@@ -40,6 +40,7 @@ export default function Login({ setIsLoggedIn }) {
         <h2 className="login-title">Sign in</h2>
         <Input
           label="SIGN IN WITH EMAIL"
+          placeholder="Email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -47,6 +48,7 @@ export default function Login({ setIsLoggedIn }) {
         />
         <Input
           label="PASSWORD"
+          placeholder="Password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

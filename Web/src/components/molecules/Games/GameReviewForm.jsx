@@ -48,6 +48,7 @@ export default function GameReviewForm({ user, game }) {
         <div className="mb-4">
           <textarea
             required
+            placeholder="Add a comment"
             className="form-control review-textarea"
             onChange={(e) => setReview({ ...review, text: e.target.value })}
           />
