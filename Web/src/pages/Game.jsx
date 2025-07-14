@@ -18,7 +18,7 @@ export default function Game({ isLoggedIn, user, fetchCurrentUser }) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetchCurrentUser();
+    if(isLoggedIn) fetchCurrentUser();
   }, []);
 
   const fetchGameById = async () => {
