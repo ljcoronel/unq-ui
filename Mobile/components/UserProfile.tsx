@@ -19,11 +19,13 @@ export default function UserProfile({
   user,
   isFriend,
   handleAddOrRemoveFriend,
+  loadingButton,
 }: {
   isCurrentUser: boolean;
   user: User;
   isFriend: boolean;
   handleAddOrRemoveFriend: (userId: string) => void;
+  loadingButton?: boolean;
 }) {
   const { logout } = useAuth();
 
@@ -43,7 +45,11 @@ export default function UserProfile({
               onPress={() => handleAddOrRemoveFriend(user.id)}
             >
               <Text style={styles.logoutText}>
-                {isFriend ? "Remove Friend" : "Add Friend"}
+                {loadingButton
+                  ? "Loading..."
+                  : isFriend
+                    ? "Remove Friend"
+                    : "Add Friend"}
               </Text>
             </TouchableOpacity>
           )}

@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useAuth } from "@/context/AuthContext";
 import { useGames } from "@/context/GamesContext";
@@ -25,7 +25,7 @@ export default function GameScreen() {
       });
     };
     fetchGame();
-  }, [game]);
+  }, []);
 
   if (isLoading) {
     return <Loading />;
@@ -38,4 +38,3 @@ export default function GameScreen() {
   );
 }
 
-const styles = StyleSheet.create({});

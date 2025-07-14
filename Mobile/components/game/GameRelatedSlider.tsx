@@ -26,7 +26,7 @@ export default function GameRelatedSlider(relatedGames: {
           <TouchableOpacity
             style={styles.imageContainer}
             key={idx}
-            onPress={() => router.replace(`../game/${game.id}`)}
+            onPress={() => router.push(`../game/${game.id}`)}
           >
             <ImageBackground
               source={{ uri: game.mainImage }}
