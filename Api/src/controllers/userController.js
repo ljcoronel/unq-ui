@@ -37,7 +37,7 @@ class UserController {
 
   userTransformWithReviews = (user) => ({
     ...this.userTransform(user),
-    reviews: user.games.flatMap(game => game.reviews).map((review) => ({
+    reviews: this.service.getUserReviews(user.id).map((review) => ({
       id: review.id,
       isRecommended: review.isRecommended,
       text: review.text,
