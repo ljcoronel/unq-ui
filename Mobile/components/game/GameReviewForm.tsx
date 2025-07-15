@@ -78,7 +78,7 @@ export default function GameReviewForm({
       <Text style={styles.label}>Text</Text>
       <TextInput
         style={styles.input}
-        placeholder=""
+        placeholder="Add a comment"
         value={review.text}
         onChangeText={(text) => setReview({ ...review, text: text })}
       />

@@ -11,17 +11,21 @@ export default function UserProfileScreen() {
   const { id } = useLocalSearchParams();
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadingButton, setLoadingButton] = useState(false);
   const { getUserById, addOrRemoveFriend, getFriendsOfUser } = useUsers();
   const navigation = useNavigation();
   const [isFriend, setIsFriend] = useState(false);
   const { user: currentUser } = useAuth();
-
+  
   const handleAddOrRemoveFriend = async (userId: string) => {
     try {
+      setLoadingButton(true);
       await addOrRemoveFriend(userId);
       await getIsFriend();
     } catch (error) {
       console.error("Error adding friend:", error);
+    } finally {
+      setLoadingButton(false);
     }
   };
 
@@ -34,6 +38,7 @@ export default function UserProfileScreen() {
     const fetchUser = async () => {
       const user = await getUserById(id as string);
       setUser(user);
+      await getIsFriend();
       setIsLoading(false);
       navigation.setOptions({
         title: "User Profile",
@@ -53,6 +58,7 @@ export default function UserProfileScreen() {
         user={user!}
         isFriend={isFriend}
         handleAddOrRemoveFriend={handleAddOrRemoveFriend}
+        loadingButton={loadingButton}
       />
     </SafeScreen>
   );

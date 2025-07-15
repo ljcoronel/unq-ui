@@ -34,14 +34,14 @@ export default function Login() {
           <Text style={styles.label}>SIGN IN WITH EMAIL</Text>
           <TextInput
             style={styles.input}
-            placeholder=""
+            placeholder="Email"
             value={email}
             onChangeText={setEmail}
           />
           <Text style={[styles.label, { marginTop: 24 }]}>PASSWORD</Text>
           <TextInput
             style={styles.input}
-            placeholder=""
+            placeholder="Password"
             secureTextEntry
             value={password}
             onChangeText={setPassword}
