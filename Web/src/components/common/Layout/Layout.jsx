@@ -14,8 +14,8 @@ export default function Layout({ children, isLoggedIn, user }) {
 
     {
       name: "LIBRARY",
-      path: `/users/${user?.id}`,
-      show: isLoggedIn && !!user,
+      path: isLoggedIn ? `/users/${user?.id}` : "/login",
+      show: true,
     },
   ];
 
