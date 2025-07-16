@@ -27,13 +27,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAppStarted, setAppStarted] = useState<boolean>(false);
 
   const getCurrentUser = async () => {
-    try {
       const response = await api.get("/users/current");
       setUser(response.data);
-    } catch (error) {
-      console.error("Error fetching current user:", error);
-      throw error;
-    }
   };
 
   useEffect(() => {
