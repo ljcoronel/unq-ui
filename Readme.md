@@ -19,4 +19,5 @@ Dispositivos usados para mobile:
 - Nicolás Ploza; Moto g13
 
 Para mobile, crear archivo constants/constants.ts con las variables definidas en constants/constants.example.ts
+Si no funciona cambiar el API_URL desde constants.example.ts
 Importante reemplazar API_URL por IP local
