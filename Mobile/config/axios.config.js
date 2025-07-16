@@ -1,6 +1,7 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { API_URL } from "@/constants/constants";
+import { API_URL } from "@/constants/constants.example";
+import { router } from "expo-router";
 
 export const setToken = async (token) => {
   try {
@@ -50,13 +51,14 @@ api.interceptors.request.use(async (config) => {
 
 api.interceptors.response.use(
   (response) => {
+   
     return response;
   },
   async (error) => {
     if (error.response?.status === 401) {
-      await removeToken();
-      // Aquí podrías redirigir al usuario a la pantalla de login
-      // usando el router de expo
+       await removeToken();
+       router.replace("/login");
+       return;
     }
     return Promise.reject(error);
   },
